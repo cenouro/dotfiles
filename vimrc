@@ -31,6 +31,8 @@ map <4-LeftMouse> <Nop>
 map <4-MiddleMouse> <Nop>
 map <4-RightMouse> <Nop>
 
+" Pathogen is also a submodule.
+runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 
 " Enable filetype plugins
