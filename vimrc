@@ -104,7 +104,6 @@ set mouse=a
 " Remap mouse events.
 map <ScrollWheelUp> <Nop>
 map <ScrollWheelDown> <Nop>
-
 map <LeftMouse> <Nop>
 map <MiddleMouse> <Nop>
 map <RightMouse> <Nop>
@@ -118,19 +117,13 @@ map <4-LeftMouse> <Nop>
 map <4-MiddleMouse> <Nop>
 map <4-RightMouse> <Nop>
 
-" Pathogen is also a submodule.
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
 
-" Enable filetype plugins
-filetype plugin indent on
-syntax enable
-set autoindent
-set smartindent
+set shiftwidth=2
+set tabstop=2
 
-nmap <leader>f :CommandTFlush<CR>
+" Only use smartindent if things are not working.
+" set smartindent
 
-set relativenumber
 set number
 
 " Use w!! to call sudo to save the file.
@@ -197,7 +190,7 @@ inoremap <End> <nop>
 nnoremap <End> <nop>
 
 " Indent full file, go back to line we were at and
-" then "center window on current line".
+" then center window on current (old) line.
 nnoremap '= gg=G''zz
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -207,23 +200,16 @@ nnoremap '= gg=G''zz
 " Set lines to the cursor - when moving vertically using j/k.
 set scrolloff=4
 
-" Turn on the Wild menu.
-set wildmenu
 
 " Ignore compiled files.
 set wildignore=*.o,*~,*.pyc
 
-" Always show current position.
-set ruler
 
 " Height of the command bar.
 "set cmdheight=2
 
 " A buffer becomes hidden when it is abandoned.
 set hidden
-
-" Configure backspace so it acts as it should act.
-set backspace=eol,start,indent
 
 " Ignore case when searching.
 set ignorecase
@@ -234,16 +220,12 @@ set smartcase
 " Highlight search results.
 set hlsearch
 
-" Makes search act like search in modern browsers.
-set incsearch
 
-" Don't redraw while executing macros (good performance config).
-set lazyredraw
 
-" For regular expressions turn magic on.
+" For regular expressions, turn magic on.
 set magic
 
-" Show matching brackets when text indicator is over them.
+" Show matching brackets.
 set showmatch
 
 " No annoying sound on errors.
@@ -258,40 +240,31 @@ set tm=500
 
 set t_Co=256
 set background=dark
-colorscheme desert
+colorscheme inkpot
 
-" Set utf8 as standard encoding and en_US as the standard language
+" Set utf8 as standard encoding.
 set encoding=utf8
-
-" Changes CommandT color.
-" For valid color schemes, use :hi in vim.
-" let g:CommandTHighlightColor='Search'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Use spaces instead of tabs.
-set expandtab
+" set expandtab
 
 " Be smart when using tabs ;).
-set smarttab
 
-" TODO: set default tab values for non-specified extensions.
-set shiftwidth=2
-set tabstop=2
+" Set default tab values for non-specified extensions.
 
-autocmd FileType ruby,eruby setlocal shiftwidth=2 tabstop=2
 autocmd FileType python,c,cpp,rst setlocal expandtab shiftwidth=4 softtabstop=4
 
 autocmd FileType cpp,c,ruby autocmd BufWritePre <buffer> :normal gg=G''
 
-" TODO: fix this.
-" Recommended range is 50~75. Convention is 80, but it is kinda
-" ugly.
-set lbr
-set textwidth=65
-set wrap " Wrap lines
+" Convention is 80, but we have to account for <CR>, specially when using
+" :set list.
+set linebreak
+set textwidth=79
+set wrap
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -319,8 +292,6 @@ set viminfo^=%
 " => Status line
 """"""""""""""""""""""""""""""
 
-" Always show the status line.
-set laststatus=2
 
 " Format the status line.
 set statusline=%t%h%m%r%y%=%c,%l/%L\ %P
@@ -359,10 +330,10 @@ noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Returns true if paste mode is enabled
 function! HasPaste()
-        if &paste
-                return 'PASTE MODE  '
-        en
-        return ''
+  if &paste
+    return 'PASTE MODE  '
+  en
+  return ''
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
