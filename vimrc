@@ -1,19 +1,106 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
+" vim:set ft=vim et sw=2:
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Mouse
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pathogen is also a submodule.
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+execute pathogen#infect()
 
-" Enable mouse so we can actually
-" disable it by remapping.
-" This may sound fucking weird, but it
-" is necessary since just disabling the mouse
-" will make wheel events to be mapped to arrow keys.
+" ===========================================
+" From vim-sensible.
+" ===========================================
+if exists('g:loaded_sensible') || &compatible
+  finish
+else
+  let g:loaded_sensible = 1
+endif
+
+filetype plugin indent on
+syntax enable
+
+" Use :help 'option' to see the documentation for the given option.
+
+set autoindent
+set backspace=indent,eol,start
+set complete-=i
+set smarttab
+
+set nrformats-=octal
+
+set ttimeout
+set ttimeoutlen=100
+
+set incsearch
+" Use <C-L> to clear the highlighting of :set hlsearch.
+if maparg('<C-L>', 'n') ==# ''
+  nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+endif
+
+set laststatus=2
+set ruler
+set wildmenu
+set lazyredraw
+
+if !&scrolloff
+  set scrolloff=1
+endif
+if !&sidescrolloff
+  set sidescrolloff=5
+endif
+set display+=lastline
+
+if &encoding ==# 'latin1' && has('gui_running')
+  set encoding=utf-8
+endif
+
+if &listchars ==# 'eol:$'
+  set listchars=eol:$,tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+endif
+
+" Delete comment character when joining commented lines.
+if v:version > 703 || v:version == 703 && has("patch541")
+  set formatoptions+=j
+endif
+
+if has('path_extra')
+  setglobal tags-=./tags tags-=./tags; tags^=./tags;
+endif
+
+set autoread
+
+if &history < 1000
+  set history=1000
+endif
+if &tabpagemax < 50
+  set tabpagemax=50
+endif
+if !empty(&viminfo)
+  set viminfo^=!
+endif
+set sessionoptions-=options
+
+" Allow color schemes to do bright colors without forcing bold.
+if &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
+  set t_Co=16
+endif
+
+" Load matchit.vim, but only if the user hasn't installed a newer version.
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+endif
+
+" Improve undo behavior a bit.
+inoremap <C-U> <C-G>u<C-U>
+inoremap <C-W> <C-G>u<C-W>
+" ===========================================
+" End vim-sensible.
+" ===========================================
+
+nnoremap ; :
+
+" Enable mouse so we can actually disable it by remapping. This may sound
+" fucking weird, but it is necessary since just disabling the mouse will make
+" wheel events to be mapped to arrow keys.
 set mouse=a
-
 " Remap mouse events.
 map <ScrollWheelUp> <Nop>
 map <ScrollWheelDown> <Nop>
