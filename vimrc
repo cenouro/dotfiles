@@ -1,6 +1,9 @@
 set nocompatible
 " vim:set ft=vim et sw=2:
 
+" This should come here or else it can break some mappings.
+let mapleader = ","
+
 " Pathogen is also a submodule.
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
@@ -30,9 +33,10 @@ set ttimeout
 set ttimeoutlen=100
 
 set incsearch
-" Use <C-L> to clear the highlighting of :set hlsearch.
-if maparg('<C-L>', 'n') ==# ''
-  nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+
+" Mapping to clear the highlighting of :set hlsearch.
+if maparg('<leader><leader>', 'n') ==# ''
+  nnoremap <silent> <leader><leader> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 endif
 
 set laststatus=2
@@ -97,6 +101,13 @@ inoremap <C-W> <C-G>u<C-W>
 
 nnoremap ; :
 
+nnoremap <leader>l :set list!<cr>
+nnoremap <leader>d :Gvdiff<cr>
+nnoremap <leader>f :CtrlP<cr>
+nnoremap <leader>b :CtrlPBuffer<cr>
+nnoremap <leader>r :CtrlPClearCache<cr>
+
+
 " Enable mouse so we can actually disable it by remapping. This may sound
 " fucking weird, but it is necessary since just disabling the mouse will make
 " wheel events to be mapped to arrow keys.
@@ -120,6 +131,7 @@ map <4-RightMouse> <Nop>
 
 set shiftwidth=2
 set tabstop=2
+set expandtab
 
 " Only use smartindent if things are not working.
 " set smartindent
@@ -139,93 +151,50 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
-" Hotkeys for split resizing.
-" TODO: probably deprecate these.
-nnoremap - <c-w><
-nnoremap + <c-w>>
-
-" Split repositioning.
-" TODO: use arrow for resizing instead.
-nnoremap <up> <c-w>K
-nnoremap <down> <c-w>J
-nnoremap <left> <c-w>H
-nnoremap <right> <c-w>L
-nnoremap <BS> <c-w>r
-nnoremap <c-BS> <c-w>R
-
 " Disable arrow keys.
 inoremap <left> <nop>
 inoremap <right> <nop>
 inoremap <up> <nop>
 inoremap <down> <nop>
 
-" Disable even more keys so you can train ;).
-"
 " Normal mode: x
-" Insert mode: none. Use CTRL-O and a Normal mode deletion
-" command.
-inoremap <Delete> <nop>
-nnoremap <Delete> <nop>
+" Insert mode: none. Use CTRL-O and a Normal mode deletion command.
+inoremap <delete> <nop>
+nnoremap <delete> <nop>
 
 " Normal mode: X
 " Insert mode: CTRL-H
-inoremap <Backspace> <nop>
-nnoremap <Backspace> <nop>
+inoremap <backspace> <nop>
+nnoremap <backspace> <nop>
 
 " No easy alternatives. But you can make it work by reading the
 " help documentation.
 inoremap <Pageup> <nop>
 nnoremap <Pageup> <nop>
-
-" Same as Pageup.
 inoremap <Pagedown> <nop>
 nnoremap <Pagedown> <nop>
 
-" Normal mode: 0
 inoremap <Home> <nop>
 nnoremap <Home> <nop>
-
-" Normal mode: $
 inoremap <End> <nop>
 nnoremap <End> <nop>
 
-" Indent full file, go back to line we were at and
-" then center window on current (old) line.
-nnoremap '= gg=G''zz
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => VIM user interface
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " Set lines to the cursor - when moving vertically using j/k.
-set scrolloff=4
-
+set scrolloff=2
 
 " Ignore compiled files.
 set wildignore=*.o,*~,*.pyc
 
-
-" Height of the command bar.
-"set cmdheight=2
-
 " A buffer becomes hidden when it is abandoned.
 set hidden
 
-" Ignore case when searching.
 set ignorecase
-
-" When searching try to be smart about cases .
 set smartcase
 
-" Highlight search results.
 set hlsearch
 
-
-
-" For regular expressions, turn magic on.
 set magic
 
-" Show matching brackets.
 set showmatch
 
 " No annoying sound on errors.
@@ -234,50 +203,20 @@ set novisualbell
 set t_vb=
 set tm=500
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors and Fonts
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 set t_Co=256
 set background=dark
 colorscheme inkpot
 
-" Set utf8 as standard encoding.
 set encoding=utf8
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Use spaces instead of tabs.
-" set expandtab
-
-" Be smart when using tabs ;).
-
 " Set default tab values for non-specified extensions.
-
 autocmd FileType python,c,cpp,rst setlocal expandtab shiftwidth=4 softtabstop=4
-
-autocmd FileType cpp,c,ruby autocmd BufWritePre <buffer> :normal gg=G''
 
 " Convention is 80, but we have to account for <CR>, specially when using
 " :set list.
 set linebreak
 set textwidth=79
 set wrap
-
-""""""""""""""""""""""""""""""
-" => Visual mode related
-""""""""""""""""""""""""""""""
-
-" Visual mode pressing * or # searches for the current selection.
-" Super useful! From an idea by Michael Naumann.
-vnoremap <silent> * :call VisualSelection('f')<CR>
-vnoremap <silent> # :call VisualSelection('b')<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Moving around, tabs, windows and buffers
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Return to last edit position when opening files (You want this!).
 autocmd BufReadPost *
@@ -288,31 +227,15 @@ autocmd BufReadPost *
 " Remember info about open buffers on close.
 set viminfo^=%
 
-""""""""""""""""""""""""""""""
-" => Status line
-""""""""""""""""""""""""""""""
-
-
-" Format the status line.
 set statusline=%t%h%m%r%y%=%c,%l/%L\ %P
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Editing mappings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
-" TODO: this may be useful for everything.
 func! DeleteTrailingWS()
         exe "normal mz"
         %s/\s\+$//ge
         exe "normal `z"
 endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Spell checking.
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd BufWrite * :call DeleteTrailingWS()
 
 " Toggle spell checking.
 map <F7> :setlocal spell! spelllang=en_us<CR>
@@ -322,23 +245,24 @@ map <F8> :setlocal spell! spelllang=pt_br<CR>
 hi SpellBad term=reverse cterm=reverse ctermfg=3 guifg=Black guibg=Yellow
 hi SpellCap term=reverse cterm=reverse ctermfg=14 ctermbg=0 gui=bold,reverse
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Misc
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
-" Returns true if paste mode is enabled
-function! HasPaste()
-  if &paste
-    return 'PASTE MODE  '
-  en
-  return ''
-endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Testing
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-inoremap <Backspace> <C-w>
+inoremap <Backspace> <C-W>
 inoremap <C-h> <C-w>
 
+if executable('ag')
+  " Use ag over grep.
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore.
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
