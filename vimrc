@@ -248,9 +248,6 @@ hi SpellCap term=reverse cterm=reverse ctermfg=14 ctermbg=0 gui=bold,reverse
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Testing
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 inoremap <Backspace> <C-W>
 inoremap <C-h> <C-w>
 
@@ -266,3 +263,19 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Testing
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Highlight current line number.
+set cursorline
+
+hi clear CursorLine
+augroup CLClear
+  autocmd! ColorScheme * hi clear CursorLine
+augroup END
+
+hi CursorLineNR cterm=bold
+augroup CLNRSet
+  autocmd! ColorScheme * hi CursorLineNR cterm=bold
+augroup END
