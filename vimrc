@@ -279,3 +279,9 @@ hi CursorLineNR cterm=bold
 augroup CLNRSet
   autocmd! ColorScheme * hi CursorLineNR cterm=bold
 augroup END
+
+function! EchoCurrentLineToShell()
+  execute "!head -n " . line(".") . " " . bufname("%") . " |tail -n 1"
+endfunction
+
+nnoremap <leader>e :call EchoCurrentLineToShell()<CR>
