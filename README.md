@@ -11,7 +11,11 @@ Submodules makes life easier. The following example, adding a vim plugin as a su
       cd bundle
       git submodule add https://github.com/tpope/vim-pathogen
 
-After this, `git status && git add && git commit` stuff. Note: Pathogen requires further instructions. Refer to it's repo's readme.
+After this, `git status && git add && git commit` stuff. 
+
+**Note:** Pathogen requires [further instructions,] which are already implemented in `.vimrc`.
+
+[further instructions,]: https://github.com/tpope/vim-pathogen#faq
 
 ##### Deploy to new machine
       git clone https://github.com/cenouro/dotfiles
