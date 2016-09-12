@@ -26,5 +26,8 @@ To fix this, edit `.gitmodules`, adding `ignore = dirty` after the submodule url
 
 #### Oh-My-Zsh configuration
 Oh-My-Zsh gitignore file has rules for ignoring the `custom` folder.
-Customizations and themes should go there. The best way is to implement them on
+[Customizations and themes should go there.] The best way is to implement them on
 this repository and then add links to them on the custom folder.
+
+[Customizations and themes should go there.]: https://github.com/robbyrussell/oh-my-zsh#custom-plugins-and-themes
+
