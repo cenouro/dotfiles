@@ -16,12 +16,15 @@ After this, `git status && git add && git commit` stuff. Note: Pathogen requires
 ##### Deploy to new machine
       git clone https://github.com/cenouro/dotfiles
       git submodule update --init
-      
+
 ##### Update all submodules
       git clone https://github.com/cenouro/dotfiles
       git submodule foreach git pull origin master
-      
+
 ##### Avoid dirty submodules trees
 To fix this, edit `.gitmodules`, adding `ignore = dirty` after the submodule url.
-      
 
+#### Oh-My-Zsh configuration
+Oh-My-Zsh gitignore file has rules for ignoring the `custom` folder.
+Customizations and themes should go there. The best way is to implement them on
+this repository and then add links to them on the custom folder.
