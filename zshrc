@@ -77,3 +77,7 @@ export EDITOR='vim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Add npm to path. Only use this after configuring npm to install global
+# packages on home folder.
+export PATH="$HOME/.node_modules_global/bin:$PATH"
