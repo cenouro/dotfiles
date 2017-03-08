@@ -128,7 +128,6 @@ map <4-LeftMouse> <Nop>
 map <4-MiddleMouse> <Nop>
 map <4-RightMouse> <Nop>
 
-
 set shiftwidth=2
 set tabstop=2
 set expandtab
@@ -203,9 +202,6 @@ set novisualbell
 set t_vb=
 set tm=500
 
-set t_Co=256
-set background=dark
-colorscheme inkpot
 
 set encoding=utf8
 
@@ -216,6 +212,7 @@ autocmd FileType python,c,cpp,rst setlocal expandtab shiftwidth=4 softtabstop=4
 " :set list.
 set linebreak
 set textwidth=79
+autocmd FileType html setlocal textwidth=120
 set wrap
 
 " Return to last edit position when opening files (You want this!).
@@ -267,18 +264,29 @@ map <C-l> <C-w>l
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Testing
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Highlight current line number.
+augroup HighlightCurrentLineNumber
+  " You have to call :colorscheme after this definition at least once
+  " to run these at Vim startup.
+  autocmd!
+  set cursorline
+  autocmd ColorScheme * hi clear CursorLine
+  autocmd ColorScheme * hi CursorLineNR cterm=bold
+augroup END
 set cursorline
 
-hi clear CursorLine
-augroup CLClear
-  autocmd! ColorScheme * hi clear CursorLine
-augroup END
+set t_Co=256
+set background=dark
+colorscheme inkpot
 
-hi CursorLineNR cterm=bold
-augroup CLNRSet
-  autocmd! ColorScheme * hi CursorLineNR cterm=bold
-augroup END
+function! BrightHighlightOn()
+  hi CursorLine ctermbg=darkred
+endfunction
+
+function! BrightHighlightOff()
+  hi clear CursorLine
+endfunction
+
+let g:ctrlp_buffer_func = { 'enter': 'BrightHighlightOn', 'exit': 'BrightHighlightOff', }
 
 function! EchoStrToShell(str)
   execute "!echo " . shellescape(a:str, 1)
