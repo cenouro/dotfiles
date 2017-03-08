@@ -77,6 +77,8 @@ export EDITOR='vim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias timestamp="date +%Y%m%d%H%M"
+alias :q="exit"
 
 # Add npm to path. Only use this after configuring npm to install global
 # packages on home folder.
