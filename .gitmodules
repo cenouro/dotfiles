@@ -19,3 +19,6 @@
 [submodule "vim/bundle/vim-js-indent"]
 	path = vim/bundle/vim-js-indent
 	url = https://github.com/gavocanov/vim-js-indent
+[submodule "vim/bundle/vim-sensible"]
+	path = vim/bundle/vim-sensible
+	url = https://github.com/tpope/vim-sensible
