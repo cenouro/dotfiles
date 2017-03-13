@@ -1,0 +1,18 @@
+set nocompatible
+" vim:set ft=vim et sw=2:
+
+" This should come here or else it can break some mappings.
+let mapleader = ","
+nnoremap ; :
+
+" Pathogen is also a submodule.
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+execute pathogen#infect()
+
+source $HOME/.vim/functions.vimrc
+source $HOME/.vim/defaults.vimrc
+source $HOME/.vim/autocommands.vimrc
+source $HOME/.vim/keys.vimrc
+source $HOME/.vim/plugins_config.vimrc
+source $HOME/.vim/ui.vimrc
+
