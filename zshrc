@@ -80,6 +80,20 @@ export EDITOR='vim'
 alias timestamp="date +%Y%m%d%H%M"
 alias :q="exit"
 
-# Add npm to path. Only use this after configuring npm to install global
-# packages on home folder.
-export PATH="$HOME/.node_modules_global/bin:$PATH"
+# NPM
+if (( $+commands[npm] ))
+then
+  export NPM_CONFIG_PREFIX=~/.npm_global
+  export PATH=~/.npm_global/bin:$PATH
+  if [[ ! -d ~/.npm_global ]]
+  then
+    mkdir -p ~/.npm_global
+  fi
+fi
+
+# RVM
+if [[ -d ~/.rvm/bin ]]
+then
+  export PATH="$PATH:$HOME/.rvm/bin"
+fi
+
