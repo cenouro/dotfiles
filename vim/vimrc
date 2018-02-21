@@ -173,6 +173,8 @@ nnoremap <leader>f :CtrlP<cr>
 nnoremap <leader>b :CtrlPBuffer<cr>
 nnoremap <leader>r :CtrlPClearCache<cr>
 
+set path+=**
+
 " Parse wildignore option since ag behavior is a little different.
 function WildignoreToAg()
   let res = []
