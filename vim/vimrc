@@ -200,9 +200,12 @@ set statusline=%t%h%m%r%y%=%c,%l/%L\ %P
 hi SpellBad term=reverse cterm=reverse ctermfg=3 guifg=Black guibg=Yellow
 hi SpellCap term=reverse cterm=reverse ctermfg=14 ctermbg=0 gui=bold,reverse
 
-set t_Co=256 background=dark
-"colorscheme inkpot
-"colorscheme Tomorrow-Night-Eighties
-colo badwolf
-"set termguicolors
+set background=dark
+" Although we aim to use millions of colors, it seems this is not cancer.
+set t_Co=256
+" Seems to be cancer for some colorschemes; works fine for gruvbox.
+set termguicolors
+" Has to be set before applying the colorscheme.
+let g:gruvbox_contrast_dark='hard'
+colorscheme gruvbox
 
