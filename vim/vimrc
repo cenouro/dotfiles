@@ -5,9 +5,20 @@ set nocompatible
 let mapleader = ","
 nnoremap ; :
 
-" Pathogen is also a submodule.
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
+
+" Vundle setup: uncomment following line and run :.w !bash
+" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+filetype off                    " Required by Vundle.
+set runtimepath+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'   " Let Vundle manage Vundle; required.
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'morhetz/gruvbox'
+call vundle#end()
+filetype plugin indent on       " Also required by Vundle.
+
 
 function! EchoStrToShell(str)
   execute "!echo " . shellescape(a:str, 1)
