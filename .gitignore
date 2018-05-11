@@ -2,3 +2,5 @@ vim/spell
 vim/.netrwhist
 vim/vim
 
+/fortune/*.dat
+

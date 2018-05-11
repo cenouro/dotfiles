@@ -1,0 +1,26 @@
+
+For Ruby-like regexes, prepend \v to them.
+Example: :%s/\v(a)|(b)/g
+
+%
+
+Use . before ! to insert the result from the shell command in the current file.
+Example: :.!ls
+
+%
+
+gf goes to file under cursor.
+
+%
+
+Use C-] and C-t for vim-tag jumping.
+
+%
+
+check set path+=**
+
+%
+
+:b works with substrings of file/buffer name.
+
+%
