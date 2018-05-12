@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  tasks:
+    - name: "Install essentials"
+      pacman:
+        name: vim,git,curl,wget,openssh,python-pip,zsh,npm,ruby,base-devel
+        state: present
+
+    - name: "Install some utils"
+      pacman:
+        name: feh,rxvt-unicode
+        state: present
+
+    - name: "Install i3"
+      pacman:
+        name: i3-gaps,dmenu,i3lock,i3status,perl-json-xs,perl-anyevent-i3
+        state: present
+
+    - name: "Install CLI apps"
+      shell: pip3 install hangups rtv --user
+
+- import_playbook: dotfiles.yml
+

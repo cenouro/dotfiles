@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+  vars:
+    dotfiles: ['vimrc']
+
+  tasks:
+    - name: "Initialize dotfiles directory"
+      git:
+        repo: "https://github.com/cenouro/dotfiles"
+        dest: "~/dotfiles"
+        update: no
+
+    - name: "Backup distro's files"
+      shell: mv .{{item}} .{{item}}.distro.back
+      args:
+        chdir: ~/
+        creates: .{{item}}.distro.back
+        removes: .{{item}}
+      with_items: "{{dotfiles}}"
+
+    - name: "Setup links"
+      file:
+        src: ~/dotfiles/{{item}}
+        path: ~/.{{item}}
+        state: link
+      with_items: "{{dotfiles}}"
+
