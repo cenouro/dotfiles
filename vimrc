@@ -6,7 +6,7 @@ let mapleader = ","
 nnoremap ; :
 
 
-" Vundle setup: uncomment following line and run :.w !bash
+" Vundle setup: clone and then run vim +PluginInstall +qall (or :PluginInstall)
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 filetype off                    " Required by Vundle.
 set runtimepath+=~/.vim/bundle/Vundle.vim
@@ -214,10 +214,13 @@ hi SpellBad term=reverse cterm=reverse ctermfg=3 guifg=Black guibg=Yellow
 hi SpellCap term=reverse cterm=reverse ctermfg=14 ctermbg=0 gui=bold,reverse
 
 set background=dark
+
 " Although we aim to use millions of colors, it seems this is not cancer.
 set t_Co=256
-" Seems to be cancer for some colorschemes; works fine for gruvbox.
-set termguicolors
+
+" Seems to be cancer for some colorschemes and/or terminals.
+" set termguicolors
+
 " Has to be set before applying the colorscheme.
 let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
