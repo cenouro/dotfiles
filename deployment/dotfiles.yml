@@ -10,6 +10,10 @@
         git config --global user.email "101b147ch@gmail.com"
         git config --global core.editor "vim"
 
+    - name: "Configure shell"
+      shell: chsh -s $(which zsh)
+      become: yes
+
     - name: "Initialize dotfiles directory"
       git:
         repo: "https://github.com/cenouro/dotfiles"
