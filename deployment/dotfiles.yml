@@ -4,6 +4,12 @@
     dotfiles: ['vimrc']
 
   tasks:
+    - name: "Configure git"
+      shell: |
+        git config --global user.name "Mario Maia"
+        git config --global user.email "101b147ch@gmail.com"
+        git config --global core.editor "vim"
+
     - name: "Initialize dotfiles directory"
       git:
         repo: "https://github.com/cenouro/dotfiles"
