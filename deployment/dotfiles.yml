@@ -4,11 +4,15 @@
     dotfiles: ['vimrc']
 
   tasks:
-    - name: "Configure git"
-      shell: |
-        git config --global user.name "Mario Maia"
-        git config --global user.email "101b147ch@gmail.com"
-        git config --global core.editor "vim"
+    - name: Configure git
+      git_config:
+        name: '{{ item.name }}'
+        value: '{{ item.value }}'
+        scope: global
+      loop:
+        - {name: 'user.name', value: 'Mario Maia'}
+        - {name: 'user.email', value: '101b147ch@gmail.com'}
+        - {name: 'core.editor', value: 'vim'}
 
     - name: "Configure shell"
       shell: chsh -s $(which zsh)
