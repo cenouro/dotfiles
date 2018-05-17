@@ -1,7 +1,9 @@
+# vim: filetype=yaml.ansible :
 ---
 - hosts: localhost
   vars:
     dotfiles: ['vimrc']
+    username: '{{ ansible_env.USER }}'
 
   tasks:
     - name: Configure git
@@ -14,9 +16,17 @@
         - {name: 'user.email', value: '101b147ch@gmail.com'}
         - {name: 'core.editor', value: 'vim'}
 
-    - name: "Configure shell"
-      shell: chsh -s $(which zsh)
-      become: yes
+    - name: Set zsh as default shell
+      block:
+        - name: "$(which zsh)"
+          command: which zsh
+          register: which_zsh
+
+        - name: Update user shell
+          user:
+            name: '{{ username }}'
+            shell: '{{ which_zsh.stdout }}'
+          become: yes
 
     - name: "Initialize dotfiles directory"
       git:
