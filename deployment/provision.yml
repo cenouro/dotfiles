@@ -1,4 +1,4 @@
-# vim: filetype=yaml.ansible :
+# vim: filetype=yaml.ansible:foldmarker=<<<,>>>:foldmethod=marker :
 ---
 - hosts: localhost
   vars:
@@ -21,6 +21,7 @@
         - zsh-users/zsh-history-substring-search
         - zsh-users/zsh-syntax-highlighting
 
+    # rbenv tasks <<<1
     - name: Clone rbenv
       git:
         repo: 'https://github.com/rbenv/rbenv.git'
@@ -41,6 +42,7 @@
         repo: 'http://github.com/rbenv/ruby-build.git'
         dest: '{{rbenv_root.stdout}}/plugins/ruby-build'
         update: no
+    # >>>1
 
     - name: Link dotfiles
       file:
@@ -69,4 +71,27 @@
         name: '{{ username }}'
         shell: '{{ which_zsh.stdout }}'
       become: yes
+
+    # Install vim plugins with Vundle <<<1
+    - name: Clone vundle
+      git:
+        repo: 'https://github.com/VundleVim/Vundle.vim.git'
+        dest: '{{userhome}}/.vim/bundle/Vundle.vim'
+        update: no
+
+    - name: Disable vim colorschemes to avoid errors
+      replace:
+        path: '{{dotfiles_path}}/vimrc'
+        regexp: '^(colorscheme.*)'
+        replace: '"ansible\1'
+
+    - name: Install vim plugins with Vundle
+      shell: "vim -E -s -c 'source {{dotfiles_path}}/vimrc' +PluginInstall +qa"
+
+    - name: Enable vim colorschemes
+      replace:
+        path: '{{dotfiles_path}}/vimrc'
+        regexp: '^"ansible(.*)'
+        replace: '\1'
+    # >>>1
 
