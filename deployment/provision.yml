@@ -1,6 +1,16 @@
 # vim: filetype=yaml.ansible:foldmarker=<<<,>>>:foldmethod=marker :
 ---
+# Install packages <<<1
 - hosts: localhost
+  # The above hosts entry is required for ensuring facts have been gathered
+  # (used on the when clause below).
+
+- import_playbook: arch.yml
+  when: ansible_distribution == 'Archlinux'
+# >>>1
+
+- hosts: localhost
+
   vars:
     dotfiles: gitconfig, vimrc, zshrc
     username: '{{ ansible_env.USER }}'
