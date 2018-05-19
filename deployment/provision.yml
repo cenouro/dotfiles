@@ -12,7 +12,7 @@
 - hosts: localhost
 
   vars:
-    dotfiles: gitconfig, vimrc, zshrc
+    dotfiles: gitconfig, vimrc, zshrc, npmrc
     username: '{{ ansible_env.USER }}'
     userhome: '{{ ansible_env.HOME }}'
     dotfiles_path: '{{userhome}}/repos/dotfiles'
@@ -60,6 +60,11 @@
         src: '{{dotfiles_path}}/{{item}}'
         path: '{{userhome}}/.{{item}}'
       loop: '{{dotfiles}}'
+
+    - name: Create npm folder
+      file:
+        state: directory
+        path: '{{userhome}}/.npm-packages'
 
     - name: Link dircolors
       file:
