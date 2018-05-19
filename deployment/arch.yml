@@ -1,23 +1,39 @@
+# vim: filetype=yaml.ansible:foldmarker=<<<,>>>:foldmethod=marker :
 ---
 - hosts: localhost
+
+  vars:
+    essentials: [vim, git, curl, wget, openssh, base-devel]
+    tools: [dictd, python-pip, zsh, npm, ruby, feh, rxvt-unicode]
+    i3_pkgs: [i3-gaps, dmenu, i3lock, i3status, perl-json-xs, perl-anyevent-i3]
+
+  vars_prompt:
+    - name: aur_cmd
+      prompt: AUR helper command
+      default: aurman
+      private: no
+
   tasks:
+
     - name: "Install essentials"
       pacman:
-        name: vim,git,curl,wget,openssh,python-pip,zsh,npm,ruby,base-devel
+        name: '{{essentials + tools + i3_pkgs}}'
         state: present
+      become: yes
 
-    - name: "Install some utils"
-      pacman:
-        name: feh,rxvt-unicode
+    - name: Install hangups and rtv
+      pip:
+        name: hangups, rtv
         state: present
+        extra_args: --user
 
-    - name: "Install i3"
-      pacman:
-        name: i3-gaps,dmenu,i3lock,i3status,perl-json-xs,perl-anyevent-i3
-        state: present
+    - name: Install English dictionary
+      command: '{{aur_cmd}} -S --noconfirm --noedit --pgp_fetch dict-gcide'
 
-    - name: "Install CLI apps"
-      shell: pip3 install hangups rtv --user
-
-- import_playbook: dotfiles.yml
+    - name: Enable dictd service
+      service:
+        name: dictd
+        state: started
+        enabled: yes
+      become: yes
 

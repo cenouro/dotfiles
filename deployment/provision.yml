@@ -1,0 +1,72 @@
+# vim: filetype=yaml.ansible :
+---
+- hosts: localhost
+  vars:
+    dotfiles: gitconfig, vimrc, zshrc
+    username: '{{ ansible_env.USER }}'
+    userhome: '{{ ansible_env.HOME }}'
+    dotfiles_path: '{{userhome}}/repos/dotfiles'
+
+  tasks:
+
+    - name: Clone essential repositories
+      git:
+        repo: "https://github.com/{{item}}.git"
+        dest: "{{userhome}}/repos/{{item|basename}}"
+        update: no
+      loop:
+        - cenouro/dotfiles
+        - seebi/dircolors-solarized
+        - zsh-users/zsh-completions
+        - zsh-users/zsh-history-substring-search
+        - zsh-users/zsh-syntax-highlighting
+
+    - name: Clone rbenv
+      git:
+        repo: 'https://github.com/rbenv/rbenv.git'
+        dest: '{{userhome}}/.rbenv'
+        update: no
+
+    - name: "Compile dynamic bash extension"
+      shell: src/configure && make -C src
+      args:
+        chdir: ~/.rbenv
+
+    - name: Register rbenv_root
+      command: '{{userhome}}/.rbenv/bin/rbenv root'
+      register: rbenv_root
+
+    - name: Clone ruby-build
+      git:
+        repo: 'http://github.com/rbenv/ruby-build.git'
+        dest: '{{rbenv_root.stdout}}/plugins/ruby-build'
+        update: no
+
+    - name: Link dotfiles
+      file:
+        state: link
+        src: '{{dotfiles_path}}/{{item}}'
+        path: '{{userhome}}/.{{item}}'
+      loop: '{{dotfiles}}'
+
+    - name: Link dircolors
+      file:
+        state: link
+        src: '{{userhome}}/repos/dircolors-solarized/dircolors.256dark'
+        path: '{{userhome}}/.dircolors'
+
+    - name: Create npm directory
+      file:
+        state: directory
+        path: '{{userhome}}/.npm-packages'
+
+    - name: '$(which zsh)'
+      command: which zsh
+      register: which_zsh
+
+    - name: Set zsh as default shell
+      user:
+        name: '{{ username }}'
+        shell: '{{ which_zsh.stdout }}'
+      become: yes
+
