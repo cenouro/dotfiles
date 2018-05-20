@@ -90,7 +90,7 @@ augroup END
 
 augroup LanguageSpecific
   autocmd!
-  autocmd FileType gitcommit setlocal textwidth=72
+  autocmd FileType gitcommit setlocal textwidth=72 spell spelllang=en_us
   autocmd FileType python,c,cpp,rst setlocal expandtab shiftwidth=4 softtabstop=4
   autocmd FileType html setlocal textwidth=120
 augroup END
