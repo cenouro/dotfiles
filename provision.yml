@@ -12,7 +12,7 @@
 - hosts: localhost
 
   vars:
-    dotfiles: [gitconfig, vimrc, zshrc, npmrc]
+    dotfiles: [emacs, gitconfig, vimrc, zshrc, npmrc]
     username: '{{ ansible_env.USER }}'
     userhome: '{{ ansible_env.HOME }}'
     dotfiles_path: '{{userhome}}/repos/dotfiles'
