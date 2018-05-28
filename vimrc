@@ -71,10 +71,6 @@ set shiftwidth=2 tabstop=2 expandtab
 
 set viminfo^=% " Remember info about open buffers on close.
 
-if executable('ag')
-  " Use ag over grep.
-  set grepprg=ag\ --nogroup\ --nocolor
-endif
 
 augroup Processors
   autocmd!
@@ -175,33 +171,6 @@ nnoremap <leader>r :CtrlPClearCache<cr>
 
 set path+=**
 
-" Parse wildignore option since ag behavior is a little different.
-function WildignoreToAg()
-  let res = []
-  for w in split(&wildignore, ',')
-    " ag's behavior for matching file extensions is different. It will match from
-    " the first dot, so --ignore='*.ext' matches correctly foo.ext but not
-    " foo.bar.ext. It won't match foo.ext.ext2 either.
-    " Another '*' has to be added so the PATTERN works as intended (at least with
-    " version 0.31.0 of ag). Also beware that ag's -g option has some weird
-    " behavior as well:
-    " * Without -g, --ignore seems to work as other tools, but seems ignore
-    " empty files.
-    " * With -g '', ag will list empty files as well, but this seems to break
-    " --ignore patterns.
-    if len(w) >= 3 && w[0:1] == '*.'
-      let res += ["--ignore='*" . w . "'"]
-    else
-      let res += ["--ignore='" . w . "'"]
-    endif
-  endfor
-  return join(res, ' ')
-endfunction
-
-" Use ag in CtrlP. Lightning fast and respects .gitignore.
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s ' . WildignoreToAg() . ' -l --nocolor -g ""'
-endif
 
 let g:ctrlp_buffer_func =
       \ { 'enter': 'EnableCursorLine',
