@@ -164,18 +164,7 @@ vnoremap <leader>e "ey:call EchoStrToShell(@e)<CR>
 
 nnoremap <leader>l :set list!<CR>
 
-
-nnoremap <leader>f :CtrlP<cr>
-nnoremap <leader>b :CtrlPBuffer<cr>
-nnoremap <leader>r :CtrlPClearCache<cr>
-
 set path+=**
-
-
-let g:ctrlp_buffer_func =
-      \ { 'enter': 'EnableCursorLine',
-      \ 'exit': 'DisableCursorLine' }
-
 
 set statusline=%t%h%m%r%y%=%c,%l/%L\ %P
 
