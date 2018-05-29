@@ -14,6 +14,8 @@
 (setq show-paren-delay 0)
 (show-paren-mode)
 
+(prefer-coding-system 'utf-8)
+
 ;; TODO: Test function/mode existance instead of relying on version number.
 (if (version<= "26.0.50" emacs-version)
     (global-display-line-numbers-mode)
@@ -54,6 +56,18 @@
 
 (use-package evil
   :ensure t
+  :init
+  (use-package evil-leader
+    :ensure t
+    :config
+    (global-evil-leader-mode)
+    (evil-leader/set-leader ",")
+    (evil-leader/set-key
+      "e" 'eval-defun
+      "l" 'whitespace-mode
+      "s" 'delete-trailing-whitespace
+      "," 'other-window
+      "o" 'delete-other-windows))
   :config
   (evil-mode))
 
@@ -89,7 +103,7 @@
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(package-selected-packages
    (quote
-    (origami evil-vimish-fold magit helm beacon use-package which-key spacemacs-theme evil evil-visual-mark-mode))))
+    (evil-leader origami evil-vimish-fold magit helm beacon use-package which-key spacemacs-theme evil evil-visual-mark-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
