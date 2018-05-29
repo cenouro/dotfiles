@@ -1,11 +1,11 @@
 set nocompatible
-" vim:set ft=vim et sw=2:
+" vim: filetype=vim:foldmethod=marker :
 
 " This should come here or else it can break some mappings.
 let mapleader = ","
 nnoremap ; :
 
-
+" Vundle {{{1
 " Vundle setup: clone and then run vim +PluginInstall +qall (or :PluginInstall)
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 filetype off                    " Required by Vundle.
@@ -18,8 +18,11 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'morhetz/gruvbox'
 call vundle#end()
 filetype plugin indent on       " Also required by Vundle.
+" }}}1
 
-
+" Functions {{{
+" TODO: deprecate this function and its mappings in favor of
+" :silent! .w !urlview
 function! EchoStrToShell(str)
   execute "!echo " . shellescape(a:str, 1)
 endfunction
@@ -43,7 +46,9 @@ function! ReturnToLastEditedPosition()
     exe "normal! g`\""
   endif
 endfunction
+" }}}
 
+" Options {{{1
 set number
 set scrolloff=2
 
@@ -68,9 +73,8 @@ set linebreak wrap
 
 set shiftwidth=2 tabstop=2 expandtab
 
-
 set viminfo^=% " Remember info about open buffers on close.
-
+" }}}1
 
 augroup Processors
   autocmd!
@@ -88,9 +92,11 @@ augroup LanguageSpecific
   autocmd!
   autocmd FileType gitcommit setlocal textwidth=72 spell spelllang=en_us
   autocmd FileType python,c,cpp,rst setlocal expandtab shiftwidth=4 softtabstop=4
-  autocmd FileType html setlocal textwidth=120
 augroup END
 
+" Mappings {{{1
+"
+" Mouse Mappings {{{2
 " Enable mouse so we can actually disable it by remapping. Just disabling the
 " mouse will make wheel events to be mapped to arrow keys.
 set mouse=a
@@ -108,14 +114,9 @@ noremap <3-RightMouse> <Nop>
 noremap <4-LeftMouse> <Nop>
 noremap <4-MiddleMouse> <Nop>
 noremap <4-RightMouse> <Nop>
+" }}}2
 
-" For long lines. Goes to next line (even if it is a wrapped continuation of
-" current line.
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
-
+" Try harder {{{2
 " Disable arrow keys.
 inoremap <left> <Nop>
 inoremap <right> <Nop>
@@ -123,12 +124,6 @@ inoremap <up> <Nop>
 inoremap <down> <Nop>
 nnoremap <left> <Nop>
 nnoremap <right> <Nop>
-
-" Resize split's using Up and Down.
-nnoremap <Up> <C-w>+
-nnoremap <Down> <C-w>-
-nnoremap <C-Up> <C-w>>
-nnoremap <C-Down> <C-w><
 
 " Normal mode: x
 nnoremap <delete> <nop>
@@ -148,7 +143,22 @@ inoremap <Home> <nop>
 nnoremap <Home> <nop>
 inoremap <End> <nop>
 nnoremap <End> <nop>
+" }}}2
 
+" For long lines. Goes to next line (even if it is a wrapped continuation of
+" current line.
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+
+" Resize split's using Up and Down.
+nnoremap <Up> <C-w>+
+nnoremap <Down> <C-w>-
+nnoremap <C-Up> <C-w>>
+nnoremap <C-Down> <C-w><
+
+" TODO: fix toggle logic (transition from one to another is not correct).
 " Toggle spell checking.
 noremap <F7> :setlocal spell! spelllang=en_us<CR>
 noremap <F8> :setlocal spell! spelllang=pt_br<CR>
@@ -163,11 +173,13 @@ nnoremap <leader>e "eyy:call EchoStrToShell(@e)<CR>
 vnoremap <leader>e "ey:call EchoStrToShell(@e)<CR>
 
 nnoremap <leader>l :set list!<CR>
+" }}}1
 
 set path+=**
 
 set statusline=%t%h%m%r%y%=%c,%l/%L\ %P
 
+" Colors {{{
 hi SpellBad term=reverse cterm=reverse ctermfg=3 guifg=Black guibg=Yellow
 hi SpellCap term=reverse cterm=reverse ctermfg=14 ctermbg=0 gui=bold,reverse
 
@@ -182,4 +194,5 @@ set t_Co=256
 " Has to be set before applying the colorscheme.
 let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
+" }}}
 
