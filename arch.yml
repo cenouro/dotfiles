@@ -3,7 +3,7 @@
 - hosts: localhost
 
   vars:
-    essentials: [vim, git, curl, wget, openssh, base-devel]
+    essentials: [vim, git, curl, wget, openssh, base-devel, ttf-ubuntu-font-family]
     tools: [dictd, python-pip, zsh, npm, ruby, feh, rxvt-unicode]
     i3_pkgs: [i3-gaps, dmenu, i3lock, i3status, perl-json-xs, perl-anyevent-i3]
 
