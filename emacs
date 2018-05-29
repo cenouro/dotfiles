@@ -54,6 +54,9 @@
 (use-package magit
   :ensure t)
 
+(use-package yaml-mode
+  :ensure t)
+
 (use-package evil
   :ensure t
   :init
@@ -103,7 +106,7 @@
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(package-selected-packages
    (quote
-    (evil-leader origami evil-vimish-fold magit helm beacon use-package which-key spacemacs-theme evil evil-visual-mark-mode))))
+    (yaml-mode evil-leader origami evil-vimish-fold magit helm beacon use-package which-key spacemacs-theme evil evil-visual-mark-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
