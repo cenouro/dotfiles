@@ -58,15 +58,13 @@
 
 (use-package magit
   :ensure t)
+(setq use-package-always-ensure t)
 
-(use-package yaml-mode
-  :ensure t)
+(use-package yaml-mode :defer t)
 
 (use-package evil
-  :ensure t
   :init
   (use-package evil-leader
-    :ensure t
     :config
     (global-evil-leader-mode)
     (evil-leader/set-leader ",")
@@ -80,23 +78,19 @@
   (evil-mode))
 
 (use-package evil-vimish-fold
-  :ensure t
   :init
   (use-package vimish-fold
-    :ensure t
     :config
     (vimish-fold-global-mode 1))
   :config
   (evil-vimish-fold-mode 1))
 
 (use-package which-key
-  :ensure t
   :config
   (which-key-mode)
   (setq which-key-allow-evil-operators nil))
 
 (use-package beacon
-  :ensure t
   :init
   (beacon-mode 1))
 
