@@ -56,9 +56,14 @@
 (global-set-key [escape] 'keyboard-quit)
 (global-set-key (kbd "<C-escape>") 'keyboard-escape-quit)
 
-(use-package magit
-  :ensure t)
+;; Packages.
 (setq use-package-always-ensure t)
+
+(use-package magit :defer t)
+(add-hook 'magit-mode-hook (lambda ()
+                             (local-unset-key "j")
+                             (local-set-key "k" 'magit-section-backward)
+                             (local-set-key "j" 'magit-section-forward)))
 
 (use-package yaml-mode :defer t)
 
