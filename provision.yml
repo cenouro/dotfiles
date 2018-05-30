@@ -12,7 +12,7 @@
 - hosts: localhost
 
   vars:
-    dotfiles: [emacs, gitconfig, vimrc, zshrc, npmrc]
+    dotfiles: ['emacs.d', gitconfig, vimrc, zshrc, npmrc]
     username: '{{ ansible_env.USER }}'
     userhome: '{{ ansible_env.HOME }}'
     dotfiles_path: '{{userhome}}/repos/dotfiles'
@@ -109,4 +109,3 @@
         regexp: '^"ansible(.*)'
         replace: '\1'
     # >>>1
-

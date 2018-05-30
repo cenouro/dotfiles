@@ -6,3 +6,6 @@ vim/vim
 
 *.retry
 
+emacs.d/*
+!emacs.d/init.el
+
