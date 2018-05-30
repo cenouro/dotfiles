@@ -51,6 +51,10 @@
 (eval-when-compile
   (require 'use-package))
 
+;; Attempt to improve ESC-ESC-ESC (keyboard-escape-quit closes splits).
+(global-set-key [escape] 'keyboard-quit)
+(global-set-key (kbd "<C-escape>") 'keyboard-escape-quit)
+
 (use-package magit
   :ensure t)
 
