@@ -17,11 +17,13 @@
 
 (prefer-coding-system 'utf-8)
 
-;; TODO: Test function/mode existance instead of relying on version number.
-(if (version<= "26.0.50" emacs-version)
+;; Line numbers {{{
+(setq-default display-line-numbers-type 'relative)
+(setq-default linum-format "%3d")
+(if (fboundp 'global-display-line-numbers-mode)
     (global-display-line-numbers-mode)
-  (global-linum-mode)
-  (setq linum-format "%3d"))
+  (global-linum-mode))
+;; }}}
 
 (setq inhibit-startup-message t)
 (setq scroll-conservatively 100)
