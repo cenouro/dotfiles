@@ -1,6 +1,8 @@
 ;;; -*- lexical-binding: t -*-
 
+(package-initialize)
 (require 'package)
+(setq package-enable-at-startup nil)
 
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
@@ -41,7 +43,6 @@
 (global-set-key (kbd "<C-return>") 'ansi-term)
 
 (setq package-enable-at-startup nil)
-(package-initialize)
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -112,7 +113,7 @@
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(package-selected-packages
    (quote
-    (yaml-mode evil-leader origami evil-vimish-fold magit helm beacon use-package which-key spacemacs-theme evil evil-visual-mark-mode))))
+    (yaml-mode evil-leader evil-vimish-fold magit beacon use-package which-key spacemacs-theme evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
