@@ -103,6 +103,7 @@
       "o" 'delete-other-windows))
   :config
   (evil-mode)
+  (evil-set-initial-state 'dired-mode 'emacs)
   (define-key evil-insert-state-map (kbd "C-h") 'backward-delete-char-untabify))
 
 (use-package which-key
