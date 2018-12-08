@@ -1,3 +1,4 @@
+
 #!/usr/bin/sh
 
 ln -fs `realpath ./vim` ~/.vim
