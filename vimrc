@@ -16,6 +16,7 @@ Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'morhetz/gruvbox'
+Plugin 'vim-ruby/vim-ruby'      " Use latest instead of relying on Vim version.
 call vundle#end()
 filetype plugin indent on       " Also required by Vundle.
 " }}}1
