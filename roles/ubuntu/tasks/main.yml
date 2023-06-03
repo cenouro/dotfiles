@@ -1,0 +1,42 @@
+---
+- name: Install essential packages
+  ansible.builtin.apt:
+    package:
+      - mpv
+      - transmission
+      - tree
+    state: present
+  become: true
+
+- name: Enable pixel-perfect scrolling in Firefox
+  ansible.builtin.lineinfile:
+    path: '{{ item.path }}'
+    line: '{{ item.line }}'
+    state: present
+    create: True
+  loop:
+    - path: '{{ HOME }}/.xprofile'
+      line: 'export MOZ_USE_XINPUT2=1'
+    - path: '{{ XDG_CONFIG_HOME }}/environment.d/envvars.conf'
+      line: 'MOZ_ENABLE_WAYLAND=1'
+
+- name: Get Firefox (snap) app launcher stats
+  ansible.builtin.stat:
+    path: '{{ snap.app_launchers.firefox }}'
+  register: firefox_snap_app_launcher_stats
+
+- name: Get Firefox (user) app launcher stats
+  ansible.builtin.stat:
+    path: '{{ user.app_launchers.firefox }}'
+  register: firefox_user_app_launcher_stats
+
+- name: Copy Firefox app launcher
+  ansible.builtin.copy:
+    src: '{{ snap.app_launchers.firefox }}'
+    dest: '{{ user.app_launchers.firefox }}'
+    mode: preserve
+  when:
+    - firefox_snap_app_launcher_stats.stat.exists == true
+    - firefox_user_app_launcher_stats.stat.exists == false
+  notify: Customize Firefox app launcher
+...

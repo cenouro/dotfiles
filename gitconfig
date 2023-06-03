@@ -1,0 +1,16 @@
+[user]
+    name = Mario Maia
+    email = cenouro+git@protonmail.com
+[core]
+    editor = nvim
+[pull]
+    ff = only
+[merge]
+    ff = false
+    conflictStyle = diff3
+[diff]
+    algorithm = patience
+    indentHeuristic = true
+[init]
+    defaultBranch = master
+

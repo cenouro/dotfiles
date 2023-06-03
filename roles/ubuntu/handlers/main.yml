@@ -1,0 +1,11 @@
+---
+- name: Customize Firefox app launcher
+  ansible.builtin.lineinfile:
+    path: '{{ user.app_launchers.firefox }}'
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+  loop:
+    - { regexp: '^Name=Firefox', line: 'Name=Firefox' }
+    - regexp: '^Icon=/snap/firefox/'
+      line: 'Icon=/snap/firefox/current/default256.png'
+...

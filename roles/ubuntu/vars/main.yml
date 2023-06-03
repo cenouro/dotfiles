@@ -1,0 +1,12 @@
+---
+snap_app_launchers_dir: '/var/lib/snapd/desktop/applications'
+user_app_launchers_dir: '{{ HOME }}/.local/share/applications'
+
+snap:
+  app_launchers:
+    firefox: '{{ snap_app_launchers_dir }}/firefox_firefox.desktop'
+
+user:
+  app_launchers:
+    firefox: '{{ user_app_launchers_dir }}/firefox_firefox.desktop'
+...
