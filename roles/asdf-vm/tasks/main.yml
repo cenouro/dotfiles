@@ -26,4 +26,7 @@
 
 - name: Include asdf-nodejs tasks
   include_tasks: asdf-nodejs.yml
+
+- name: Include asdf-ruby tasks
+  include_tasks: asdf-ruby.yml
 ...

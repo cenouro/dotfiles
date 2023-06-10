@@ -1,0 +1,27 @@
+---
+- name: Install asdf-ruby (ruby-build) dependencies
+  ansible.builtin.apt:
+    package:
+      - autoconf
+      - patch
+      - build-essential
+      - rustc
+      - libssl-dev
+      - libyaml-dev
+      - libreadline6-dev
+      - zlib1g-dev
+      - libgmp-dev
+      - libncurses5-dev
+      - libffi-dev
+      - libgdbm6
+      - libgdbm-dev
+      - libdb-dev
+      - uuid-dev
+    state: present
+  become: true
+
+- name: Install asdf-ruby plugin
+  ansible.builtin.shell:
+    cmd: asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
+    creates: '{{ HOME }}/.asdf/plugins/ruby/'
+...
