@@ -24,7 +24,6 @@
 
   roles:
     - asdf-vm
-    - chruby
     - git
     - gnome
     - ubuntu
