@@ -23,6 +23,7 @@
         - '{{ XDG_STATE_HOME }}'
 
   roles:
+    - asdf-vm
     - chruby
     - git
     - gnome
