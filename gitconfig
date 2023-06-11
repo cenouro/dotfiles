@@ -1,6 +1,6 @@
 [user]
     name = Mario Maia
-    email = cenouro+git@protonmail.com
+    email = mario.mtbr+github@outlook.com
 [core]
     editor = nvim
 [pull]
@@ -13,4 +13,3 @@
     indentHeuristic = true
 [init]
     defaultBranch = master
-
