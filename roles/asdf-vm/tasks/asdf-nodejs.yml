@@ -11,9 +11,6 @@
 
 - name: Install asdf-nodejs plugin
   ansible.builtin.shell:
-    cmd: |
-      source {{ HOME|quote }}/.bashrc
-      asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-    executable: /usr/bin/bash
+    cmd: asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
     creates: '{{ HOME }}/.asdf/plugins/nodejs/'
 ...

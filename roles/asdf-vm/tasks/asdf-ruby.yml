@@ -22,9 +22,6 @@
 
 - name: Install asdf-ruby plugin
   ansible.builtin.shell:
-    cmd: |
-      source {{ HOME|quote }}/.bashrc
-      asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
-    executable: /usr/bin/bash
+    cmd: asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
     creates: '{{ HOME }}/.asdf/plugins/ruby/'
 ...
