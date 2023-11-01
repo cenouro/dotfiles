@@ -1,7 +1,7 @@
 ---
 - name: Customize Firefox app launcher
   ansible.builtin.lineinfile:
-    path: '{{ user.app_launchers.firefox }}'
+    path: '{{ user.firefox.desktop }}'
     regexp: '{{ item.regexp }}'
     line: '{{ item.line }}'
   loop:

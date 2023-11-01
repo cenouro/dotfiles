@@ -20,8 +20,8 @@
 
 - name: Copy Firefox app launcher
   ansible.builtin.copy:
-    src: '{{ snap.app_launchers.firefox }}'
-    dest: '{{ user.app_launchers.firefox }}'
+    src: '{{ snap.firefox.desktop }}'
+    dest: '{{ user.firefox.desktop }}'
     mode: preserve
     force: false
   notify: Customize Firefox app launcher
