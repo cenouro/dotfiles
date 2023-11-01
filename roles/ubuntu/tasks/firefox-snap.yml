@@ -24,5 +24,15 @@
     dest: '{{ user.firefox.desktop }}'
     mode: preserve
     force: false
-  notify: Customize Firefox app launcher
+
+- name: Customize Firefox app launcher
+  ansible.builtin.lineinfile:
+    path: '{{ user.firefox.desktop }}'
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+  loop:
+    - regexp: '^Name=Firefox Web Browser'
+      line: 'Name=Firefox'
+    - regexp: '^Icon=/snap/firefox/'
+      line: 'Icon=/snap/firefox/current/default256.png'
 ...
