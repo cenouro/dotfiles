@@ -1,0 +1,21 @@
+---
+- name: Install mpv
+  ansible.builtin.apt:
+    package: mpv
+    state: present
+  become: true
+
+- name: Copy mpv app launcher
+  ansible.builtin.copy:
+    src: '{{ deb.mpv.desktop }}'
+    dest: '{{ user.mpv.desktop }}'
+    mode: preserve
+    force: false
+
+- name: Hide mpv app launcher
+  ansible.builtin.lineinfile:
+    path: '{{ user.mpv.desktop }}'
+    line: 'NoDisplay=true'
+    insertbefore: 'Name=mpv Media Player'
+    firstmatch: true
+...

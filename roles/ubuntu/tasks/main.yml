@@ -2,7 +2,6 @@
 - name: Install essential packages
   ansible.builtin.apt:
     package:
-      - mpv
       - transmission
       - tree
     state: present
@@ -10,4 +9,7 @@
 
 - name: Include Firefox tasks
   include_tasks: firefox-snap.yml
+
+- name: Include mpv tasks
+  include_tasks: mpv.yml
 ...
