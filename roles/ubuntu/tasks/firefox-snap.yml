@@ -30,9 +30,11 @@
     path: '{{ user.firefox.desktop }}'
     regexp: '{{ item.regexp }}'
     line: '{{ item.line }}'
+    firstmatch: true
+    backrefs: true
   loop:
-    - regexp: '^Name=Firefox Web Browser'
+    - regexp: '^Name=Firefox Web Browser$'
       line: 'Name=Firefox'
-    - regexp: '^Icon=/snap/firefox/'
-      line: 'Icon=/snap/firefox/current/default256.png'
+    - regexp: '^Icon=/snap/firefox/(?!current).*?/(.*)$'
+      line: 'Icon=/snap/firefox/current/\1'
 ...
