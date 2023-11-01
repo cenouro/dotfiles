@@ -9,5 +9,5 @@
   become: true
 
 - name: Include Firefox tasks
-  include_tasks: firefox.yml
+  include_tasks: firefox-snap.yml
 ...
