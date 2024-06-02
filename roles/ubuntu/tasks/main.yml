@@ -23,9 +23,13 @@
     insertbefore: 'Name=mpv Media Player'
     firstmatch: true
 
+- name: Install Chromium snap
+  community.general.snap:
+    name: chromium
+    channel: stable
+    state: present
+  become: true
+
 - name: Include Firefox tasks
   include_tasks: firefox-snap.yml
-
-- name: Include Chromium tasks
-  include_tasks: chromium-snap.yml
 ...

@@ -10,14 +10,10 @@ deb:
 snap:
   firefox:
     desktop: '{{ snap_app_launchers_dir }}/firefox_firefox.desktop'
-  chromium:
-    desktop: '{{ snap_app_launchers_dir }}/chromium_chromium.desktop'
 
 user:
   firefox:
     desktop: '{{ user_app_launchers_dir }}/firefox_firefox.desktop'
-  chromium:
-    desktop: '{{ user_app_launchers_dir }}/chromium_chromium.desktop'
   mpv:
     desktop: '{{ user_app_launchers_dir }}/mpv.desktop'
 ...
