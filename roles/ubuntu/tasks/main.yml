@@ -12,8 +12,13 @@
 - name: Install essential snaps
   community.general.snap:
     name:
+      - amberol
+      - bitwarden
       - chromium
       - firefox
+      - onlyoffice-desktopeditors
+      - tagger
+      - tube-converter
     channel: stable
     state: present
   become: true
