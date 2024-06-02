@@ -2,18 +2,30 @@
 - name: Install essential packages
   ansible.builtin.apt:
     package:
+      - mpv
       - transmission
       - tree
       - wget
     state: present
   become: true
 
+- name: Copy mpv app launcher
+  ansible.builtin.copy:
+    src: '{{ deb.mpv.desktop }}'
+    dest: '{{ user.mpv.desktop }}'
+    mode: preserve
+    force: false
+
+- name: Hide mpv app launcher
+  ansible.builtin.lineinfile:
+    path: '{{ user.mpv.desktop }}'
+    line: 'NoDisplay=true'
+    insertbefore: 'Name=mpv Media Player'
+    firstmatch: true
+
 - name: Include Firefox tasks
   include_tasks: firefox-snap.yml
 
 - name: Include Chromium tasks
   include_tasks: chromium-snap.yml
-
-- name: Include mpv tasks
-  include_tasks: mpv.yml
 ...
