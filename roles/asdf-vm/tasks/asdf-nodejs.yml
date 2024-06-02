@@ -2,6 +2,7 @@
 - name: Install asdf-nodejs (node-build) dependencies
   ansible.builtin.apt:
     package:
+      - build-essential
       - g++
       - make
       - python3
