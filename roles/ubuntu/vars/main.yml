@@ -1,19 +1,12 @@
 ---
 deb_app_launchers_dir: '/usr/share/applications/'
-snap_app_launchers_dir: '/var/lib/snapd/desktop/applications'
 user_app_launchers_dir: '{{ HOME }}/.local/share/applications'
 
 deb:
   mpv:
     desktop: '{{ deb_app_launchers_dir }}/mpv.desktop'
 
-snap:
-  firefox:
-    desktop: '{{ snap_app_launchers_dir }}/firefox_firefox.desktop'
-
 user:
-  firefox:
-    desktop: '{{ user_app_launchers_dir }}/firefox_firefox.desktop'
   mpv:
     desktop: '{{ user_app_launchers_dir }}/mpv.desktop'
 ...

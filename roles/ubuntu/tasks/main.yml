@@ -9,6 +9,15 @@
     state: present
   become: true
 
+- name: Install essential snaps
+  community.general.snap:
+    name:
+      - chromium
+      - firefox
+    channel: stable
+    state: present
+  become: true
+
 - name: Copy mpv app launcher
   ansible.builtin.copy:
     src: '{{ deb.mpv.desktop }}'
@@ -23,13 +32,15 @@
     insertbefore: 'Name=mpv Media Player'
     firstmatch: true
 
-- name: Install Chromium snap
-  community.general.snap:
-    name: chromium
-    channel: stable
+- name: Enable pixel-perfect scrolling in Firefox
+  ansible.builtin.lineinfile:
+    path: '{{ item.path }}'
+    line: '{{ item.line }}'
     state: present
-  become: true
-
-- name: Include Firefox tasks
-  include_tasks: firefox-snap.yml
+    create: True
+  loop:
+    - path: '{{ HOME }}/.xprofile'
+      line: 'export MOZ_USE_XINPUT2=1'
+    - path: '{{ XDG_CONFIG_HOME }}/environment.d/envvars.conf'
+      line: 'MOZ_ENABLE_WAYLAND=1'
 ...
