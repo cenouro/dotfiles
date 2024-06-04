@@ -19,7 +19,6 @@
       - onlyoffice-desktopeditors
       - tagger
       - tube-converter
-    channel: stable
     state: present
   become: true
 
