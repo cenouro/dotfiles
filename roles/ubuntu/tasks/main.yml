@@ -36,15 +36,17 @@
     insertbefore: 'Name=mpv Media Player'
     firstmatch: true
 
-- name: Enable pixel-perfect scrolling in Firefox
-  ansible.builtin.lineinfile:
+- name: 'FIREFOX: Enable pixel-perfect scrolling'
+  ansible.builtin.blockinfile:
     path: '{{ item.path }}'
-    line: '{{ item.line }}'
-    state: present
-    create: True
+    block: '{{ item.block }}'
+    prepend_newline: true
+    append_newline: true
+    marker: '# {mark} Ansible Managed Block | FIREFOX: Enable pixel-perfect scrolling'
+    create: true
   loop:
     - path: '{{ HOME }}/.xprofile'
-      line: 'export MOZ_USE_XINPUT2=1'
+      block: 'export MOZ_USE_XINPUT2=1'
     - path: '{{ XDG_CONFIG_HOME }}/environment.d/envvars.conf'
-      line: 'MOZ_ENABLE_WAYLAND=1'
+      block: 'MOZ_ENABLE_WAYLAND=1'
 ...
