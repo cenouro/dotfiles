@@ -10,5 +10,6 @@ then
     if ( command -v gpu-manager &> /dev/null ) && ( gpu-manager | grep -Fiq "last cards number = 1" )
     then
         nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
+        nvidia-settings --assign GPULogoBrightness=0
     fi
 fi
