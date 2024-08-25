@@ -1,0 +1,18 @@
+---
+- name: Install applications
+  include_tasks: '{{ DISTRO }}.yml'
+
+- name: 'FIREFOX: Enable pixel-perfect scrolling'
+  ansible.builtin.blockinfile:
+    path: '{{ item.path }}'
+    block: '{{ item.block }}'
+    prepend_newline: true
+    append_newline: true
+    marker: '# {mark} Ansible Managed Block | FIREFOX: Enable pixel-perfect scrolling'
+    create: true
+  loop:
+    - path: '{{ HOME }}/.xprofile'
+      block: 'export MOZ_USE_XINPUT2=1'
+    - path: '{{ XDG_CONFIG_HOME }}/environment.d/envvars.conf'
+      block: 'MOZ_ENABLE_WAYLAND=1'
+...

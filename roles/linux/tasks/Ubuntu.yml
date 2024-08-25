@@ -1,0 +1,24 @@
+---
+- name: Install essential packages
+  ansible.builtin.apt:
+    package:
+      - mpv
+      - transmission
+      - tree
+      - wget
+    state: present
+  become: true
+
+- name: Install essential snaps
+  community.general.snap:
+    name:
+      - amberol
+      - bitwarden
+      - chromium
+      - firefox
+      - onlyoffice-desktopeditors
+      - tagger
+      - tube-converter
+    state: present
+  become: true
+...

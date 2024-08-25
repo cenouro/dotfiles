@@ -1,0 +1,15 @@
+---
+- name: Install asdf-nodejs (node-build) dependencies
+  ansible.builtin.package:
+    name: '{{ asdf_nodejs_deps }}'
+    state: present
+  become: true
+
+- name: Install asdf-nodejs plugin
+  ansible.builtin.shell:
+    cmd: |
+      source {{ HOME|quote }}/.asdf/asdf.sh
+      asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+    executable: /usr/bin/bash
+    creates: '{{ HOME }}/.asdf/plugins/nodejs/'
+...

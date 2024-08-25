@@ -1,0 +1,16 @@
+[user]
+    name = Mario Maia
+    email = mario.mtbr+github@outlook.com
+    signingkey = 249BCCD1!
+[core]
+    editor = nvim
+[pull]
+    ff = only
+[merge]
+    ff = false
+    conflictStyle = diff3
+[diff]
+    algorithm = patience
+    indentHeuristic = true
+[init]
+    defaultBranch = master

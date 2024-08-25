@@ -1,0 +1,47 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars:
+    - DISTRO: '{{ ansible_facts.distribution }}'
+
+    - HOME: '{{ ansible_env.HOME }}'
+    - PWD: '{{ ansible_env.PWD }}'
+
+    - XDG_CONFIG_HOME: '{{ HOME }}/.config'
+    - XDG_CACHE_HOME: '{{ HOME }}/.cache'
+    - XDG_DATA_HOME: '{{ HOME }}/.local/share'
+    - XDG_STATE_HOME: '{{ HOME }}/.local/state'
+
+  pre_tasks:
+    - name: Ensure XDG directories
+      ansible.builtin.file:
+        path: '{{ item }}'
+        state: directory
+      loop:
+        - '{{ XDG_CONFIG_HOME }}'
+        - '{{ XDG_CACHE_HOME }}'
+        - '{{ XDG_DATA_HOME }}'
+        - '{{ XDG_STATE_HOME }}'
+
+  roles:
+    - asdf-vm
+    - git
+    - gnome
+    - linux
+
+  tasks:
+    - name: 'NVIDIA: Avoid screen tearing in Xorg'
+      ansible.builtin.blockinfile:
+        path: '{{ HOME }}/.xprofile'
+        prepend_newline: true
+        append_newline: true
+        create: true
+        marker: '# {mark} Ansible Managed Block | NVIDIA: Avoid screen tearing in Xorg'
+        block: "{{ lookup('ansible.builtin.file', './block.nvidia-xprofile.sh') }}"
+
+    - name: Print all available facts (run with --tags debug)
+      ansible.builtin.debug:
+        var: ansible_facts
+      tags: [ debug, never ]
+...
