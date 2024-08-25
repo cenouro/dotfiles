@@ -13,7 +13,18 @@
     - XDG_DATA_HOME: '{{ HOME }}/.local/share'
     - XDG_STATE_HOME: '{{ HOME }}/.local/state'
 
+    - emacs_d: '{{ HOME }}/.emacs.d'
+
   pre_tasks:
+    - name: Ensure user folder in /opt/
+      ansible.builtin.file:
+        path: '/opt/{{ ansible_facts.user_id }}'
+        state: directory
+        owner: '{{ ansible_facts.user_id }}'
+        group: '{{ ansible_facts.user_id }}'
+        mode: '750'
+      become: true
+
     - name: Ensure XDG directories
       ansible.builtin.file:
         path: '{{ item }}'
@@ -29,6 +40,10 @@
     - git
     - gnome
     - linux
+    - install-emacs
+    - emacs
+    - languagetool
+    - gnome-hotkeys
 
   tasks:
     - name: 'NVIDIA: Avoid screen tearing in Xorg'

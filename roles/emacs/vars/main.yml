@@ -1,0 +1,11 @@
+---
+init_el:
+  src: '{{ PWD }}/init.el'
+  dest: '{{ emacs_d }}/init.el'
+
+elisp:
+  src: '{{ PWD }}/elisp'
+  dest: '{{ emacs_d }}/elisp'
+
+custom_el: '{{ emacs_d }}/custom.el'
+...

@@ -1,0 +1,39 @@
+---
+- name: Install dconf-editor and community.general.dconf dependency
+  ansible.builtin.package:
+    name:
+      - dconf-editor
+      - python3-psutil
+    state: present
+  become: yes
+
+- name: Remap CapsLock -> Ctrl, AltGr -> Alt
+  community.general.dconf:
+    key: "/org/gnome/desktop/input-sources/xkb-options"
+    value: "['ctrl:nocaps', 'lv3:ralt_alt']"
+    state: present
+
+- name: Allow Emacs to use M-SPC and C-M-SPC
+  community.general.dconf:
+    key: "/org/gnome/desktop/wm/keybindings/activate-window-menu"
+    value: "@as []"
+    state: present
+
+- name: Allow Emacs to use C-M-d
+  community.general.dconf:
+    key: "/org/gnome/desktop/wm/keybindings/show-desktop"
+    value: "['<Super>d']"
+    state: present
+
+- name: Allow Emacs to use C-M-t
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/terminal"
+    value: "@as []"
+    state: present
+
+- name: Allow Emacs to use C-. and C-;
+  # Dconf does not work here, it has to be set using gsettings.
+  ansible.builtin.shell:
+    cmd: "gsettings set org.freedesktop.ibus.panel.emoji hotkey \"@as []\""
+  changed_when: false
+...

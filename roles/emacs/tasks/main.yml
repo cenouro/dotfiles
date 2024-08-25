@@ -1,0 +1,34 @@
+---
+- name: Load variables
+  ansible.builtin.include_vars: '{{ DISTRO }}.yml'
+
+- name: Install JetBrains Mono
+  ansible.builtin.package:
+    name: '{{ jetbrains_mono_fonts }}'
+    state: present
+  become: true
+
+- name: Ensure Emacs directory
+  ansible.builtin.file:
+    dest: '{{ emacs_d }}'
+    state: directory
+
+- name: Link assets
+  ansible.builtin.file:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    state: link
+  loop:
+    - '{{ init_el }}'
+    - '{{ elisp }}'
+
+- name: Create empty custom.el
+  ansible.builtin.file:
+    path: '{{ custom_el }}'
+    state: touch
+    access_time: preserve
+    modification_time: preserve
+
+- name: Include inf-ruby.yml
+  include_tasks: inf-ruby.yml
+...
