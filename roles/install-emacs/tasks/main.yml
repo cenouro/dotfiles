@@ -1,4 +1,0 @@
----
-- name: Install Emacs
-  include_tasks: '{{ DISTRO }}.yml'
-...

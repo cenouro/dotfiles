@@ -2,6 +2,9 @@
 - name: Load variables
   ansible.builtin.include_vars: '{{ DISTRO }}.yml'
 
+- name: Include tasks that install emacs
+  include_tasks: 'install-emacs-{{ DISTRO }}.yml'
+
 - name: Install JetBrains Mono
   ansible.builtin.package:
     name: '{{ jetbrains_mono_fonts }}'
