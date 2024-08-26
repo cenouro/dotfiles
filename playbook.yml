@@ -3,6 +3,7 @@
   connection: local
 
   vars:
+    - CURRENT_DESKTOP: '{{ ansible_facts.env.XDG_CURRENT_DESKTOP }}'
     - DISTRO: '{{ ansible_facts.distribution }}'
 
     - HOME: '{{ ansible_env.HOME }}'
@@ -36,11 +37,13 @@
   roles:
     - asdf-vm
     - git
-    - gnome
+    - role: gnome
+      when: CURRENT_DESKTOP == 'GNOME'
     - linux
     - emacs
     - languagetool
-    - gnome-hotkeys
+    - role: gnome-hotkeys
+      when: CURRENT_DESKTOP == 'GNOME'
 
   tasks:
     - name: 'NVIDIA: Avoid screen tearing in Xorg'
