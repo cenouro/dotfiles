@@ -32,6 +32,10 @@
     access_time: preserve
     modification_time: preserve
 
+- name: Configure keyboard when using GNOME
+  include_tasks: gnome-keyboard.yml
+  when: CURRENT_DESKTOP == 'GNOME'
+
 - name: Include inf-ruby.yml
   include_tasks: inf-ruby.yml
 ...

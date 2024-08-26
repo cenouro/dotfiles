@@ -42,8 +42,6 @@
     - linux
     - emacs
     - languagetool
-    - role: gnome-hotkeys
-      when: CURRENT_DESKTOP == 'GNOME'
 
   tasks:
     - name: 'NVIDIA: Avoid screen tearing in Xorg'
