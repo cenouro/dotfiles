@@ -1,4 +1,6 @@
 ---
+emacs_d: '{{ HOME }}/.emacs.d'
+
 init_el:
   src: '{{ PWD }}/init.el'
   dest: '{{ emacs_d }}/init.el'

@@ -13,8 +13,6 @@
     - XDG_DATA_HOME: '{{ HOME }}/.local/share'
     - XDG_STATE_HOME: '{{ HOME }}/.local/state'
 
-    - emacs_d: '{{ HOME }}/.emacs.d'
-
   pre_tasks:
     - name: Ensure user folder in /opt/
       ansible.builtin.file:
