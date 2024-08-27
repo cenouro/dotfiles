@@ -108,12 +108,12 @@ See `comint-send-invisible' for security note."
 
 (customize-set-variable 'backup-directory-alist
                         '((".*" . "~/.local/state/emacs/backups")))
-(customize-set-variable  'backup-by-copying t "Don't clobber symbolic links")
-(customize-set-variable  'delete-old-versions t)
-(customize-set-variable  'kept-new-versions 6)
-(customize-set-variable  'kept-old-versions 2)
+(customize-set-variable 'backup-by-copying t "Don't clobber symbolic links")
+(customize-set-variable 'delete-old-versions t)
+(customize-set-variable 'kept-new-versions 6)
+(customize-set-variable 'kept-old-versions 2)
 (customize-set-variable 'vc-make-backup-files nil)
-(customize-set-variable  'version-control t "Use versioned backups")
+(customize-set-variable 'version-control t "Use versioned backups")
 
 
 ;;; The usual suspects
