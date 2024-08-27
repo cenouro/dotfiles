@@ -112,6 +112,7 @@ See `comint-send-invisible' for security note."
 (customize-set-variable  'delete-old-versions t)
 (customize-set-variable  'kept-new-versions 6)
 (customize-set-variable  'kept-old-versions 2)
+(customize-set-variable 'vc-make-backup-files nil)
 (customize-set-variable  'version-control t "Use versioned backups")
 
 
