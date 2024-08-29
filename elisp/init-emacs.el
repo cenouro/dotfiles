@@ -85,7 +85,7 @@ See `comint-send-invisible' for security note."
 
 (set-face-attribute 'default nil
                     :family "JetBrains Mono"
-                    :height (round (cnr/scale-font-height 132))
+                    :height (round (cnr/scale-font-height 140))
                     :slant  'normal
                     :weight 'normal
                     :width  'normal)
