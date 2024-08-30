@@ -28,5 +28,18 @@
                '(ruby-mode . ("bundle" "exec"
                               "srb tc --lsp --disable-watchman"))))
 
+
+(define-skeleton minitest-skeleton
+  "Skeleton for *_test.rb files."
+  nil
+  "require 'minitest/autorun'" \n \n
+  "class Test"
+  (replace-regexp-in-string (rx (or "-" (seq "_" (? "test.rb"))))
+                            "" (capitalize (buffer-name)))
+  " < Minitest::Test" \n
+  "def test_" _ > \n
+  "end" > \n
+  "end" > "\n")
+
 (provide 'init-ruby)
 ;;; init-ruby.el ends here
