@@ -18,6 +18,8 @@
 
 
 (with-eval-after-load 'compile
+  (add-hook 'ruby-mode-hook
+            #'(lambda () (setq-local compile-command "bundle exec rake test")))
   (add-to-list 'compilation-error-regexp-alist-alist
                '(rails-minitest-failure "\\[\\(.*?.rb\\):\\([0-9]+\\)\\]:$" 1 2))
   (add-to-list 'compilation-error-regexp-alist 'rails-minitest-failure))
