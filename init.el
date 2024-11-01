@@ -24,6 +24,8 @@
 (require 'init-corfu)
 (require 'init-orderless)
 
+(require 'init-eldoc)
+
 (require 'init-project)
 (require 'init-flymake)
 (require 'init-eglot)
