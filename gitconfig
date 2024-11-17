@@ -4,7 +4,7 @@
     signingkey = 249BCCD1!
 [core]
     editor = nvim
-	autocrlf = input
+    autocrlf = input
 [pull]
     ff = only
 [merge]
