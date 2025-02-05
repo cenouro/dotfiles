@@ -41,6 +41,7 @@
 (require 'init-magit)
 (require 'init-vdiff)
 (require 'init-ruby)
+(require 'init-python)
 
 
 (unless (package-installed-p 'page-break-lines)
