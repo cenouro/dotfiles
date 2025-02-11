@@ -23,6 +23,7 @@
 (require 'init-vertico)
 (require 'init-corfu)
 (require 'init-orderless)
+(require 'init-tempel)
 
 (require 'init-eldoc)
 

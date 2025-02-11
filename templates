@@ -1,0 +1,16 @@
+;;; templates --- templates for tempel.el
+
+ruby-mode
+
+(bigdecimal "BigDecimal(" p ")")
+(extend-sig "extend T::Sig")
+(sig-params-returns "sig { params(" p ").returns(" p ") }")
+(sig-params-void "sig { params(" p ").void }")
+(sig-returns "sig { returns(" p ") }")
+(sig-void "sig { void }")
+(tany "T.any(" p ")")
+(tarray "T::Array[" p "]")
+(thash "T::Hash[" p "]")
+(tlet "T.let(" (p "value") ", " (p "type") ")")
+(tnilable "T.nilable(" p ")")
+(trevealtype "T.reveal_type(" p ")")

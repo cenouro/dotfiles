@@ -24,6 +24,7 @@
   loop:
     - '{{ init_el }}'
     - '{{ elisp }}'
+    - '{{ templates }}'
 
 - name: Create empty custom.el
   ansible.builtin.file:

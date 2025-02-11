@@ -9,5 +9,9 @@ elisp:
   src: '{{ PWD }}/elisp'
   dest: '{{ emacs_d }}/elisp'
 
+templates:
+  src: '{{ PWD }}/templates'
+  dest: '{{ emacs_d }}/templates'
+
 custom_el: '{{ emacs_d }}/custom.el'
 ...
