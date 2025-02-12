@@ -3,6 +3,8 @@
 ruby-mode
 
 (bigdecimal "BigDecimal(" p ")")
+(extend-sig "extend T::Sig")
+(rere "require_relative '" p "'")
 (sig-params-returns "sig { params(" p ").returns(" p ") }")
 (sig-params-void "sig { params(" p ").void }")
 (sig-returns "sig { returns(" p ") }")
