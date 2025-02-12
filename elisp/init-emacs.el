@@ -99,6 +99,7 @@ See `comint-send-invisible' for security note."
 
 ;;; Auto-save and backups
 ;;
+(customize-set-variable 'auto-save-default nil)
 (customize-set-variable 'auto-save-list-file-prefix
                         "~/.local/state/emacs/auto-saves/.saves-")
 (customize-set-variable 'auto-save-file-name-transforms
@@ -106,6 +107,7 @@ See `comint-send-invisible' for security note."
 (customize-set-variable 'auto-save-interval 256)
 (customize-set-variable 'auto-save-timeout  120)
 
+(customize-set-variable 'make-backup-files nil)
 (customize-set-variable 'backup-directory-alist
                         '((".*" . "~/.local/state/emacs/backups")))
 (customize-set-variable 'backup-by-copying t "Don't clobber symbolic links")
