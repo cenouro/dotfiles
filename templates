@@ -1,5 +1,10 @@
 ;;; templates --- templates for tempel.el
 
+emacs-lisp-mode
+
+(add "add-hook '")
+(cus "customize-set-variable '")
+
 ruby-mode
 
 (bigdecimal "BigDecimal(" p ")")
