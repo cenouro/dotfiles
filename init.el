@@ -15,6 +15,7 @@
 (require 'init-modus-themes)
 
 (require 'init-diminish)
+(require 'init-undo-fu)
 ;; (require 'init-undo-tree)
 
 (require 'init-ace-window)
