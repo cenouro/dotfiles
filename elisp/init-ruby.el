@@ -27,8 +27,10 @@
 
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
-               '(ruby-mode . ("bundle" "exec"
-                              "srb tc --lsp --disable-watchman"))))
+               `(ruby-mode . ("bundle" "exec"
+                              ,(if (executable-find "watchman")
+                                   "srb tc --lsp"
+                                 "srb tc --lsp --disable-watchman")))))
 
 
 (define-skeleton minitest-skeleton
