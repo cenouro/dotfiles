@@ -2,6 +2,7 @@
 
 ruby-mode
 
+(bigdecimal "BigDecimal(" p ")")
 (sig-params-returns "sig { params(" p ").returns(" p ") }")
 (sig-params-void "sig { params(" p ").void }")
 (sig-returns "sig { returns(" p ") }")
