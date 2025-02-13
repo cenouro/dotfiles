@@ -22,7 +22,11 @@
             #'(lambda () (setq-local compile-command "bundle exec rake test")))
   (add-to-list 'compilation-error-regexp-alist-alist
                '(rails-minitest-failure "\\[\\(.*?.rb\\):\\([0-9]+\\)\\]:$" 1 2))
-  (add-to-list 'compilation-error-regexp-alist 'rails-minitest-failure))
+  (add-to-list 'compilation-error-regexp-alist 'rails-minitest-failure)
+  (font-lock-add-keywords 'compilation-mode
+                          '(("^Expected" . 'compilation-error)
+                            ("false\\|true\\|truthy\\|nil"
+                             . 'font-lock-constant-face))))
 
 
 (with-eval-after-load 'eglot
