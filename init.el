@@ -12,11 +12,11 @@
 (require 'init-package)
 
 (require 'init-emacs)
+(require 'init-imenu)
 (require 'init-modus-themes)
 
 (require 'init-diminish)
 (require 'init-undo-fu)
-;; (require 'init-undo-tree)
 
 (require 'init-ace-window)
 (require 'init-all-the-icons)
