@@ -7,7 +7,7 @@
 
 ;;; Bindings and QoL
 ;;
-(global-set-key (kbd "C-x k")   #'kill-this-buffer)
+(global-set-key (kbd "C-x k")   #'kill-current-buffer)
 (global-set-key (kbd "C-x C-b") #'ibuffer)
 
 (global-set-key (kbd "C-c v g f") #'find-file-at-point)
