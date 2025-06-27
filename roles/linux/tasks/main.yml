@@ -31,4 +31,17 @@
       block: 'export MOZ_USE_XINPUT2=1'
     - path: '{{ XDG_CONFIG_HOME }}/environment.d/envvars.conf'
       block: 'MOZ_ENABLE_WAYLAND=1'
+
+- name: 'FSTAB: add user mount points'
+  ansible.builtin.blockinfile:
+    path: /etc/fstab
+    block: |
+      UUID=5bfcada5-f612-4cfc-95e9-d4d903c1db6b /mnt/HDD                              btrfs   noatime,space_cache=v2,compress=zstd    0   0
+      /mnt/HDD/@music                           /home/cenouro/Music                   none    bind,x-gvfs-hide                        0   0
+      /mnt/HDD/@videos                          /home/cenouro/Videos                  none    bind,x-gvfs-hide                        0   0
+      /mnt/HDD/@transmission                    /home/cenouro/.config/transmission    none    bind,x-gvfs-hide                        0   0
+    prepend_newline: true
+    append_newline: true
+  become: true
+  notify: 'mount fstab'
 ...

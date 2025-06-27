@@ -64,4 +64,13 @@
       ansible.builtin.debug:
         var: ansible_facts
       tags: [ debug, never ]
+
+  handlers:
+    - name: 'mount fstab'
+      ansible.builtin.command:
+        cmd: '{{ item }}'
+      loop:
+        - systemctl daemon-reload
+        - mount -a
+      become: true
 ...
