@@ -3,16 +3,16 @@
   connection: local
 
   vars:
-    - CURRENT_DESKTOP: '{{ ansible_facts.env.XDG_CURRENT_DESKTOP }}'
-    - DISTRO: '{{ ansible_facts.distribution }}'
+    CURRENT_DESKTOP: '{{ ansible_facts.env.XDG_CURRENT_DESKTOP }}'
+    DISTRO: '{{ ansible_facts.distribution }}'
 
-    - HOME: '{{ ansible_env.HOME }}'
-    - PWD: '{{ ansible_env.PWD }}'
+    HOME: '{{ ansible_env.HOME }}'
+    PWD: '{{ ansible_env.PWD }}'
 
-    - XDG_CONFIG_HOME: '{{ HOME }}/.config'
-    - XDG_CACHE_HOME: '{{ HOME }}/.cache'
-    - XDG_DATA_HOME: '{{ HOME }}/.local/share'
-    - XDG_STATE_HOME: '{{ HOME }}/.local/state'
+    XDG_CONFIG_HOME: '{{ HOME }}/.config'
+    XDG_CACHE_HOME: '{{ HOME }}/.cache'
+    XDG_DATA_HOME: '{{ HOME }}/.local/share'
+    XDG_STATE_HOME: '{{ HOME }}/.local/state'
 
   pre_tasks:
     - name: Ensure user folder in /opt/
