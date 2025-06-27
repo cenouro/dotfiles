@@ -13,6 +13,11 @@
     dest: '{{ XDG_CONFIG_HOME }}/mpv/mpv.conf'
     state: link
 
+- name: 'TRANSMISSION: ensure config folder'
+  ansible.builtin.file:
+    path: '{{ XDG_CONFIG_HOME }}/transmission'
+    state: directory
+
 - name: 'FIREFOX: Enable pixel-perfect scrolling'
   ansible.builtin.blockinfile:
     path: '{{ item.path }}'
