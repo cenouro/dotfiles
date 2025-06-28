@@ -3,6 +3,9 @@
   connection: local
 
   vars:
+    COMPUTER_NAME: "{{ ansible_facts.system_vendor + ' ' + ansible_facts.product_name }}"
+    COMPUTER_NAME_NOSPACES: "{{ computer_name | regex_replace(' ', '') }}"
+
     CURRENT_DESKTOP: '{{ ansible_facts.env.XDG_CURRENT_DESKTOP }}'
     DISTRO: '{{ ansible_facts.distribution }}'
 
@@ -13,6 +16,7 @@
     XDG_CACHE_HOME: '{{ HOME }}/.cache'
     XDG_DATA_HOME: '{{ HOME }}/.local/share'
     XDG_STATE_HOME: '{{ HOME }}/.local/state'
+
 
   pre_tasks:
     - name: Ensure user folder in /opt/
@@ -37,11 +41,19 @@
   roles:
     - asdf-vm
     - git
-    - role: gnome
-      when: CURRENT_DESKTOP == 'GNOME'
-    - linux
     - emacs
     - languagetool
+
+    - role: gnome
+      when: CURRENT_DESKTOP == 'GNOME'
+
+    # In order to interpolate variables in task names, they have to be
+    # passed explicitly to the role (or set as facts, which is more
+    # cumbersome).
+    - role: linux
+      computer_name: '{{ COMPUTER_NAME }}'
+      computer_name_nospaces: '{{ COMPUTER_NAME_NOSPACES }}'
+
 
   tasks:
     - name: Don't step into gems when debugging ruby code
@@ -64,6 +76,7 @@
       ansible.builtin.debug:
         var: ansible_facts
       tags: [ debug, never ]
+
 
   handlers:
     - name: 'mount fstab'

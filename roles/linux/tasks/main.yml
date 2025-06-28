@@ -32,14 +32,17 @@
     - path: '{{ XDG_CONFIG_HOME }}/environment.d/envvars.conf'
       block: 'MOZ_ENABLE_WAYLAND=1'
 
+- name: Load variables pertinent to '{{ computer_name }}'
+  ansible.builtin.include_vars: '{{ computer_name_nospaces }}.yml'
+
 - name: 'FSTAB: add user mount points'
   ansible.builtin.blockinfile:
     path: /etc/fstab
     block: |
-      UUID=5bfcada5-f612-4cfc-95e9-d4d903c1db6b /mnt/HDD                              btrfs   noatime,space_cache=v2,compress=zstd    0   0
-      /mnt/HDD/@music                           /home/cenouro/Music                   none    bind,x-gvfs-hide                        0   0
-      /mnt/HDD/@videos                          /home/cenouro/Videos                  none    bind,x-gvfs-hide                        0   0
-      /mnt/HDD/@transmission                    /home/cenouro/.config/transmission    none    bind,x-gvfs-hide                        0   0
+      UUID={{ data_device_uuid }} /mnt/HDD                              btrfs   noatime,space_cache=v2,compress=zstd    0   0
+      /mnt/HDD/@music                           /home/{{ ansible_facts.user_id }}/Music                   none    bind,x-gvfs-hide                        0   0
+      /mnt/HDD/@videos                          /home/{{ ansible_facts.user_id }}/Videos                  none    bind,x-gvfs-hide                        0   0
+      /mnt/HDD/@transmission                    /home/{{ ansible_facts.user_id }}/.config/transmission    none    bind,x-gvfs-hide                        0   0
     prepend_newline: true
     append_newline: true
   become: true
