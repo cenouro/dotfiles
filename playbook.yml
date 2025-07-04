@@ -6,7 +6,7 @@
     COMPUTER_NAME: "{{ ansible_facts.system_vendor + ' ' + ansible_facts.product_name }}"
     COMPUTER_NAME_NOSPACES: "{{ computer_name | regex_replace(' ', '') }}"
 
-    CURRENT_DESKTOP: '{{ ansible_facts.env.XDG_CURRENT_DESKTOP }}'
+    CURRENT_DESKTOP: '{{ ansible_facts.env.XDG_CURRENT_DESKTOP | regex_search("GNOME") }}'
     DISTRO: '{{ ansible_facts.distribution }}'
 
     HOME: '{{ ansible_env.HOME }}'
