@@ -1,6 +1,6 @@
 ### Notebook Info
 
-The notebook worked flawless with the following configuration:
+The notebook worked flawlessly with the following configuration:
 
 * Fedora 42, Gnome 48, Wayland
 * Nvidia Driver Version: 575.64
