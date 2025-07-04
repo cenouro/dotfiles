@@ -35,6 +35,12 @@
 - name: Load variables pertinent to '{{ computer_name }}'
   ansible.builtin.include_vars: '{{ computer_name_nospaces }}.yml'
 
+- name: Create /mnt/HDD
+  ansible.builtin.file:
+    path: /mnt/HDD
+    state: directory
+  become: true
+
 - name: 'FSTAB: add user mount points'
   ansible.builtin.blockinfile:
     path: /etc/fstab
