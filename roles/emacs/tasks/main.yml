@@ -11,10 +11,13 @@
     state: present
   become: true
 
-- name: Ensure Emacs directory
+- name: Ensure Emacs directories
   ansible.builtin.file:
-    dest: '{{ emacs_d }}'
+    dest: '{{ item }}'
     state: directory
+  loop:
+    - '{{ emacs_d }}'
+    - '{{ XDG_STATE_HOME }}/emacs'
 
 - name: Link assets
   ansible.builtin.file:
@@ -25,6 +28,12 @@
     - '{{ init_el }}'
     - '{{ elisp }}'
     - '{{ templates }}'
+
+- name: Create projects file
+  ansible.builtin.template:
+    src: projects.j2
+    dest: '{{ XDG_STATE_HOME }}/emacs/projects'
+    force: false
 
 - name: Create empty custom.el
   ansible.builtin.file:
