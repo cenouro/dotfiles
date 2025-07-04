@@ -23,10 +23,10 @@ major mode for commit messages allows for simpler customization."
 (add-hook 'git-commit-setup-hook #'git-commit-turn-on-flyspell)
 
 
-(unless (package-installed-p 'magit-todos)
-  (package-vc-install (github "alphapapa/magit-todos")))
-(require 'magit-todos)
-(magit-todos-mode 1)
+;; (unless (package-installed-p 'magit-todos)
+;;   (package-vc-install (github "alphapapa/magit-todos")))
+;; (require 'magit-todos)
+;; (magit-todos-mode 1)
 
 (provide 'init-magit)
 ;;; init-magit.el ends here
