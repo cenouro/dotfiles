@@ -24,6 +24,8 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
+(customize-set-variable 'package-vc-register-as-project nil)
+
 
 ;;; Common dependencies for other packages:
 
