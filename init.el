@@ -1,7 +1,15 @@
-;;; init.el --- My modular init.el  -*- lexical-binding: t; -*-
+;;; init.el ---  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
+;; After "maintaining" a highly modular init.el for more than a year,
+;; I've decided to move most configuration back here. Deciding how to
+;; divide things into separate files is too cumbersome, and a bunch of
+;; files had very few lines.
+;;
+;; Modularization should be used only when it is almost unavoidable,
+;; such as configurations for a programming language (e.g.
+;; `init-ruby.el').
 
 ;;; Code:
 ;; These must be run before everything
