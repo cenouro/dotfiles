@@ -33,7 +33,7 @@
 (require 'init-eglot)
 (require 'init-prog)
 (require 'init-apache)
-(require 'init-graphviz)
+;; (require 'init-graphviz)
 (require 'init-markdown)
 (require 'init-yaml)
 (require 'init-asdf)
