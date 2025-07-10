@@ -46,7 +46,6 @@
 (require 'init-modus-themes)
 
 (require 'init-diminish)
-(require 'init-undo-fu)
 
 (require 'init-ace-window)
 (require 'init-all-the-icons)
