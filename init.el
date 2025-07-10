@@ -53,6 +53,11 @@
   :custom (modus-themes-prompts '(bold))
   :config (load-theme 'modus-operandi :no-confirm))
 
+(use-package page-break-lines
+  :demand t
+  :ensure t
+  :config (global-page-break-lines-mode 1))
+
 
 (require 'init-emacs)
 (require 'init-imenu)
@@ -81,12 +86,6 @@
 (require 'init-git)
 (require 'init-magit)
 (require 'init-ruby)
-
-
-(unless (package-installed-p 'page-break-lines)
-  (package-install 'page-break-lines))
-(require 'page-break-lines)
-(global-page-break-lines-mode)
 
 
 (provide 'init)
