@@ -69,7 +69,6 @@
 (require 'init-elisp)
 (require 'init-git)
 (require 'init-magit)
-(require 'init-vdiff)
 (require 'init-ruby)
 
 
