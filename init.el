@@ -35,7 +35,6 @@
 (require 'init-markdown)
 (require 'init-yaml)
 (require 'init-asdf)
-(require 'init-ansible)
 (require 'init-elisp)
 (require 'init-git)
 (require 'init-magit)
