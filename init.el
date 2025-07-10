@@ -19,6 +19,28 @@
 
 (require 'init-package)
 
+
+;;;; use-package configuration
+;;
+(progn
+  (require 'use-package)
+  (my/customize-set-variable "Although use-package does not defer by"
+                             "default, defer is implied by some"
+                             "keywords. I prefer a more consistent"
+                             "behavior of always deferring."
+                             'use-package-always-defer t)
+
+  (my/customize-set-variable "Since I intend to use builtin packages"
+                             "when possible, it makes sense to only"
+                             "ensure when necessary."
+                             'use-package-always-ensure nil)
+
+  (my/customize-set-variable "This use-package convenience caused me"
+                             "more pain than good. Disable it."
+                             'use-package-hook-name-suffix nil)
+
+  (customize-set-variable 'use-package-use-theme nil))
+
 (require 'init-emacs)
 (require 'init-imenu)
 (require 'init-modus-themes)
