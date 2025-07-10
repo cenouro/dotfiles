@@ -63,7 +63,6 @@
 (require 'init-eglot)
 (require 'init-prog)
 (require 'init-apache)
-;; (require 'init-graphviz)
 (require 'init-markdown)
 (require 'init-yaml)
 (require 'init-asdf)
@@ -73,7 +72,6 @@
 (require 'init-magit)
 (require 'init-vdiff)
 (require 'init-ruby)
-(require 'init-python)
 
 
 (unless (package-installed-p 'page-break-lines)
