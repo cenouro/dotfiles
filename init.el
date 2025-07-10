@@ -39,7 +39,10 @@
                              "more pain than good. Disable it."
                              'use-package-hook-name-suffix nil)
 
-  (customize-set-variable 'use-package-use-theme nil))
+  (my/customize-set-variable "Don't use a custom theme for :custom."
+                             "The benefits of a custom theme are not"
+                             "clear to me and it seems overkill."
+                             'use-package-use-theme nil))
 
 (require 'init-emacs)
 (require 'init-imenu)
