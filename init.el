@@ -58,13 +58,17 @@
   :ensure t
   :config (global-page-break-lines-mode 1))
 
+(use-package ace-window
+  :ensure t
+  :bind ("M-o" . #'ace-window)
+  :custom (aw-keys '(?f ?d ?j ?k ?s ?l)))
+
 
 (require 'init-emacs)
 (require 'init-imenu)
 
 (require 'init-diminish)
 
-(require 'init-ace-window)
 (require 'init-all-the-icons)
 
 (require 'init-vertico)
