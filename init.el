@@ -44,9 +44,18 @@
                              "clear to me and it seems overkill."
                              'use-package-use-theme nil))
 
+
+;;;; User Interface
+;;
+(use-package modus-themes
+  :demand t
+  :ensure t
+  :custom (modus-themes-prompts '(bold))
+  :config (load-theme 'modus-operandi :no-confirm))
+
+
 (require 'init-emacs)
 (require 'init-imenu)
-(require 'init-modus-themes)
 
 (require 'init-diminish)
 
