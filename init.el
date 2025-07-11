@@ -94,6 +94,14 @@
                                     (eglot (styles orderless))
                                     (eglot-capf (styles orderless))))))
 
+(use-package tempel
+  :ensure t
+  :functions (tempel-next tempel-previous)
+  :bind (("M-i" . #'tempel-complete)
+         :map tempel-map
+         ("M-n" . #'tempel-next)
+         ("M-p" . #'tempel-previous)))
+
 
 (require 'init-emacs)
 (require 'init-imenu)
@@ -102,8 +110,6 @@
 
 (require 'init-windmove)
 (require 'init-all-the-icons)
-
-(require 'init-tempel)
 
 (require 'init-eldoc)
 
