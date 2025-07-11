@@ -69,6 +69,7 @@
 
 (require 'init-diminish)
 
+(require 'init-windmove)
 (require 'init-all-the-icons)
 
 (require 'init-vertico)
