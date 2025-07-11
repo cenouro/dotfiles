@@ -30,10 +30,14 @@
                              "behavior of always deferring."
                              'use-package-always-defer t)
 
-  (my/customize-set-variable "Since I intend to use builtin packages"
-                             "when possible, it makes sense to only"
-                             "ensure when necessary."
-                             'use-package-always-ensure nil)
+  (my/customize-set-variable "Never upgrade built-in packages."
+                             'package-install-upgrade-built-in nil)
+
+  (my/customize-set-variable "It's probably safe to always ensure by"
+                             "default now that the option"
+                             "package-install-upgrade-built-in has"
+                             "been customized."
+                             'use-package-always-ensure t)
 
   (my/customize-set-variable "This use-package convenience caused me"
                              "more pain than good. Disable it."
