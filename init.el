@@ -71,6 +71,20 @@
   :ensure t
   :config (marginalia-mode 1))
 
+(use-package corfu
+  :demand t
+  :ensure t
+  :custom
+  ((tab-always-indent 'complete)
+   (corfu-auto nil)
+   (corfu-cycle t)
+   (corfu-preview-current nil)
+   (corfu-quit-at-boundary nil)
+   (corfu-quit-no-match nil)
+   (corfu-scroll-margin 3))
+  :config
+  (global-corfu-mode 1))
+
 
 (require 'init-emacs)
 (require 'init-imenu)
@@ -80,7 +94,6 @@
 (require 'init-windmove)
 (require 'init-all-the-icons)
 
-(require 'init-corfu)
 (require 'init-orderless)
 (require 'init-tempel)
 
