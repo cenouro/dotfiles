@@ -17,7 +17,7 @@
 
 (require 'init-diminish)
 
-(require 'init-ace-window)
+(require 'init-windmove)
 (require 'init-all-the-icons)
 
 (require 'init-vertico)
