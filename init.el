@@ -53,13 +53,11 @@
 ;;
 (use-package modus-themes
   :demand t
-  :ensure t
   :custom (modus-themes-prompts '(bold))
   :config (load-theme 'modus-operandi :no-confirm))
 
 (use-package page-break-lines
   :demand t
-  :ensure t
   :config (global-page-break-lines-mode 1))
 
 
@@ -67,17 +65,14 @@
 ;;
 (use-package vertico
   :demand t
-  :ensure t
   :config (vertico-mode 1))
 
 (use-package marginalia
   :after vertico
-  :ensure t
   :config (marginalia-mode 1))
 
 (use-package corfu
   :demand t
-  :ensure t
   :custom
   ((tab-always-indent 'complete)
    (corfu-auto nil)
@@ -91,7 +86,6 @@
 
 (use-package orderless
   :demand t
-  :ensure t
   :custom
   ((completion-styles '(orderless basic))
    (completion-category-overrides '((file (styles basic partial-completion))
@@ -99,7 +93,6 @@
                                     (eglot-capf (styles orderless))))))
 
 (use-package tempel
-  :ensure t
   :functions (tempel-next tempel-previous)
   :bind (("M-i" . #'tempel-complete)
          :map tempel-map
