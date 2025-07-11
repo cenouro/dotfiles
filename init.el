@@ -85,6 +85,15 @@
   :config
   (global-corfu-mode 1))
 
+(use-package orderless
+  :demand t
+  :ensure t
+  :custom
+  ((completion-styles '(orderless basic))
+   (completion-category-overrides '((file (styles basic partial-completion))
+                                    (eglot (styles orderless))
+                                    (eglot-capf (styles orderless))))))
+
 
 (require 'init-emacs)
 (require 'init-imenu)
@@ -94,7 +103,6 @@
 (require 'init-windmove)
 (require 'init-all-the-icons)
 
-(require 'init-orderless)
 (require 'init-tempel)
 
 (require 'init-eldoc)
