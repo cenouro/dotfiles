@@ -99,7 +99,22 @@
          ("M-n" . #'tempel-next)
          ("M-p" . #'tempel-previous)))
 
+
+;;;; Version Control and Diffs
+;;
+(use-package vc-git
+  :custom (vc-git-diff-switches "--patience"))
 
+(use-package ediff
+  :custom
+  ((ediff-window-setup-function
+    #'ediff-setup-windows-plain "Don't use a separate frame")
+   (ediff-split-window-function
+    #'split-window-horizontally "Diff side-by-side")))
+
+(require 'init-magit)
+
+
 (require 'init-emacs)
 (require 'init-imenu)
 
@@ -119,8 +134,6 @@
 (require 'init-yaml)
 (require 'init-asdf)
 (require 'init-elisp)
-(require 'init-git)
-(require 'init-magit)
 (require 'init-ruby)
 
 
