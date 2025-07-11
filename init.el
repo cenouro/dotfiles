@@ -58,6 +58,19 @@
   :ensure t
   :config (global-page-break-lines-mode 1))
 
+
+;;;; Completion
+;;
+(use-package vertico
+  :demand t
+  :ensure t
+  :config (vertico-mode 1))
+
+(use-package marginalia
+  :after vertico
+  :ensure t
+  :config (marginalia-mode 1))
+
 
 (require 'init-emacs)
 (require 'init-imenu)
@@ -67,7 +80,6 @@
 (require 'init-windmove)
 (require 'init-all-the-icons)
 
-(require 'init-vertico)
 (require 'init-corfu)
 (require 'init-orderless)
 (require 'init-tempel)
