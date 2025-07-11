@@ -60,6 +60,11 @@
   :demand t
   :config (global-page-break-lines-mode 1))
 
+(use-package eldoc
+  :custom
+  ((eldoc-echo-area-prefer-doc-buffer t)
+   (eldoc-echo-area-use-multiline-p   3)))
+
 
 ;;;; Completion
 ;;
@@ -122,8 +127,6 @@
 
 (require 'init-windmove)
 (require 'init-all-the-icons)
-
-(require 'init-eldoc)
 
 (require 'init-project)
 (require 'init-flymake)
