@@ -157,6 +157,12 @@
   :config
   (add-hook 'yaml-mode-hook #'(lambda () (setq truncate-lines t))))
 
+(use-package asdf
+  :demand t
+  :vc (:url "https://github.com/cenouro/asdf.el")
+  :functions (asdf-enable)
+  :config (asdf-enable))
+
 
 
 (require 'init-emacs)
@@ -166,7 +172,6 @@
 
 (require 'init-flymake)
 (require 'init-eglot)
-(require 'init-asdf)
 (require 'init-elisp)
 (require 'init-ruby)
 
