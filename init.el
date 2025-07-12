@@ -141,6 +141,10 @@
   :demand t
   :config (global-hl-todo-mode 1))
 
+(use-package apache-mode)
+
+(use-package markdown-mode)
+
 
 
 (require 'init-emacs)
@@ -152,8 +156,6 @@
 (require 'init-project)
 (require 'init-flymake)
 (require 'init-eglot)
-(require 'init-apache)
-(require 'init-markdown)
 (require 'init-yaml)
 (require 'init-asdf)
 (require 'init-elisp)
