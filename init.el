@@ -7,9 +7,22 @@
 ;; divide things into separate files is too cumbersome, and a bunch of
 ;; files had very few lines.
 ;;
-;; Modularization should be used only when it is almost unavoidable,
-;; such as configurations for a programming language (e.g.
-;; `init-ruby.el').
+;; Modularization should be used only when it would be a foolish
+;; endeavor not to, such as configurations for a programming language.
+;; Consider `init-ruby.el' as an example; here is what it does (or, at
+;; least, what it was supposed to do):
+;;
+;;   * installs an inferior shell and a package for viewing
+;;     documentation;
+;;   * tweaks some `compilation-mode' settings for working with Rails;
+;;   * makes `eglot' work with Sorbet LSP (this also requires the
+;;     ad-hoc advice function implemented in `init-eglot.el');
+;;   * implements a skeleton for minitest
+;;
+;; It would not be wise to move all those configurations to `init.el'.
+;; Moreover, loading `init-ruby.el' can be deferred as a whole, and
+;; then loaded entirely if work is to be done in a Ruby project.
+;;
 
 ;;; Code:
 ;; These must be run before everything
