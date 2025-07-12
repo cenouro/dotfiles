@@ -65,6 +65,14 @@
   ((eldoc-echo-area-prefer-doc-buffer t)
    (eldoc-echo-area-use-multiline-p   3)))
 
+(use-package diminish
+  :init (add-hook 'emacs-startup-hook
+                  #'(lambda ()
+                      (diminish 'auto-revert-mode)
+                      (diminish 'flyspell-mode)
+                      (diminish 'page-break-lines-mode)
+                      (diminish 'subword-mode))))
+
 
 ;;;; Completion
 ;;
@@ -122,8 +130,6 @@
 
 (require 'init-emacs)
 (require 'init-imenu)
-
-(require 'init-diminish)
 
 (require 'init-windmove)
 (require 'init-all-the-icons)
