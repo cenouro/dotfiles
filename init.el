@@ -128,6 +128,21 @@
 (require 'init-magit)
 
 
+;;;; Programming Languages
+;;
+(use-package prog-mode
+  :ensure nil
+  :init
+  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+  (add-hook 'prog-mode-hook #'(lambda () (setq truncate-lines t))))
+
+(use-package hl-todo
+  :vc "https://github.com/tarsius/hl-todo"
+  :demand t
+  :config (global-hl-todo-mode 1))
+
+
+
 (require 'init-emacs)
 (require 'init-imenu)
 
@@ -137,7 +152,6 @@
 (require 'init-project)
 (require 'init-flymake)
 (require 'init-eglot)
-(require 'init-prog)
 (require 'init-apache)
 (require 'init-markdown)
 (require 'init-yaml)

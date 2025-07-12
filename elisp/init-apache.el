@@ -4,7 +4,6 @@
 
 ;;; Code:
 (require 'init-package)
-(require 'init-prog)
 
 (unless (package-installed-p 'apache-mode)
   (package-install 'apache-mode))

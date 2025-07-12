@@ -4,7 +4,6 @@
 
 ;;; Code:
 (require 'init-package)
-(require 'init-prog)
 
 (unless (package-installed-p 'yaml-mode)
   (package-install 'yaml-mode))
