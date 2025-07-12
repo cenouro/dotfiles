@@ -56,6 +56,11 @@
   :custom (modus-themes-prompts '(bold))
   :config (load-theme 'modus-operandi :no-confirm))
 
+(use-package all-the-icons
+  :if (display-graphic-p)
+  :demand t
+  :vc (:url "https://github.com/domtronn/all-the-icons.el"))
+
 (use-package page-break-lines
   :demand t
   :config (global-page-break-lines-mode 1))
@@ -167,8 +172,6 @@
 
 (require 'init-emacs)
 (require 'init-imenu)
-
-(require 'init-all-the-icons)
 
 (require 'init-flymake)
 (require 'init-eglot)
