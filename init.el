@@ -145,6 +145,15 @@
 
 (use-package markdown-mode)
 
+(use-package yaml-mode
+  :config
+  (add-hook 'yaml-mode-hook #'(lambda () (setq truncate-lines t)))
+  (require 'autoinsert)
+  (add-hook 'yaml-mode-hook #'(lambda ()
+                                (setq-local auto-insert-query nil)
+                                (auto-insert)))
+  (add-to-list 'auto-insert-alist '(yaml-mode . (nil "---\n" _  "\n...\n"))))
+
 
 
 (require 'init-emacs)
@@ -156,7 +165,6 @@
 (require 'init-project)
 (require 'init-flymake)
 (require 'init-eglot)
-(require 'init-yaml)
 (require 'init-asdf)
 (require 'init-elisp)
 (require 'init-ruby)
