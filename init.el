@@ -130,6 +130,10 @@
 
 ;;;; Programming Languages
 ;;
+(use-package project
+  :demand t
+  :custom (project-list-file "~/.local/state/emacs/projects"))
+
 (use-package prog-mode
   :ensure nil
   :init
@@ -157,7 +161,6 @@
 (require 'init-windmove)
 (require 'init-all-the-icons)
 
-(require 'init-project)
 (require 'init-flymake)
 (require 'init-eglot)
 (require 'init-asdf)
