@@ -107,7 +107,7 @@
 
 ;;;; Version Control and Diffs
 ;;
-(use-package vc-git
+(use-package vc
   :custom (vc-git-diff-switches "--patience"))
 
 (use-package ediff
