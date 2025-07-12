@@ -73,6 +73,10 @@
                       (diminish 'page-break-lines-mode)
                       (diminish 'subword-mode))))
 
+(use-package emacs
+  :bind ("M-o" . #'other-window)
+  :config (windmove-default-keybindings))
+
 
 ;;;; Completion
 ;;
@@ -158,7 +162,6 @@
 (require 'init-emacs)
 (require 'init-imenu)
 
-(require 'init-windmove)
 (require 'init-all-the-icons)
 
 (require 'init-flymake)
