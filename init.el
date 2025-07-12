@@ -137,7 +137,7 @@
   (add-hook 'prog-mode-hook #'(lambda () (setq truncate-lines t))))
 
 (use-package hl-todo
-  :vc "https://github.com/tarsius/hl-todo"
+  :vc (:url "https://github.com/tarsius/hl-todo")
   :demand t
   :config (global-hl-todo-mode 1))
 
