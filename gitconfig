@@ -10,6 +10,7 @@
 [merge]
     ff = false
     conflictStyle = diff3
+    suppressDest = ""
 [diff]
     algorithm = patience
     indentHeuristic = true
