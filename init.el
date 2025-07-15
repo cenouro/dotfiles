@@ -26,6 +26,9 @@
 ;; whole, in a very simple way, and then loaded entirely if work is to
 ;; be done in a Ruby project.
 ;;
+;; I've also decided to stop using `use-package' because it feels like
+;; a glorified `progn' without the clarity and simplicity of `progn'.
+;;
 
 ;;; Code:
 ;; These must be run before everything
