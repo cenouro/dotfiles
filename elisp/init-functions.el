@@ -60,5 +60,18 @@ LIST-VAR, ELEMENT, APPEND and COMPARE-FN are passed to `add-to-list'."
                           comment))
 
 
+(defun my/jsonrpc-connection-receive (connection message)
+  "Remove \"bad\" keys from LSP requests.
+
+Emacs' JSON-RPC library is very strict when parsing LSP
+responses. For example, Ruby's Sorbet sends a \"requestMethod\"
+property in its responses, which is not part of the official LSP
+spec.
+
+This function is meant to be used as an advice that removes
+\"bad\" properties from responses before Emacs parses them."
+  (cl--do-remf message :requestMethod))
+
+
 (provide 'init-functions)
 ;;; init-functions.el ends here
