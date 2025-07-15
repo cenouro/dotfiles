@@ -31,6 +31,7 @@
 ;; These must be run before everything
 (add-to-list 'load-path (locate-user-emacs-file "elisp"))
 (require 'init-custom)
+(require 'init-functions)
 
 
 (require 'init-package)
