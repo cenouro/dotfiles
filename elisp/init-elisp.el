@@ -11,10 +11,7 @@
 
 ;;; Code:
 (with-eval-after-load 'flymake
-  (add-hook 'emacs-lisp-mode-hook #'flymake-mode)
-  (add-hook 'emacs-startup-hook
-            #'(lambda ()
-                (setq elisp-flymake-byte-compile-load-path load-path))))
+  (add-hook 'emacs-lisp-mode-hook #'elisp/flymake-mode-without-byte-compile))
 
 (provide 'init-elisp)
 ;;; init-elisp.el ends here
