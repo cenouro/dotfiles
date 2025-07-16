@@ -142,24 +142,25 @@
 
 ;;;; Version Control and Diffs
 ;;
-(use-package vc
-  :custom (vc-git-diff-switches "--patience"))
+(prog1 :vc-git
+  (customize-set-variable 'vc-git-diff-switches "--patience"))
 
-(use-package ediff
-  :custom
-  ((ediff-window-setup-function
-    #'ediff-setup-windows-plain "Don't use a separate frame")
-   (ediff-split-window-function
-    #'split-window-horizontally "Diff side-by-side")))
+(prog1 :ediff
+  (customize-set-variable
+   'ediff-window-setup-function
+   #'ediff-setup-windows-plain "Don't use a separate frame")
+  (customize-set-variable
+   'ediff-split-window-function
+   #'split-window-horizontally "Diff side-by-side"))
 
 (require 'init-magit)
 
 
 ;;;; Programming Languages
 ;;
-(use-package project
-  :demand t
-  :custom (project-list-file "~/.local/state/emacs/projects"))
+(prog1 :project
+  (require 'project)
+  (setopt project-list-file "~/.local/state/emacs/projects"))
 
 (use-package prog-mode
   :ensure nil
