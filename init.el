@@ -77,10 +77,12 @@
   (customize-set-variable 'modus-themes-prompts '(bold))
   (load-theme 'modus-operandi :no-confirm))
 
-(use-package all-the-icons
-  :if (display-graphic-p)
-  :demand t
-  :vc (:url "https://github.com/domtronn/all-the-icons.el"))
+(prog1 :all-the-icons
+  (ensure-vc-package
+   'all-the-icons
+   (github "domtronn/all-the-icons.el"))
+  (when (display-graphic-p)
+    (require 'all-the-icons)))
 
 (prog1 :page-break-lines
   (global-page-break-lines-mode 1))
@@ -167,10 +169,9 @@
   (add-hook 'prog-mode-hook #'flyspell-prog-mode)
   (add-hook 'prog-mode-hook #'(lambda () (setq truncate-lines t))))
 
-(use-package hl-todo
-  :vc (:url "https://github.com/tarsius/hl-todo")
-  :demand t
-  :config (global-hl-todo-mode 1))
+(prog1 :hl-todo
+  (ensure-vc-package 'hl-todo (github "tarsius/hl-todo"))
+  (global-hl-todo-mode 1))
 
 (prog1 :apache-mode
   (ensure-package 'apache-mode))
@@ -184,11 +185,10 @@
     (add-hook 'yaml-mode-hook
               #'(lambda () (setq truncate-lines t)))))
 
-(use-package asdf
-  :demand t
-  :vc (:url "https://github.com/cenouro/asdf.el")
-  :functions (asdf-enable)
-  :config (asdf-enable))
+(prog1 :asdf
+  (ensure-vc-package 'asdf (github "cenouro/asdf.el"))
+  (require 'asdf)
+  (asdf-enable))
 
 
 
