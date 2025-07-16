@@ -97,9 +97,9 @@
                       (diminish 'page-break-lines-mode)
                       (diminish 'subword-mode))))
 
-(use-package emacs
-  :bind ("M-o" . #'other-window)
-  :config (windmove-default-keybindings))
+(prog1 :emacs
+  (windmove-default-keybindings)
+  (keymap-global-set "M-o" #'other-window))
 
 
 ;;;; Completion
