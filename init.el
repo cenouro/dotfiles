@@ -40,35 +40,6 @@
 (require 'init-package)
 
 
-;;;; use-package configuration
-;;
-(progn
-  (require 'use-package)
-  (my/customize-set-variable "Although use-package does not defer by"
-                             "default, defer is implied by some"
-                             "keywords. I prefer a more consistent"
-                             "behavior of always deferring."
-                             'use-package-always-defer t)
-
-  (my/customize-set-variable "Never upgrade built-in packages."
-                             'package-install-upgrade-built-in nil)
-
-  (my/customize-set-variable "It's probably safe to always ensure by"
-                             "default now that the option"
-                             "package-install-upgrade-built-in has"
-                             "been customized."
-                             'use-package-always-ensure t)
-
-  (my/customize-set-variable "This use-package convenience caused me"
-                             "more pain than good. Disable it."
-                             'use-package-hook-name-suffix nil)
-
-  (my/customize-set-variable "Don't use a custom theme for :custom."
-                             "The benefits of a custom theme are not"
-                             "clear to me and it seems overkill."
-                             'use-package-use-theme nil))
-
-
 ;;;; User Interface
 ;;
 (prog1 :modus-themes
