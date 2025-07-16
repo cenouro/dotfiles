@@ -104,25 +104,23 @@
 
 ;;;; Completion
 ;;
-(use-package vertico
-  :demand t
-  :config (vertico-mode 1))
+(prog1 :vertico
+  (ensure-package 'vertico)
+  (vertico-mode 1))
 
-(use-package marginalia
-  :after vertico
-  :config (marginalia-mode 1))
+(prog1 :marginalia
+  (ensure-package 'marginalia)
+  (marginalia-mode 1))
 
-(use-package corfu
-  :demand t
-  :custom
-  ((tab-always-indent 'complete)
-   (corfu-auto nil)
-   (corfu-cycle t)
-   (corfu-preview-current nil)
-   (corfu-quit-at-boundary nil)
-   (corfu-quit-no-match nil)
-   (corfu-scroll-margin 3))
-  :config
+(prog1 :corfu
+  (ensure-package 'corfu)
+  (setopt tab-always-indent 'complete
+          corfu-auto nil
+          corfu-cycle t
+          corfu-preview-current nil
+          corfu-quit-at-boundary nil
+          corfu-quit-no-match nil
+          corfu-scroll-margin 3)
   (global-corfu-mode 1))
 
 (use-package orderless
