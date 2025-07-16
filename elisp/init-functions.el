@@ -73,5 +73,11 @@ This function is meant to be used as an advice that removes
   (cl--do-remf message :requestMethod))
 
 
+(defun ensure-package (package-name)
+  "Install PACKAGE-NAME if it's not already installed."
+  (unless (package-installed-p package-name)
+    (package-install package-name)))
+
+
 (provide 'init-functions)
 ;;; init-functions.el ends here
