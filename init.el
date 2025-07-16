@@ -123,21 +123,21 @@
           corfu-scroll-margin 3)
   (global-corfu-mode 1))
 
-(use-package orderless
-  :demand t
-  :custom
-  ((completion-styles '(orderless basic))
-   (completion-category-overrides
-    '((file (styles basic partial-completion))
-      (eglot (styles orderless))
-      (eglot-capf (styles orderless))))))
+(prog1 :orderless
+  (ensure-package 'orderless)
+  (require 'orderless)
+  (setopt completion-styles '(orderless basic)
+          completion-category-overrides
+          '((file (styles basic partial-completion))
+            (eglot (styles orderless))
+            (eglot-capf (styles orderless)))))
 
-(use-package tempel
-  :functions (tempel-next tempel-previous)
-  :bind (("M-i" . #'tempel-complete)
-         :map tempel-map
-         ("M-n" . #'tempel-next)
-         ("M-p" . #'tempel-previous)))
+(prog1 :tempel
+  (ensure-package 'tempel)
+  (keymap-global-set "M-i" #'tempel-complete)
+  (with-eval-after-load 'tempel
+    (keymap-set tempel-map "M-n" #'tempel-next)
+    (keymap-set tempel-map "M-p" #'tempel-previous)))
 
 
 ;;;; Version Control and Diffs
