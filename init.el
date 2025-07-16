@@ -85,6 +85,7 @@
     (require 'all-the-icons)))
 
 (prog1 :page-break-lines
+  (ensure-package 'page-break-lines)
   (global-page-break-lines-mode 1))
 
 (prog1 :eldoc
