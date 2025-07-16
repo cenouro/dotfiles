@@ -79,5 +79,16 @@ This function is meant to be used as an advice that removes
     (package-install package-name)))
 
 
+(with-eval-after-load 'flymake
+  (defun elisp/flymake-mode-without-byte-compile ()
+    "Disable `elisp-flymake-byte-compile' and start `flymake-mode'.
+
+`elisp-flymake-byte-compile' was not really designed for configuration
+files such as `init.el'; it complains (incorrectly) too much
+about undefined variables and functions."
+    (remove-hook 'flymake-diagnostic-functions #'elisp-flymake-byte-compile t)
+    (flymake-mode 1)))
+
+
 (provide 'init-functions)
 ;;; init-functions.el ends here
