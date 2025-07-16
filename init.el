@@ -82,14 +82,12 @@
   :demand t
   :vc (:url "https://github.com/domtronn/all-the-icons.el"))
 
-(use-package page-break-lines
-  :demand t
-  :config (global-page-break-lines-mode 1))
+(prog1 :page-break-lines
+  (global-page-break-lines-mode 1))
 
-(use-package eldoc
-  :custom
-  ((eldoc-echo-area-prefer-doc-buffer t)
-   (eldoc-echo-area-use-multiline-p   3)))
+(prog1 :eldoc
+  (setopt eldoc-echo-area-prefer-doc-buffer t
+          eldoc-echo-area-use-multiline-p   3))
 
 (use-package diminish
   :init (add-hook 'emacs-startup-hook
