@@ -172,9 +172,11 @@
   :demand t
   :config (global-hl-todo-mode 1))
 
-(use-package apache-mode)
+(prog1 :apache-mode
+  (ensure-package 'apache-mode))
 
-(use-package markdown-mode)
+(prog1 :markdown-mode
+  (ensure-package 'markdown-mode))
 
 (prog1 :yaml-mode
   (ensure-package 'yaml-mode)
