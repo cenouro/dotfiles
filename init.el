@@ -89,13 +89,14 @@
   (setopt eldoc-echo-area-prefer-doc-buffer t
           eldoc-echo-area-use-multiline-p   3))
 
-(use-package diminish
-  :init (add-hook 'emacs-startup-hook
-                  #'(lambda ()
-                      (diminish 'auto-revert-mode)
-                      (diminish 'flyspell-mode)
-                      (diminish 'page-break-lines-mode)
-                      (diminish 'subword-mode))))
+(prog1 :diminish
+  (ensure-package 'diminish)
+  (add-hook 'emacs-startup-hook
+            #'(lambda ()
+                (diminish 'auto-revert-mode)
+                (diminish 'flyspell-mode)
+                (diminish 'page-break-lines-mode)
+                (diminish 'subword-mode))))
 
 (prog1 :emacs
   (windmove-default-keybindings)
@@ -162,9 +163,7 @@
   (require 'project)
   (setopt project-list-file "~/.local/state/emacs/projects"))
 
-(use-package prog-mode
-  :ensure nil
-  :init
+(prog1 :prog-mode
   (add-hook 'prog-mode-hook #'flyspell-prog-mode)
   (add-hook 'prog-mode-hook #'(lambda () (setq truncate-lines t))))
 
@@ -177,9 +176,11 @@
 
 (use-package markdown-mode)
 
-(use-package yaml-mode
-  :config
-  (add-hook 'yaml-mode-hook #'(lambda () (setq truncate-lines t))))
+(prog1 :yaml-mode
+  (ensure-package 'yaml-mode)
+  (with-eval-after-load 'yaml-mode
+    (add-hook 'yaml-mode-hook
+              #'(lambda () (setq truncate-lines t)))))
 
 (use-package asdf
   :demand t
