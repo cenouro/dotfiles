@@ -71,10 +71,11 @@
 
 ;;;; User Interface
 ;;
-(use-package modus-themes
-  :demand t
-  :custom (modus-themes-prompts '(bold))
-  :config (load-theme 'modus-operandi :no-confirm))
+(prog1 :modus-themes
+  (ensure-package 'modus-themes)
+  (require 'modus-themes)
+  (customize-set-variable 'modus-themes-prompts '(bold))
+  (load-theme 'modus-operandi :no-confirm))
 
 (use-package all-the-icons
   :if (display-graphic-p)
