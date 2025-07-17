@@ -26,8 +26,23 @@
 ;; whole, in a very simple way, and then loaded entirely if work is to
 ;; be done in a Ruby project.
 ;;
-;; I've also decided to stop using `use-package' because it feels like
-;; a glorified `progn' without the clarity and simplicity of `progn'.
+;; Regarding use-package:
+;;
+;; I've also decided to stop using `use-package'. Since it tries its
+;; best to do the right thing, it's a very good package for those new
+;; to Emacs and a lot can be learned from it's macro expansions.
+;;
+;; However, I've come to realize that use-package's keywords are no
+;; better than simply using functions that do the same thing. The most
+;; obvious example would be the `:custom' keyword vs `setopt'; even
+;; before `setopt' was part of Emacs, I had implemented an ad-hoc
+;; function that had the same behavior and signature.
+;;
+;; The point here is that I'd rather use `progn' and functions instead
+;; of `use-package' keywords. And I also had this idea of using
+;; keywords in `progn' for organization and labeling purposes.
+;; Keywords are symbols that self-evaluate in Elisp, so they are
+;; pretty much a no-op in `progn'.
 ;;
 
 ;;; Code:
