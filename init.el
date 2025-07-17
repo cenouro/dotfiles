@@ -26,6 +26,24 @@
 ;; whole, in a very simple way, and then loaded entirely if work is to
 ;; be done in a Ruby project.
 ;;
+;; Regarding use-package:
+;;
+;; I've also decided to stop using `use-package'. Since it tries its
+;; best to do the right thing, it's a very good package for those new
+;; to Emacs and a lot can be learned from it's macro expansions.
+;;
+;; However, I've come to realize that use-package's keywords are no
+;; better than simply using functions that do the same thing. The most
+;; obvious example would be the `:custom' keyword vs `setopt'; even
+;; before `setopt' was part of Emacs, I had implemented an ad-hoc
+;; function that had the same behavior and signature.
+;;
+;; The point here is that I'd rather use `progn' and functions instead
+;; of `use-package' keywords. And I also had this idea of using
+;; keywords in `progn' for organization and labeling purposes.
+;; Keywords are symbols that self-evaluate in Elisp, so they are
+;; pretty much a no-op in `progn'.
+;;
 
 ;;; Code:
 ;; These must be run before everything
@@ -37,154 +55,127 @@
 (require 'init-package)
 
 
-;;;; use-package configuration
-;;
-(progn
-  (require 'use-package)
-  (my/customize-set-variable "Although use-package does not defer by"
-                             "default, defer is implied by some"
-                             "keywords. I prefer a more consistent"
-                             "behavior of always deferring."
-                             'use-package-always-defer t)
-
-  (my/customize-set-variable "Never upgrade built-in packages."
-                             'package-install-upgrade-built-in nil)
-
-  (my/customize-set-variable "It's probably safe to always ensure by"
-                             "default now that the option"
-                             "package-install-upgrade-built-in has"
-                             "been customized."
-                             'use-package-always-ensure t)
-
-  (my/customize-set-variable "This use-package convenience caused me"
-                             "more pain than good. Disable it."
-                             'use-package-hook-name-suffix nil)
-
-  (my/customize-set-variable "Don't use a custom theme for :custom."
-                             "The benefits of a custom theme are not"
-                             "clear to me and it seems overkill."
-                             'use-package-use-theme nil))
-
-
 ;;;; User Interface
 ;;
-(use-package modus-themes
-  :demand t
-  :custom (modus-themes-prompts '(bold))
-  :config (load-theme 'modus-operandi :no-confirm))
+(prog1 :modus-themes
+  (ensure-package 'modus-themes)
+  (require 'modus-themes)
+  (customize-set-variable 'modus-themes-prompts '(bold))
+  (load-theme 'modus-operandi :no-confirm))
 
-(use-package all-the-icons
-  :if (display-graphic-p)
-  :demand t
-  :vc (:url "https://github.com/domtronn/all-the-icons.el"))
+(prog1 :all-the-icons
+  (ensure-vc-package
+   'all-the-icons
+   (github "domtronn/all-the-icons.el"))
+  (when (display-graphic-p)
+    (require 'all-the-icons)))
 
-(use-package page-break-lines
-  :demand t
-  :config (global-page-break-lines-mode 1))
+(prog1 :page-break-lines
+  (ensure-package 'page-break-lines)
+  (global-page-break-lines-mode 1))
 
-(use-package eldoc
-  :custom
-  ((eldoc-echo-area-prefer-doc-buffer t)
-   (eldoc-echo-area-use-multiline-p   3)))
+(prog1 :eldoc
+  (setopt eldoc-echo-area-prefer-doc-buffer t
+          eldoc-echo-area-use-multiline-p   3))
 
-(use-package diminish
-  :init (add-hook 'emacs-startup-hook
-                  #'(lambda ()
-                      (diminish 'auto-revert-mode)
-                      (diminish 'flyspell-mode)
-                      (diminish 'page-break-lines-mode)
-                      (diminish 'subword-mode))))
+(prog1 :diminish
+  (ensure-package 'diminish)
+  (add-hook 'emacs-startup-hook
+            #'(lambda ()
+                (diminish 'auto-revert-mode)
+                (diminish 'flyspell-mode)
+                (diminish 'page-break-lines-mode)
+                (diminish 'subword-mode))))
 
-(use-package emacs
-  :bind ("M-o" . #'other-window)
-  :config (windmove-default-keybindings))
+(prog1 :emacs
+  (windmove-default-keybindings)
+  (keymap-global-set "M-o" #'other-window))
 
 
 ;;;; Completion
 ;;
-(use-package vertico
-  :demand t
-  :config (vertico-mode 1))
+(prog1 :vertico
+  (ensure-package 'vertico)
+  (vertico-mode 1))
 
-(use-package marginalia
-  :after vertico
-  :config (marginalia-mode 1))
+(prog1 :marginalia
+  (ensure-package 'marginalia)
+  (marginalia-mode 1))
 
-(use-package corfu
-  :demand t
-  :custom
-  ((tab-always-indent 'complete)
-   (corfu-auto nil)
-   (corfu-cycle t)
-   (corfu-preview-current nil)
-   (corfu-quit-at-boundary nil)
-   (corfu-quit-no-match nil)
-   (corfu-scroll-margin 3))
-  :config
+(prog1 :corfu
+  (ensure-package 'corfu)
+  (setopt tab-always-indent 'complete
+          corfu-auto nil
+          corfu-cycle t
+          corfu-preview-current nil
+          corfu-quit-at-boundary nil
+          corfu-quit-no-match nil
+          corfu-scroll-margin 3)
   (global-corfu-mode 1))
 
-(use-package orderless
-  :demand t
-  :custom
-  ((completion-styles '(orderless basic))
-   (completion-category-overrides
-    '((file (styles basic partial-completion))
-      (eglot (styles orderless))
-      (eglot-capf (styles orderless))))))
+(prog1 :orderless
+  (ensure-package 'orderless)
+  (require 'orderless)
+  (setopt completion-styles '(orderless basic)
+          completion-category-overrides
+          '((file (styles basic partial-completion))
+            (eglot (styles orderless))
+            (eglot-capf (styles orderless)))))
 
-(use-package tempel
-  :functions (tempel-next tempel-previous)
-  :bind (("M-i" . #'tempel-complete)
-         :map tempel-map
-         ("M-n" . #'tempel-next)
-         ("M-p" . #'tempel-previous)))
+(prog1 :tempel
+  (ensure-package 'tempel)
+  (keymap-global-set "M-i" #'tempel-complete)
+  (with-eval-after-load 'tempel
+    (keymap-set tempel-map "M-n" #'tempel-next)
+    (keymap-set tempel-map "M-p" #'tempel-previous)))
 
 
 ;;;; Version Control and Diffs
 ;;
-(use-package vc
-  :custom (vc-git-diff-switches "--patience"))
+(prog1 :vc-git
+  (customize-set-variable 'vc-git-diff-switches "--patience"))
 
-(use-package ediff
-  :custom
-  ((ediff-window-setup-function
-    #'ediff-setup-windows-plain "Don't use a separate frame")
-   (ediff-split-window-function
-    #'split-window-horizontally "Diff side-by-side")))
+(prog1 :ediff
+  (customize-set-variable
+   'ediff-window-setup-function
+   #'ediff-setup-windows-plain "Don't use a separate frame")
+  (customize-set-variable
+   'ediff-split-window-function
+   #'split-window-horizontally "Diff side-by-side"))
 
 (require 'init-magit)
 
 
 ;;;; Programming Languages
 ;;
-(use-package project
-  :demand t
-  :custom (project-list-file "~/.local/state/emacs/projects"))
+(prog1 :project
+  (require 'project)
+  (setopt project-list-file "~/.local/state/emacs/projects"))
 
-(use-package prog-mode
-  :ensure nil
-  :init
+(prog1 :prog-mode
   (add-hook 'prog-mode-hook #'flyspell-prog-mode)
   (add-hook 'prog-mode-hook #'(lambda () (setq truncate-lines t))))
 
-(use-package hl-todo
-  :vc (:url "https://github.com/tarsius/hl-todo")
-  :demand t
-  :config (global-hl-todo-mode 1))
+(prog1 :hl-todo
+  (ensure-vc-package 'hl-todo (github "tarsius/hl-todo"))
+  (global-hl-todo-mode 1))
 
-(use-package apache-mode)
+(prog1 :apache-mode
+  (ensure-package 'apache-mode))
 
-(use-package markdown-mode)
+(prog1 :markdown-mode
+  (ensure-package 'markdown-mode))
 
-(use-package yaml-mode
-  :config
-  (add-hook 'yaml-mode-hook #'(lambda () (setq truncate-lines t))))
+(prog1 :yaml-mode
+  (ensure-package 'yaml-mode)
+  (with-eval-after-load 'yaml-mode
+    (add-hook 'yaml-mode-hook
+              #'(lambda () (setq truncate-lines t)))))
 
-(use-package asdf
-  :demand t
-  :vc (:url "https://github.com/cenouro/asdf.el")
-  :functions (asdf-enable)
-  :config (asdf-enable))
+(prog1 :asdf
+  (ensure-vc-package 'asdf (github "cenouro/asdf.el"))
+  (require 'asdf)
+  (asdf-enable))
 
 
 

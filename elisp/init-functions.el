@@ -73,6 +73,18 @@ This function is meant to be used as an advice that removes
   (cl--do-remf message :requestMethod))
 
 
+(defun ensure-package (package-name)
+  "Install PACKAGE-NAME if it's not already installed."
+  (unless (package-installed-p package-name)
+    (package-install package-name)))
+
+
+(defun ensure-vc-package (package-name url)
+  "Use `package-vc-install' to ensure PACKAGE-NAME is installed."
+  (unless (package-installed-p package-name)
+    (package-vc-install url)))
+
+
 (with-eval-after-load 'flymake
   (defun elisp/flymake-mode-without-byte-compile ()
     "Disable `elisp-flymake-byte-compile' and start `flymake-mode'.
