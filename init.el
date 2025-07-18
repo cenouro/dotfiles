@@ -157,6 +157,16 @@
   (require 'project)
   (setopt project-list-file "~/.local/state/emacs/projects"))
 
+(prog1 :eglot
+  (require 'eglot)
+  (my/customize-set-variable
+   "I've tested Eglot+Imenu a bit in a Ruby+Sorbet project and it"
+   "bugs when *Rescan* is used, whereas Imenu works fine by itself."
+   'eglot-stay-out-of '(imenu))
+  (when (version<= emacs-version "30")
+    (advice-add #'jsonrpc-connection-receive :before
+                #'my/jsonrpc-connection-receive)))
+
 (prog1 :prog-mode
   (add-hook 'prog-mode-hook #'flyspell-prog-mode)
   (add-hook 'prog-mode-hook #'(lambda () (setq truncate-lines t))))
@@ -182,14 +192,15 @@
   (require 'asdf)
   (asdf-enable))
 
+(prog1 :elisp
+  (with-eval-after-load 'flymake
+    (add-hook 'emacs-lisp-mode-hook
+              #'elisp/flymake-mode-without-byte-compile)))
+
 
 
 (require 'init-emacs)
-(require 'init-imenu)
-
 (require 'init-flymake)
-(require 'init-eglot)
-(require 'init-elisp)
 (require 'init-ruby)
 
 
