@@ -73,10 +73,30 @@ This function is meant to be used as an advice that removes
   (cl--do-remf message :requestMethod))
 
 
-(defun ensure-package (package-name)
-  "Install PACKAGE-NAME if it's not already installed."
-  (unless (package-installed-p package-name)
-    (package-install package-name)))
+(defun ensure-package (package-name &optional archive)
+  "Install PACKAGE-NAME if it's not already installed.
+
+ARCHIVE, a symbol or string, is used to pin the package to that specific
+archive. It's default value is \"gnu\"."
+  (let* ((archive (cond ((null archive)    "gnu")
+                        ((symbolp archive) (symbol-name archive))
+                        ((stringp archive) archive)))
+         (pack-arch (cons package-name archive)))
+    (if package-pinned-packages
+        (setopt package-pinned-packages
+                (add-to-list 'package-pinned-packages pack-arch))
+      (setopt package-pinned-packages (list pack-arch)))
+
+    (unless (package-installed-p package-name)
+      ;; I've done some testing and looked at how use-package does its
+      ;; pinning; my conclusion is that, in order for pinning to
+      ;; actually work, `package-read-all-archive-contents' must be
+      ;; called every time after `package-pinned-packages' is updated.
+      ;; Logically, this would be done above, after the calls to
+      ;; `setopt'; but, as a "performance hack", it's done here, only
+      ;; if the package must be installed.
+      (package-read-all-archive-contents)
+      (package-install package-name))))
 
 
 (defun ensure-vc-package (package-name url)

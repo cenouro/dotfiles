@@ -71,7 +71,7 @@
     (require 'all-the-icons)))
 
 (prog1 :page-break-lines
-  (ensure-package 'page-break-lines)
+  (ensure-package 'page-break-lines 'nongnu)
   (global-page-break-lines-mode 1))
 
 (prog1 :eldoc
@@ -161,13 +161,13 @@
   (global-hl-todo-mode 1))
 
 (prog1 :apache-mode
-  (ensure-package 'apache-mode))
+  (ensure-package 'apache-mode 'nongnu))
 
 (prog1 :markdown-mode
-  (ensure-package 'markdown-mode))
+  (ensure-package 'markdown-mode 'nongnu))
 
 (prog1 :yaml-mode
-  (ensure-package 'yaml-mode)
+  (ensure-package 'yaml-mode 'nongnu)
   (with-eval-after-load 'yaml-mode
     (add-hook 'yaml-mode-hook
               #'(lambda () (setq truncate-lines t)))))
