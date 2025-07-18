@@ -197,11 +197,16 @@
     (add-hook 'emacs-lisp-mode-hook
               #'elisp/flymake-mode-without-byte-compile)))
 
+(prog1 :ruby-mode
+  (ensure-package 'inf-ruby 'nongnu)
+  (ensure-vc-package 'yari (github "hron/yari.el"))
+  (with-eval-after-load 'ruby-mode
+    (require 'init-ruby)))
+
 
 
 (require 'init-emacs)
 (require 'init-flymake)
-(require 'init-ruby)
 
 
 (provide 'init)

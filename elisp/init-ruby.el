@@ -3,17 +3,8 @@
 ;;; Commentary:
 
 ;;; Code:
-(require 'init-package)
-(require 'ruby-mode)
-
-(unless (package-installed-p 'inf-ruby)
-  (package-install 'inf-ruby))
 (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode)
-
-(unless (package-installed-p 'yari)
-  (package-vc-install (github "hron/yari.el")))
 (define-key ruby-mode-map (kbd "C-c ?") #'yari)
-
 (add-to-list 'auto-mode-alist '("/\\.irbrc\\'" . ruby-mode))
 
 
@@ -48,6 +39,7 @@
   "def test_" _ > \n
   "end" > \n
   "end" > "\n")
+
 
 (provide 'init-ruby)
 ;;; init-ruby.el ends here
