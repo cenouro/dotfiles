@@ -143,7 +143,12 @@
    'ediff-split-window-function
    #'split-window-horizontally "Diff side-by-side"))
 
-(require 'init-magit)
+(prog1 :magit
+  (ensure-package 'magit 'nongnu)
+  (require 'magit)
+  (setopt    git-commit-major-mode #'my/git-commit-mode)
+  (add-hook 'git-commit-setup-hook #'git-commit-turn-on-auto-fill)
+  (add-hook 'git-commit-setup-hook #'git-commit-turn-on-flyspell))
 
 
 ;;;; Programming Languages

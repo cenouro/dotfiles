@@ -116,5 +116,14 @@ about undefined variables and functions."
     (flymake-mode 1)))
 
 
+(define-derived-mode my/git-commit-mode text-mode "Commit"
+  "Major mode for editing Git commit messages.
+
+Intended to be used as `git-commit-major-mode'. A lot of modes
+derive from `text-mode' (e.g. `nxml-mode'); using a dedicated
+major mode for commit messages allows for simpler customization."
+  (setq fill-column 72))
+
+
 (provide 'init-functions)
 ;;; init-functions.el ends here
