@@ -3,9 +3,6 @@
 ;;; Commentary:
 
 ;;; Code:
-(require 'init-custom)
-(require 'init-package)
-
 (require 'flymake)
 (define-key flymake-mode-map (kbd "C-c f p") #'flymake-goto-prev-error)
 (define-key flymake-mode-map (kbd "C-c f n") #'flymake-goto-next-error)
@@ -20,8 +17,9 @@
                (window-height   . 0.2)))
 
 
-(unless (package-installed-p 'flymake-languagetool)
-  (package-vc-install (github "emacs-languagetool/flymake-languagetool")))
+(ensure-vc-package 'flymake-languagetool
+                   (github "emacs-languagetool/flymake-languagetool"))
+
 (require 'flymake-languagetool)
 (customize-set-variable 'flymake-languagetool-server-jar
                         (concat "/opt/" (user-login-name)
