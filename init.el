@@ -47,8 +47,12 @@
 
 ;;; Code:
 ;; These must be run before everything
-(add-to-list 'load-path (locate-user-emacs-file "elisp"))
-(require 'init-custom)
+(prog1 :essential-initialization
+  (add-to-list 'load-path (locate-user-emacs-file "elisp"))
+  (customize-set-variable 'custom-file "~/.emacs.d/custom.el"
+                          "This must be set and loaded as early as possible.")
+  (load custom-file))
+
 (require 'init-functions)
 
 
