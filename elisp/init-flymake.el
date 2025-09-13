@@ -31,7 +31,7 @@
     (flymake-languagetool-load)
     (flymake-mode 1)))
 
-(with-eval-after-load 'init-magit
+(with-eval-after-load 'magit
   (my/add-to-list "Disable LanguageTool in Git commit comments."
                   'flymake-languagetool-ignore-faces-alist
                   '(cnr/git-commit-mode font-lock-comment-face
@@ -42,7 +42,7 @@
                                         git-commit-comment-file
                                         git-commit-comment-heading))
 
-  (add-hook 'cnr/git-commit-mode-hook #'my/flymake-languagetool-load))
+  (add-hook 'my/git-commit-mode-hook #'my/flymake-languagetool-load))
 
 (provide 'init-flymake)
 ;;; init-flymake.el ends here
