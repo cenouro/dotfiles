@@ -34,13 +34,13 @@
 (with-eval-after-load 'magit
   (my/add-to-list "Disable LanguageTool in Git commit comments."
                   'flymake-languagetool-ignore-faces-alist
-                  '(cnr/git-commit-mode font-lock-comment-face
-                                        git-commit-comment-action
-                                        git-commit-comment-branch-local
-                                        git-commit-comment-branch-remote
-                                        git-commit-comment-detached
-                                        git-commit-comment-file
-                                        git-commit-comment-heading))
+                  '(my/git-commit-mode font-lock-comment-face
+                                       git-commit-comment-action
+                                       git-commit-comment-branch-local
+                                       git-commit-comment-branch-remote
+                                       git-commit-comment-detached
+                                       git-commit-comment-file
+                                       git-commit-comment-heading))
 
   (add-hook 'my/git-commit-mode-hook #'my/flymake-languagetool-load))
 
