@@ -1,29 +1,22 @@
 ---
-- name: Install asdf-vm dependencies
-  ansible.builtin.package:
-    name:
-      - curl
-      - git
-    state: present
-  become: true
+- name: Download asdf
+  ansible.builtin.unarchive:
+    remote_src: true
+    src: https://github.com/asdf-vm/asdf/releases/download/v0.18.0/asdf-v0.18.0-linux-amd64.tar.gz
+    dest: '{{ HOME }}/.local/bin/'
+    creates: '{{ HOME }}/.local/bin/asdf'
 
-- name: Clone asdf-vm repository
-  ansible.builtin.git:
-    repo: 'https://github.com/asdf-vm/asdf.git'
-    dest: '{{ HOME }}/.asdf'
-    version: v0.14.0
-    depth: 1
-
-- name: Source asdf-vm in ~/.bashrc
+- name: Add asdf to .bashrc
   ansible.builtin.blockinfile:
+    path: "{{ HOME }}/.bashrc"
     block: |
-      . "$HOME/.asdf/asdf.sh"
-      . "$HOME/.asdf/completions/asdf.bash"
-    path: '{{ HOME }}/.bashrc'
-    insertafter: EOL
-    marker: '# {mark} Ansible Managed Block | asdf-vm'
+      export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+      . <(asdf completion bash)
+    insertafter: EOF
+    marker: '# {mark} Ansible Managed Block | Add asdf to .bashrc'
     prepend_newline: true
     append_newline: true
+    state: present
 
 - name: Load list of dependecies to install for asdf-nodejs and asdf-ruby
   ansible.builtin.include_vars: '{{ DISTRO }}.yml'

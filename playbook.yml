@@ -38,6 +38,21 @@
         - '{{ XDG_DATA_HOME }}'
         - '{{ XDG_STATE_HOME }}'
 
+    - name: Ensure ~/.local/bin
+      ansible.builtin.file:
+        path: '{{ HOME }}/.local/bin'
+        state: directory
+
+    - name: Add ~/.local/bin to $PATH
+      ansible.builtin.blockinfile:
+        path: "{{ HOME }}/.bashrc"
+        block: export PATH="${HOME}/.local/bin:${PATH}"
+        insertafter: EOF
+        marker: '# {mark} Ansible Managed Block | Add ~/.local/bin to $PATH'
+        prepend_newline: true
+        append_newline: true
+        state: present
+
   roles:
     - asdf-vm
     - git
