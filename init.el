@@ -192,9 +192,11 @@
               #'(lambda () (setq truncate-lines t)))))
 
 (prog1 :asdf
-  (ensure-vc-package 'asdf (github "cenouro/asdf.el"))
-  (require 'asdf)
-  (asdf-enable))
+  ;; See: https://www.emacswiki.org/emacs/ExecPath
+  ;; See: https://mise.jdx.dev/ide-integration.html#emacs
+  (let ((asdf-shims-path (expand-file-name ".asdf/shims" "~")))
+    (setenv "PATH" (concat (getenv "PATH") ":" asdf-shims-path))
+    (add-to-list 'exec-path asdf-shims-path :append)))
 
 (prog1 :elisp
   (with-eval-after-load 'flymake
