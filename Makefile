@@ -16,3 +16,6 @@ USER != logname
 
 ${HOME}/.rdbgrc :
 	echo "config set skip_path /\/\.asdf\/installs\/ruby\//" > $@
+
+${HOME}/.xprofile : nvidia-xprofile
+	cat nvidia-xprofile > $@

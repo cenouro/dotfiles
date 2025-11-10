@@ -59,15 +59,6 @@
 
 
   tasks:
-    - name: 'NVIDIA: Avoid screen tearing in Xorg'
-      ansible.builtin.blockinfile:
-        path: '{{ HOME }}/.xprofile'
-        prepend_newline: true
-        append_newline: true
-        create: true
-        marker: '# {mark} Ansible Managed Block | NVIDIA: Avoid screen tearing in Xorg'
-        block: "{{ lookup('ansible.builtin.file', './block.nvidia-xprofile.sh') }}"
-
     - name: Print all available facts (run with --tags debug)
       ansible.builtin.debug:
         var: ansible_facts
