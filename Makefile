@@ -15,7 +15,10 @@ USER != logname
 
 
 ${HOME}/.rdbgrc :
+	## Don't step into gems when debugging ruby code
 	echo "config set skip_path /\/\.asdf\/installs\/ruby\//" > $@
 
+
 ${HOME}/.xprofile : nvidia-xprofile
+	## Avoid screen tearing in Xorg
 	cat nvidia-xprofile > $@
