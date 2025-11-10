@@ -14,13 +14,17 @@ HOME  = /home/${USER}
 USER != logname
 
 
-.PHONY : git
+.PHONY : bash git
+
+
 git : ${HOME}/.config/git/config
 
 ${HOME}/.config/git/config :
 	mkdir -p $(@D)
 	ln -sf $(realpath ./gitconfig) $@
 
+
+bash : ${HOME}/.bashrc
 
 ${HOME}/.bashrc : /etc/skel/.bashrc bashrc
 	## Assemble ~/.bashrc
