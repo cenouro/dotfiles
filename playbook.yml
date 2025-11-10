@@ -59,13 +59,6 @@
 
 
   tasks:
-    - name: Don't step into gems when debugging ruby code
-      ansible.builtin.lineinfile:
-        path: '{{ HOME }}/.rdbgrc'
-        state: present
-        create: true
-        line: config set skip_path /\/\.asdf\/installs\/ruby\//
-
     - name: 'NVIDIA: Avoid screen tearing in Xorg'
       ansible.builtin.blockinfile:
         path: '{{ HOME }}/.xprofile'

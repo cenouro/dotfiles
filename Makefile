@@ -12,3 +12,7 @@
 # Makefile is ran using sudo.
 HOME  = /home/${USER}
 USER != logname
+
+
+${HOME}/.rdbgrc :
+	echo "config set skip_path /\/\.asdf\/installs\/ruby\//" > $@
