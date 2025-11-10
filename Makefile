@@ -14,6 +14,11 @@ HOME  = /home/${USER}
 USER != logname
 
 
+${HOME}/.bashrc : /etc/skel/.bashrc bashrc
+	## Assemble ~/.bashrc
+	cat $^ > $@
+
+
 ${HOME}/.rdbgrc :
 	## Don't step into gems when debugging ruby code
 	echo "config set skip_path /\/\.asdf\/installs\/ruby\//" > $@
