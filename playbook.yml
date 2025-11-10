@@ -18,22 +18,6 @@
     XDG_STATE_HOME: '{{ HOME }}/.local/state'
 
 
-  pre_tasks:
-    - name: Ensure XDG directories
-      ansible.builtin.file:
-        path: '{{ item }}'
-        state: directory
-      loop:
-        - '{{ XDG_CONFIG_HOME }}'
-        - '{{ XDG_CACHE_HOME }}'
-        - '{{ XDG_DATA_HOME }}'
-        - '{{ XDG_STATE_HOME }}'
-
-    - name: Ensure ~/.local/bin
-      ansible.builtin.file:
-        path: '{{ HOME }}/.local/bin'
-        state: directory
-
   roles:
     - asdf-vm
     - git
