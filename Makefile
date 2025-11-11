@@ -52,8 +52,9 @@ ${HOME}/.xprofile : nvidia-xprofile
 languagetool : ${HOME}/.local/LanguageTool
 
 ${HOME}/.local/LanguageTool : ${HOME}/.local/LanguageTool-6.2.zip
-	unzip -q -o $< -d $(<D)
-	ln -sf ${HOME}/.local/LanguageTool-6.2 $@
+	rm -rf ${HOME}/.local/LanguageTool-6.2/
+	unzip -q $< -d $(<D)
+	ln -sf ${HOME}/.local/LanguageTool-6.2/ $@
 
 ${HOME}/.local/LanguageTool-6.2.zip :
 	wget -O $@ "https://languagetool.org/download/LanguageTool-6.2.zip"
