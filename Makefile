@@ -44,7 +44,9 @@ bash : ${HOME}/.bashrc
 
 ${HOME}/.bashrc : /etc/skel/.bashrc bashrc
 	## Assemble ~/.bashrc
-	cat $^ > $@
+# head and the "-" as argument to cat are used in order to filter out
+# the Local Variable list pertinent to Emacs in ./bashrc.
+	head --lines=-3 ./bashrc | cat /etc/skel/.bashrc - > $@
 
 
 ${HOME}/.rdbgrc :
