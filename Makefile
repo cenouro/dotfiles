@@ -56,4 +56,4 @@ ${HOME}/.local/LanguageTool : ${HOME}/.local/LanguageTool-6.2.zip
 	ln -sf ${HOME}/.local/LanguageTool-6.2 $@
 
 ${HOME}/.local/LanguageTool-6.2.zip :
-	wget -O $@ https://languagetool.org/download/LanguageTool-6.2.zip
+	wget -O $@ "https://languagetool.org/download/LanguageTool-6.2.zip"
