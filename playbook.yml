@@ -21,7 +21,6 @@
   roles:
     - asdf-vm
     - emacs
-    - languagetool
 
     # In order to interpolate variables in task names, they have to be
     # passed explicitly to the role (or set as facts, which is more

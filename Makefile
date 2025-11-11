@@ -14,7 +14,15 @@ HOME  = /home/${USER}
 USER != logname
 
 
-.PHONY : bash git
+PACKAGES := git wget
+PACKAGES += default-jre
+
+
+.PHONY : bash git install languagetool
+
+
+install :
+	apt update && apt install -y ${PACKAGES}
 
 
 git : ${HOME}/.config/git/config
@@ -39,3 +47,13 @@ ${HOME}/.rdbgrc :
 ${HOME}/.xprofile : nvidia-xprofile
 	## Avoid screen tearing in Xorg
 	cat nvidia-xprofile > $@
+
+
+languagetool : ${HOME}/.local/LanguageTool
+
+${HOME}/.local/LanguageTool : ${HOME}/.local/LanguageTool-6.2.zip
+	unzip -q $< -d $(<D)
+	ln -sf ${HOME}/.local/LanguageTool-6.2 $@
+
+${HOME}/.local/LanguageTool-6.2.zip :
+	wget -O $@ https://languagetool.org/download/LanguageTool-6.2.zip
