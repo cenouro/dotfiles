@@ -31,7 +31,7 @@ PACKAGES += default-jre
 PACKAGES += mpv transmission
 
 
-.PHONY : bash git install languagetool
+.PHONY : bash git install languagetool mpv transmission
 
 
 install :
@@ -52,6 +52,20 @@ git : ${HOME}/.config/git/config
 ${HOME}/.config/git/config :
 	mkdir -p $(@D)
 	ln -sf $(realpath ./gitconfig) $@
+
+
+transmission : | ${HOME}/.config/transmission
+# Nothing much to do here since my transmission folder is actually
+# kept in a separated partition, supposed to be "bind-mounted" in this
+# directory. The directory is only created here for convenience.
+	mkdir -p ${HOME}/.config/transmission
+
+
+mpv : ${HOME}/.config/mpv/mpv.conf
+
+${HOME}/.config/mpv/mpv.conf : mpv.conf
+	mkdir -p $(@D)
+	ln -sf $(realpath ./mpv.conf) $@
 
 
 bash : ${HOME}/.bashrc
