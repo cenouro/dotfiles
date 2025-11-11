@@ -23,6 +23,8 @@ USER != logname
 
 
 PACKAGES := git wget
+
+# LanguageTool dependency
 PACKAGES += default-jre
 
 
