@@ -1,7 +1,4 @@
 ---
-- name: Install applications
-  include_tasks: '{{ DISTRO }}.yml'
-
 - name: 'MPV: ensure config folder'
   ansible.builtin.file:
     path: '{{ XDG_CONFIG_HOME }}/mpv'

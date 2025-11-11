@@ -22,10 +22,13 @@ HOME  = /home/${USER}
 USER != logname
 
 
-PACKAGES := git wget
+PACKAGES := curl git tree wget
 
 # LanguageTool dependency
 PACKAGES += default-jre
+
+# Apps
+PACKAGES += mpv transmission
 
 
 .PHONY : bash git install languagetool
@@ -33,6 +36,15 @@ PACKAGES += default-jre
 
 install :
 	apt update && apt install -y ${PACKAGES}
+
+	snap install amberol
+	snap install brave
+	snap install chromium
+	snap install tagger
+	snap install tube-converter
+
+	snap install bitwarden
+	snap connect bitwarden:password-manager-service
 
 
 git : ${HOME}/.config/git/config
