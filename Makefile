@@ -28,10 +28,10 @@ PACKAGES := curl git tree wget
 PACKAGES += default-jre
 
 # Apps
-PACKAGES += mpv transmission
+PACKAGES += mpv
 
 
-.PHONY : bash git install languagetool mpv transmission
+.PHONY : bash git install languagetool mpv
 
 
 install :
@@ -52,13 +52,6 @@ git : ${HOME}/.config/git/config
 ${HOME}/.config/git/config :
 	mkdir -p $(@D)
 	ln -sf $(realpath ./gitconfig) $@
-
-
-transmission : | ${HOME}/.config/transmission
-# Nothing much to do here since my transmission folder is actually
-# kept in a separated partition, supposed to be "bind-mounted" in this
-# directory. The directory is only created here for convenience.
-	mkdir -p ${HOME}/.config/transmission
 
 
 mpv : ${HOME}/.config/mpv/mpv.conf
