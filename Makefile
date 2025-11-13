@@ -32,6 +32,8 @@
 HOME  = /home/${USER}
 USER != logname
 
+PWD != pwd
+
 
 EMACS_D := ${HOME}/.emacs.d
 
@@ -96,6 +98,9 @@ ${HOME}/.bashrc : /etc/skel/.bashrc bashrc
 	head --lines=-3 ./bashrc | cat /etc/skel/.bashrc - > $@
 
 
+${HOME}/.irbrc : irbrc
+	cat $< > $@
+
 ${HOME}/.rdbgrc :
 	## Don't step into gems when debugging ruby code
 	echo "config set skip_path /\/\.asdf\/installs\/ruby\//" > $@
@@ -140,7 +145,8 @@ ${HOME}/.asdf/plugins/ruby : | ${HOME}/.local/bin/asdf
 
 
 emacs : ${EMACS_D}/init.el ${EMACS_D}/custom.el \
-		${EMACS_D}/elisp   ${EMACS_D}/templates
+        ${EMACS_D}/elisp   ${EMACS_D}/templates \
+        ${HOME}/.local/state/emacs/projects
 
 ${EMACS_D} :
 	mkdir -p ${EMACS_D}
@@ -152,3 +158,7 @@ ${EMACS_D}/init.el   \
 ${EMACS_D}/elisp     \
 ${EMACS_D}/templates : | ${EMACS_D}
 	ln -sf $(realpath ./$(@F)) ${EMACS_D}
+
+${HOME}/.local/state/emacs/projects :
+	mkdir -p $(@D)
+	echo ";;; -*- lisp-data -*-\n((\"${PWD}\"))" > $@
