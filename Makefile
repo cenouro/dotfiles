@@ -1,3 +1,6 @@
+# When "tar" is used, make sure to thoroughly test the recipe and
+# check whether the flag "--touch" is required.
+#
 # Avoid sub-shells as much as possible since they are a source of
 # unexpected behavior.
 #
@@ -105,7 +108,7 @@ ${HOME}/.local/LanguageTool-6.2.zip :
 asdf-vm : bash asdf-nodejs asdf-ruby ${HOME}/.local/bin/asdf
 
 ${HOME}/.local/bin/asdf : ${HOME}/.local/asdf-v0.18.0-linux-amd64.tar.gz
-	tar --extract --gunzip --file=$< --directory=$(@D)
+	tar --extract --gunzip --touch --file=$< --directory=$(@D)
 
 ${HOME}/.local/asdf-v0.18.0-linux-amd64.tar.gz :
 	wget --quiet --show-progress -O $@ \
