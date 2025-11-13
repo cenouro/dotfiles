@@ -1,16 +1,4 @@
 ---
-- name: Load variables
-  ansible.builtin.include_vars: '{{ DISTRO }}.yml'
-
-- name: Include tasks that install emacs
-  include_tasks: 'install-emacs-{{ DISTRO }}.yml'
-
-- name: Install JetBrains Mono
-  ansible.builtin.package:
-    name: '{{ jetbrains_mono_fonts }}'
-    state: present
-  become: true
-
 - name: Ensure Emacs directories
   ansible.builtin.file:
     dest: '{{ item }}'
@@ -19,28 +7,11 @@
     - '{{ emacs_d }}'
     - '{{ XDG_STATE_HOME }}/emacs'
 
-- name: Link assets
-  ansible.builtin.file:
-    src: '{{ item.src }}'
-    dest: '{{ item.dest }}'
-    state: link
-  loop:
-    - '{{ init_el }}'
-    - '{{ elisp }}'
-    - '{{ templates }}'
-
 - name: Create projects file
   ansible.builtin.template:
     src: projects.j2
     dest: '{{ XDG_STATE_HOME }}/emacs/projects'
     force: false
-
-- name: Create empty custom.el
-  ansible.builtin.file:
-    path: '{{ custom_el }}'
-    state: touch
-    access_time: preserve
-    modification_time: preserve
 
 - name: Configure keyboard when using GNOME
   include_tasks: gnome-keyboard.yml

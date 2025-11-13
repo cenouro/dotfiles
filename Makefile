@@ -33,6 +33,9 @@ HOME  = /home/${USER}
 USER != logname
 
 
+EMACS_D := ${HOME}/.emacs.d
+
+
 PACKAGES := curl git tree wget
 
 # LanguageTool dependency
@@ -47,12 +50,11 @@ PACKAGES += libgdbm-dev libgdbm6 libgmp-dev libncurses5-dev
 PACKAGES += libreadline6-dev libssl-dev libyaml-dev patch rustc
 PACKAGES += uuid-dev zlib1g-dev
 
+# Apps & Fonts
+PACKAGES += mpv fonts-jetbrains-mono
 
-# Apps
-PACKAGES += mpv
 
-
-.PHONY : bash git install languagetool mpv
+.PHONY : bash emacs git install languagetool mpv
 .PHONY : asdf-vm asdf-nodejs asdf-ruby
 
 
@@ -67,6 +69,8 @@ install :
 
 	snap install bitwarden
 	snap connect bitwarden:password-manager-service
+
+	snap install emacs --classic
 
 
 git : ${HOME}/.config/git/config
@@ -133,3 +137,18 @@ asdf-ruby : | ${HOME}/.asdf/plugins/ruby
 
 ${HOME}/.asdf/plugins/ruby : | ${HOME}/.local/bin/asdf
 	$| plugin add ruby "https://github.com/asdf-vm/asdf-ruby.git"
+
+
+emacs : ${EMACS_D}/init.el ${EMACS_D}/custom.el \
+		${EMACS_D}/elisp   ${EMACS_D}/templates
+
+${EMACS_D} :
+	mkdir -p ${EMACS_D}
+
+${EMACS_D}/custom.el :
+	touch $@
+
+${EMACS_D}/init.el   \
+${EMACS_D}/elisp     \
+${EMACS_D}/templates : | ${EMACS_D}
+	ln -sf $(realpath ./$(@F)) ${EMACS_D}
