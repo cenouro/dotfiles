@@ -27,11 +27,22 @@ PACKAGES := curl git tree wget
 # LanguageTool dependency
 PACKAGES += default-jre
 
+# asdf-nodejs dependencies
+PACKAGES += build-essential g++ make python3 python3-pip
+
+# asdf-ruby dependencies
+PACKAGES += autoconf build-essential libdb-dev libffi-dev
+PACKAGES += libgdbm-dev libgdbm6 libgmp-dev libncurses5-dev
+PACKAGES += libreadline6-dev libssl-dev libyaml-dev patch rustc
+PACKAGES += uuid-dev zlib1g-dev
+
+
 # Apps
 PACKAGES += mpv
 
 
-.PHONY : asdf-vm bash git install languagetool mpv
+.PHONY : bash git install languagetool mpv
+.PHONY : asdf-vm asdf-nodejs asdf-ruby
 
 
 install :
@@ -91,7 +102,7 @@ ${HOME}/.local/LanguageTool-6.2.zip :
 	wget -O $@ "https://languagetool.org/download/LanguageTool-6.2.zip"
 
 
-asdf-vm : bash ${HOME}/.local/bin/asdf
+asdf-vm : bash asdf-nodejs asdf-ruby ${HOME}/.local/bin/asdf
 
 ${HOME}/.local/bin/asdf : ${HOME}/.local/asdf-v0.18.0-linux-amd64.tar.gz
 	tar --extract --gunzip --file=$< --directory=$(@D)
@@ -99,3 +110,15 @@ ${HOME}/.local/bin/asdf : ${HOME}/.local/asdf-v0.18.0-linux-amd64.tar.gz
 ${HOME}/.local/asdf-v0.18.0-linux-amd64.tar.gz :
 	wget --quiet --show-progress -O $@ \
 	"https://github.com/asdf-vm/asdf/releases/download/v0.18.0/$(@F)"
+
+
+asdf-nodejs : | ${HOME}/.asdf/plugins/nodejs
+
+${HOME}/.asdf/plugins/nodejs : | ${HOME}/.local/bin/asdf
+	$| plugin add nodejs "https://github.com/asdf-vm/asdf-nodejs.git"
+
+
+asdf-ruby : | ${HOME}/.asdf/plugins/ruby
+
+${HOME}/.asdf/plugins/ruby : | ${HOME}/.local/bin/asdf
+	$| plugin add ruby "https://github.com/asdf-vm/asdf-ruby.git"

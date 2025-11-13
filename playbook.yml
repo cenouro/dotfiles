@@ -16,7 +16,6 @@
 
 
   roles:
-    - asdf-vm
     - emacs
 
 
