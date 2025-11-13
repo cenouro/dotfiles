@@ -1,6 +1,14 @@
+# #####
 # When "tar" is used, make sure to thoroughly test the recipe and
 # check whether the flag "--touch" is required.
 #
+# By default, tar preserves the original mtime of the files, which
+# implies that the compressed archive will always have a newer mtime
+# than the files contained in it. Therefore, targets that have tar
+# files as prerequisite will always be rebuilt.
+#
+#
+# #####
 # Avoid sub-shells as much as possible since they are a source of
 # unexpected behavior.
 #
