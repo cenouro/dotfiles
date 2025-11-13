@@ -31,7 +31,7 @@ PACKAGES += default-jre
 PACKAGES += mpv
 
 
-.PHONY : bash git install languagetool mpv
+.PHONY : asdf-vm bash git install languagetool mpv
 
 
 install :
@@ -89,3 +89,13 @@ ${HOME}/.local/LanguageTool : ${HOME}/.local/LanguageTool-6.2.zip
 
 ${HOME}/.local/LanguageTool-6.2.zip :
 	wget -O $@ "https://languagetool.org/download/LanguageTool-6.2.zip"
+
+
+asdf-vm : bash ${HOME}/.local/bin/asdf
+
+${HOME}/.local/bin/asdf : ${HOME}/.local/asdf-v0.18.0-linux-amd64.tar.gz
+	tar --extract --gunzip --file=$< --directory=$(@D)
+
+${HOME}/.local/asdf-v0.18.0-linux-amd64.tar.gz :
+	wget --quiet --show-progress -O $@ \
+	"https://github.com/asdf-vm/asdf/releases/download/v0.18.0/$(@F)"

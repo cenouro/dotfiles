@@ -1,23 +1,4 @@
 ---
-- name: Download asdf
-  ansible.builtin.unarchive:
-    remote_src: true
-    src: https://github.com/asdf-vm/asdf/releases/download/v0.18.0/asdf-v0.18.0-linux-amd64.tar.gz
-    dest: '{{ HOME }}/.local/bin/'
-    creates: '{{ HOME }}/.local/bin/asdf'
-
-- name: Add asdf to .bashrc
-  ansible.builtin.blockinfile:
-    path: "{{ HOME }}/.bashrc"
-    block: |
-      export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-      . <(asdf completion bash)
-    insertafter: EOF
-    marker: '# {mark} Ansible Managed Block | Add asdf to .bashrc'
-    prepend_newline: true
-    append_newline: true
-    state: present
-
 - name: Load list of dependecies to install for asdf-nodejs and asdf-ruby
   ansible.builtin.include_vars: '{{ DISTRO }}.yml'
 
