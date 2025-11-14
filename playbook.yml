@@ -15,10 +15,6 @@
     XDG_STATE_HOME: '{{ HOME }}/.local/state'
 
 
-  roles:
-    - emacs
-
-
   tasks:
     - name: Print all available facts (run with --tags debug)
       ansible.builtin.debug:

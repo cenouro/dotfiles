@@ -1,5 +1,0 @@
----
-- name: Configure keyboard when using GNOME
-  include_tasks: gnome-keyboard.yml
-  when: CURRENT_DESKTOP == 'GNOME'
-...

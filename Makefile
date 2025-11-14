@@ -56,7 +56,8 @@ PACKAGES += uuid-dev zlib1g-dev
 PACKAGES += mpv fonts-jetbrains-mono
 
 
-.PHONY : bash emacs git install languagetool mpv
+.PHONY : bash git install languagetool mpv
+.PHONY : emacs emacs-gnome-keyboard
 .PHONY : asdf-vm asdf-nodejs asdf-ruby
 
 
@@ -146,7 +147,8 @@ ${HOME}/.asdf/plugins/ruby : | ${HOME}/.local/bin/asdf
 
 emacs : ${EMACS_D}/init.el ${EMACS_D}/custom.el \
         ${EMACS_D}/elisp   ${EMACS_D}/templates \
-        ${HOME}/.local/state/emacs/projects
+        ${HOME}/.local/state/emacs/projects     \
+        emacs-gnome-keyboard
 
 ${EMACS_D} :
 	mkdir -p ${EMACS_D}
@@ -162,3 +164,26 @@ ${EMACS_D}/templates : | ${EMACS_D}
 ${HOME}/.local/state/emacs/projects :
 	mkdir -p $(@D)
 	echo ";;; -*- lisp-data -*-\n((\"${PWD}\"))" > $@
+
+emacs-gnome-keyboard :
+	## Remap CapsLock -> Ctrl, AltGr -> Alt
+	gsettings set org.gnome.desktop.input-sources xkb-options \
+	              "['ctrl:nocaps', 'lv3:ralt_alt']"
+
+	## Allow Emacs to use M-SPC and C-M-SPC
+	gsettings set org.gnome.desktop.wm.keybindings activate-window-menu \
+	              "@as []"
+
+	## Allow Emacs to use C-M-d
+	gsettings set org.gnome.desktop.wm.keybindings show-desktop
+	              "['<Super>d']"
+
+	## Allow Emacs to use C-M-t
+	gsettings set org.gnome.settings-daemon.plugins.media-keys terminal
+	              "@as []"
+
+	## Allow Emacs to use C-. and C-;
+# NOTE: Don't ever use dconf to refactor this code because it doesn't
+#       work with the key in question; this specific key can only be
+#       set using gsettings.
+	gsettings set org.freedesktop.ibus.panel.emoji hotkey "@as []"
