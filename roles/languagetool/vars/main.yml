@@ -1,4 +1,0 @@
----
-version: 6.2
-url: https://languagetool.org/download/LanguageTool-{{ version }}.zip
-...

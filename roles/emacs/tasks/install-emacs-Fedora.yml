@@ -1,7 +1,0 @@
----
-- name: Install Emacs
-  ansible.builtin.dnf:
-    name: emacs
-    state: present
-  become: true
-...

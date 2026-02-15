@@ -22,8 +22,8 @@
 
 (require 'flymake-languagetool)
 (customize-set-variable 'flymake-languagetool-server-jar
-                        (concat "/opt/" (user-login-name)
-                                "/LanguageTool/languagetool-server.jar"))
+                        (expand-file-name "languagetool-server.jar"
+                                          "~/.local/LanguageTool"))
 
 (defun my/flymake-languagetool-load ()
   "Load languagetool and then enable flymake."
