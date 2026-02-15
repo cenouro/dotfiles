@@ -175,11 +175,11 @@ emacs-gnome-keyboard :
 	              "@as []"
 
 	## Allow Emacs to use C-M-d
-	gsettings set org.gnome.desktop.wm.keybindings show-desktop
+	gsettings set org.gnome.desktop.wm.keybindings show-desktop \
 	              "['<Super>d']"
 
 	## Allow Emacs to use C-M-t
-	gsettings set org.gnome.settings-daemon.plugins.media-keys terminal
+	gsettings set org.gnome.settings-daemon.plugins.media-keys terminal \
 	              "@as []"
 
 	## Allow Emacs to use C-. and C-;
