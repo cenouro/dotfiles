@@ -211,6 +211,21 @@
 
 
 
+(prog1 :org-mode
+  (setopt org-agenda-files '("~/Documents/org/")
+          org-startup-indented t
+          org-startup-folded 'show2levels
+          org-enforce-todo-dependencies t
+          org-enforce-todo-checkbox-dependencies t
+          org-special-ctrl-a/e 'reversed
+          org-ctrl-k-protect-subtree 'error
+          org-fold-catch-invisible-edits 'error)
+
+  (global-set-key (kbd "C-c a") #'org-agenda)
+  (global-set-key (kbd "C-c c") #'org-capture)
+  (global-set-key (kbd "C-c l") #'org-store-link))
+
+
 (require 'init-emacs)
 (require 'init-flymake)
 
