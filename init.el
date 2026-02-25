@@ -82,6 +82,17 @@
   (setopt eldoc-echo-area-prefer-doc-buffer t
           eldoc-echo-area-use-multiline-p   3))
 
+(prog1 :imenu
+  (my/customize-set-variable
+   "Although 'group is more pleasing to the eyes, it prevents group"
+   "headings from being filtered and selected in the minibuffer,"
+   "which is a problem in org-mode files."
+   "With `imenu-level-separator' and `imenu-space-replacement'"
+   "properly configured, 'prefix gets the job done very well."
+   'imenu-flatten 'prefix)
+  (setopt imenu-level-separator " > "
+          imenu-space-replacement " "))
+
 (prog1 :diminish
   (ensure-package 'diminish)
   (add-hook 'emacs-startup-hook
