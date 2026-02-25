@@ -234,6 +234,10 @@
           org-special-ctrl-a/e 'reversed
           org-ctrl-k-protect-subtree 'error
           org-fold-catch-invisible-edits 'error)
+  (setopt org-todo-keywords
+          '((sequence "TODO(t)" "WAITING(w)" "VERIFY(v)"
+                      "|" "DONE(d)" "CANCELED(c)"))
+          org-log-into-drawer t)
 
   (global-set-key (kbd "C-c a") #'org-agenda)
   (global-set-key (kbd "C-c c") #'org-capture)
