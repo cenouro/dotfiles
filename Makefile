@@ -182,6 +182,26 @@ emacs-gnome-keyboard :
 	gsettings set org.gnome.settings-daemon.plugins.media-keys terminal \
 	              "@as []"
 
+	## Allow Emacs to use <Super> + <Arrows>
+	gsettings set org.gnome.shell.extensions.tiling-assistant \
+	              restore-window  "@as []"
+	gsettings set org.gnome.shell.extensions.tiling-assistant \
+	              tile-left-half  "@as []"
+	gsettings set org.gnome.shell.extensions.tiling-assistant \
+	              tile-maximize   "@as []"
+	gsettings set org.gnome.shell.extensions.tiling-assistant \
+	              tile-right-half "@as []"
+
+	## Allow Emacs to use <Shift> + <Super> + <Arrows>
+	gsettings set org.gnome.desktop.wm.keybindings \
+	              move-to-monitor-down  "@as []"
+	gsettings set org.gnome.desktop.wm.keybindings \
+	              move-to-monitor-left  "@as []"
+	gsettings set org.gnome.desktop.wm.keybindings \
+	              move-to-monitor-right "@as []"
+	gsettings set org.gnome.desktop.wm.keybindings \
+	              move-to-monitor-up    "@as []"
+
 	## Allow Emacs to use C-. and C-;
 # NOTE: Don't ever use dconf to refactor this code because it doesn't
 #       work with the key in question; this specific key can only be

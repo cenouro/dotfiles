@@ -91,8 +91,11 @@
                 (diminish 'page-break-lines-mode)
                 (diminish 'subword-mode))))
 
+(prog1 :windmove
+  (windmove-default-keybindings 'super)
+  (windmove-swap-states-default-keybindings '(shift super)))
+
 (prog1 :emacs
-  (windmove-default-keybindings)
   (keymap-global-set "M-o" #'other-window))
 
 
