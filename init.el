@@ -91,7 +91,12 @@
    "properly configured, 'prefix gets the job done very well."
    'imenu-flatten 'prefix)
   (setopt imenu-level-separator " > "
-          imenu-space-replacement " "))
+          imenu-space-replacement " ")
+  (my/add-to-list
+   "Safe value for use in init.el"
+   'safe-local-variable-values
+   '(imenu-generic-expression
+     . ((nil "^(prog1 :\\(\\(\\w\\|-\\)+\\)" 1)))))
 
 (prog1 :diminish
   (ensure-package 'diminish)
@@ -250,3 +255,7 @@
 
 (provide 'init)
 ;;; init.el ends here
+
+;; Local Variables:
+;; imenu-generic-expression: ((nil "^(prog1 :\\(\\(\\w\\|-\\)+\\)" 1))
+;; End:
