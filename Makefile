@@ -166,6 +166,12 @@ ${HOME}/.local/state/emacs/projects :
 	echo ";;; -*- lisp-data -*-\n((\"${PWD}\"))" > $@
 
 emacs-gnome-keyboard :
+# You can use dconf-editor to browse, test some settings and do some
+# simple searches, but gsettings is better for searching since it
+# dumps KEYS AND VALUES; it also lists hidden stuff, such as the emoji
+# hotkey thing:
+# $ gsettings list-recursively | grep -i ...
+
 	## Remap CapsLock -> Ctrl, AltGr -> Alt
 	gsettings set org.gnome.desktop.input-sources xkb-options \
 	              "['ctrl:nocaps', 'lv3:ralt_alt']"
@@ -191,6 +197,10 @@ emacs-gnome-keyboard :
 	              tile-maximize   "@as []"
 	gsettings set org.gnome.shell.extensions.tiling-assistant \
 	              tile-right-half "@as []"
+	gsettings set org.gnome.mutter.keybindings \
+	              toggle-tiled-left  "@as []"
+	gsettings set org.gnome.mutter.keybindings \
+	              toggle-tiled-right "@as []"
 
 	## Allow Emacs to use <Shift> + <Super> + <Arrows>
 	gsettings set org.gnome.desktop.wm.keybindings \
