@@ -49,15 +49,54 @@ to `customize-set-variable'.
                             (string-trim (string-join comments " ")))))
 
 
-(defun my/add-to-list (comment list-var element &optional append compare-fn)
+(defun my/add-to-list (&rest args)
   "My decorated `add-to-list'.
+
 Like `add-to-list', but actually uses `customize-set-variable'.
 
-COMMENT is passed to `customize-set-variable'.
-LIST-VAR, ELEMENT, APPEND and COMPARE-FN are passed to `add-to-list'."
-  (customize-set-variable list-var
-                          (add-to-list list-var element append compare-fn)
-                          comment))
+COMMENT strings are simply discarded because the logic for ensuring
+their proper ordering and consistency is not trivial. It could be done
+by having a certain structure in the final comment string, such as a
+list of strings that can be parsed and \"stringfied\" as needed, but
+that seems overkill.
+
+LIST-VAR has to be a symbol.
+
+APPEND and COMPARE-FN are passed to `add-to-list'.
+
+\(fn [COMMENT...] LIST-VAR ELEMENT APPEND COMPARE-FN\)"
+  (let* ((args-without-comments (seq-drop-while #'stringp args))
+         (list-var   (nth 0 args-without-comments))
+         (element    (nth 1 args-without-comments))
+         (append     (nth 2 args-without-comments))
+         (compare-fn (nth 3 args-without-comments)))
+
+    (when (or (length< args-without-comments 2)
+              (length> args-without-comments 4))
+      (signal 'wrong-number-of-arguments
+              '("Wrong number of non-comment arguments"
+                :min 2 :max 4)))
+
+    ;; Remember, list-var is a symbol corresponding to the variable,
+    ;; not the variable itself.
+    (unless (symbolp list-var)
+      (signal 'wrong-type-argument
+              (list 'symbolp 'LIST-VAR list-var)))
+
+    ;; Some functions, such as `boundp' and `add-to-list', are
+    ;; "special" and ignore lexical variables, such as variables bound
+    ;; with `let', so think twice before trying to refactor the
+    ;; following code.
+    ;;
+    ;; This check using `boundp' is done in order to have a cleaner
+    ;; error message; it's a little better than just calling
+    ;; `add-to-list' and having a uglier, more cryptic error message.
+    (if (boundp list-var)
+        (customize-set-variable list-var
+                                (add-to-list list-var element
+                                             append compare-fn))
+      (signal 'void-variable
+              (list 'LIST-VAR list-var)))))
 
 
 (defun my/jsonrpc-connection-receive (connection message)
