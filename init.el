@@ -232,6 +232,7 @@
 
 (prog1 :org-mode
   (setopt org-agenda-files '("~/Documents/org/")
+          org-cycle-separator-lines 1
           org-startup-indented t
           org-startup-folded 'show2levels
           org-enforce-todo-dependencies t
