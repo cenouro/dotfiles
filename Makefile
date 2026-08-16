@@ -114,13 +114,13 @@ ${HOME}/.xprofile : nvidia-xprofile
 
 languagetool : ${HOME}/.local/LanguageTool
 
-${HOME}/.local/LanguageTool : ${HOME}/.local/LanguageTool-6.2.zip
-	rm -rf ${HOME}/.local/LanguageTool-6.2/
+${HOME}/.local/LanguageTool : ${HOME}/.local/LanguageTool-6.6.zip
+	rm -rf ${HOME}/.local/LanguageTool-6.6/
 	unzip -q $< -d $(<D)
-	ln -sf ${HOME}/.local/LanguageTool-6.2/ $@
+	ln -sf ${HOME}/.local/LanguageTool-6.6/ $@
 
-${HOME}/.local/LanguageTool-6.2.zip :
-	wget -O $@ "https://languagetool.org/download/LanguageTool-6.2.zip"
+${HOME}/.local/LanguageTool-6.6.zip :
+	wget -O $@ "https://languagetool.org/download/LanguageTool-6.6.zip"
 
 
 asdf-vm : bash asdf-nodejs asdf-ruby ${HOME}/.local/bin/asdf
