@@ -75,17 +75,9 @@ See `comint-send-invisible' for security note."
 (column-number-mode 1)
 
 ;; Typeface
-(defun cnr/scale-font-height (height)
-  "Scale HEIGHT when Gnome's Large Text is enabled."
-  (let* ((gsettings-cmd "gsettings get org.gnome.desktop.interface text-scaling-factor")
-         (text-scaling-factor (string-to-number (shell-command-to-string gsettings-cmd))))
-    ;; x * text-scaling-factor = HEIGHT
-    ;; x = HEIGHT / text-scaling-factor
-    (/ height text-scaling-factor)))
-
 (set-face-attribute 'default nil
                     :family "JetBrains Mono"
-                    :height (round (cnr/scale-font-height 140))
+                    ;; :height 140
                     :slant  'normal
                     :weight 'normal
                     :width  'normal)
