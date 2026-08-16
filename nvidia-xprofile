@@ -11,7 +11,9 @@ then
     # gpu-manager instead.
     if ( command -v gpu-manager &> /dev/null ) && ( gpu-manager | grep -Fiq "last cards number = 1" )
     then
-        nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
+        # Since I've had no problems with screen tearing in Xubuntu
+        # 26.04 so far, this is no longer required.
+        # nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
         nvidia-settings --assign GPULogoBrightness=0
     fi
 fi
