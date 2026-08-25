@@ -64,17 +64,6 @@ PACKAGES += mpv fonts-jetbrains-mono
 install :
 	apt update && apt install -y ${PACKAGES}
 
-	snap install amberol
-	snap install brave
-	snap install chromium
-	snap install tagger
-	snap install tube-converter
-
-	snap install bitwarden
-	snap connect bitwarden:password-manager-service
-
-	snap install emacs --classic
-
 
 git : ${HOME}/.config/git/config
 
