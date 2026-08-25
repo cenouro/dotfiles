@@ -250,6 +250,17 @@
   (global-set-key (kbd "C-c l") #'org-store-link))
 
 
+(prog1 :fortune-in-scratch-buffer
+  ;; See: https://www.emacswiki.org/emacs/Fortune
+  (when (executable-find "fortune")
+    (customize-set-variable 'initial-scratch-message
+                            (with-temp-buffer
+                              (shell-command "fortune" t)
+                              (let ((comment-start ";;"))
+                                (comment-region (point-min) (point-max)))
+                              (concat (buffer-string) "\n")))))
+
+
 (require 'init-emacs)
 (require 'init-flymake)
 
