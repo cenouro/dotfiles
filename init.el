@@ -247,7 +247,14 @@
 
   (global-set-key (kbd "C-c a") #'org-agenda)
   (global-set-key (kbd "C-c c") #'org-capture)
-  (global-set-key (kbd "C-c l") #'org-store-link))
+  (global-set-key (kbd "C-c l") #'org-store-link)
+
+  ;; It's important to use emacs-startup-hook here instead of
+  ;; after-init-hook to ensure point will be correctly placed at the
+  ;; end of the *scratch* buffer. For finer point control, use
+  ;; `set-window-point'.
+  ;; See: https://emacs.stackexchange.com/questions/21464/how-to-persistently-move-the-cursor-in-a-buffer-other-than-the-current-one
+  (add-hook 'emacs-startup-hook #'org-agenda-list))
 
 
 (prog1 :fortune-in-scratch-buffer
