@@ -214,8 +214,8 @@
   ;; See: https://www.emacswiki.org/emacs/ExecPath
   ;; See: https://mise.jdx.dev/ide-integration.html#emacs
   (let ((asdf-shims-path (expand-file-name ".asdf/shims" "~")))
-    (setenv "PATH" (concat (getenv "PATH") ":" asdf-shims-path))
-    (add-to-list 'exec-path asdf-shims-path :append)))
+    (setenv "PATH" (concat asdf-shims-path ":" (getenv "PATH")))
+    (add-to-list 'exec-path asdf-shims-path)))
 
 (prog1 :elisp
   (with-eval-after-load 'flymake
