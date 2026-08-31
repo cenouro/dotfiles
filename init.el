@@ -155,6 +155,11 @@
 
 ;;;; Version Control and Diffs
 ;;
+(prog1 :changelog
+  (customize-set-variable 'add-log-full-name "Mario Maia")
+  (customize-set-variable 'add-log-mailing-address
+                          "mario.mtbr+github@outlook.com"))
+
 (prog1 :vc-git
   (customize-set-variable 'vc-git-diff-switches "--patience"))
 

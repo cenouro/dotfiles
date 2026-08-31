@@ -1,0 +1,6 @@
+2026-08-31  Mario Maia  <mario.mtbr+github@outlook.com>
+
+	* init.el (:changelog): Emacs changelog functionality has been
+	configured (basically, the name and email variables have been
+	set). Also, a ChangeLog file (this one, in fact) for this
+	repository has been created.
