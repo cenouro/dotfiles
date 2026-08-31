@@ -57,6 +57,7 @@ PACKAGES += mpv fonts-jetbrains-mono
 
 
 .PHONY : bash git install languagetool mpv
+.PHONY : fortune
 .PHONY : emacs emacs-gnome-keyboard
 .PHONY : asdf-vm asdf-nodejs asdf-ruby
 
@@ -152,6 +153,18 @@ ${EMACS_D}/templates : | ${EMACS_D}
 ${HOME}/.local/state/emacs/projects :
 	mkdir -p $(@D)
 	echo ";;; -*- lisp-data -*-\n((\"${PWD}\"))" > $@
+
+
+fortune : ${HOME}/.config/fortune/fortunes \
+          ${HOME}/.config/fortune/fortunes.dat
+
+${HOME}/.config/fortune/fortunes :
+	mkdir -p $(@D)
+	ln -sf $(realpath ./$(@F)) $@
+
+${HOME}/.config/fortune/fortunes.dat : ${HOME}/.config/fortune/fortunes
+	strfile $< $@
+
 
 emacs-gnome-keyboard :
 # You can use dconf-editor to browse, test some settings and do some
