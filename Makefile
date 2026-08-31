@@ -39,6 +39,7 @@ EMACS_D := ${HOME}/.emacs.d
 
 
 PACKAGES := curl git tree wget
+PACKAGES += fortune-mod
 
 # LanguageTool dependency
 PACKAGES += default-jre
