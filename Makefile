@@ -39,7 +39,9 @@ EMACS_D := ${HOME}/.emacs.d
 
 
 PACKAGES := curl git tree wget
+PACKAGES += emacs emacs-common-non-dfsg
 PACKAGES += fortune-mod
+PACKAGES += make make-doc
 
 # LanguageTool dependency
 PACKAGES += default-jre
