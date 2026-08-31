@@ -55,6 +55,12 @@
 
 (require 'init-functions)
 
+(prog1 :xdg
+  ;; Functions in this library don't seem to load automatically, so
+  ;; it's better to require it as early as possible and also where
+  ;; they are used.
+  (require 'xdg))
+
 
 (require 'init-package)
 
@@ -261,6 +267,14 @@
   ;; See: https://emacs.stackexchange.com/questions/21464/how-to-persistently-move-the-cursor-in-a-buffer-other-than-the-current-one
   (add-hook 'emacs-startup-hook #'org-agenda-list))
 
+
+(prog1 :fortune
+  (require 'fortune)
+  (require 'xdg)
+  (customize-set-variable 'fortune-dir
+                          (file-name-concat (xdg-config-home) "fortune"))
+  (customize-set-variable 'fortune-file
+                          (file-name-concat fortune-dir "fortunes")))
 
 (prog1 :fortune-in-scratch-buffer
   ;; See: https://www.emacswiki.org/emacs/Fortune

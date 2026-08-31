@@ -137,7 +137,8 @@ ${HOME}/.asdf/plugins/ruby : | ${HOME}/.local/bin/asdf
 
 emacs : ${EMACS_D}/init.el ${EMACS_D}/custom.el \
         ${EMACS_D}/elisp   ${EMACS_D}/templates \
-        ${HOME}/.local/state/emacs/projects
+        ${HOME}/.local/state/emacs/projects     \
+        fortune
 
 ${EMACS_D} :
 	mkdir -p ${EMACS_D}
