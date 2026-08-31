@@ -80,7 +80,8 @@ ${HOME}/.config/mpv/mpv.conf : mpv.conf
 	ln -sf $(realpath ./mpv.conf) $@
 
 
-bash : ${HOME}/.bashrc
+bash : ${HOME}/.bashrc \
+       fortune
 
 ${HOME}/.bashrc : /etc/skel/.bashrc bashrc
 	## Assemble ~/.bashrc

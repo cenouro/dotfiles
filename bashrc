@@ -8,6 +8,13 @@ if [[ -f "${HOME}/.local/bin/asdf" ]]; then
     . <(asdf completion bash)
 fi
 
+if ( command -v fortune &> /dev/null ) && [ -d "${HOME}/.config/fortune" ]
+then
+    echo ''
+    fortune ${HOME}/.config/fortune
+    echo ''
+fi
+
 # Local Variables:
 # mode: sh
 # End:
