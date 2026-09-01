@@ -160,15 +160,15 @@ ${HOME}/.local/state/emacs/projects :
 	echo ";;; -*- lisp-data -*-\n((\"${PWD}\"))" > $@
 
 
-fortune : ${HOME}/.config/fortune/fortunes \
-          ${HOME}/.config/fortune/fortunes.dat
+fortune : | ${HOME}/.config/fortunes \
+            ${HOME}/.config/fortunes/quotes.dat
 
-${HOME}/.config/fortune/fortunes :
-	mkdir -p $(@D)
-	ln -sf $(realpath ./$(@F)) $@
+${HOME}/.config/fortunes : | fortunes
+	ln -sf $(realpath ./fortunes) $@
 
-${HOME}/.config/fortune/fortunes.dat : ${HOME}/.config/fortune/fortunes
-	strfile $< $@
+${HOME}/.config/fortunes/quotes.dat : ./fortunes/quotes \
+                                      | ${HOME}/.config/fortunes
+	strfile -s $< $@
 
 
 emacs-gnome-keyboard :

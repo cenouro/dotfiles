@@ -272,9 +272,9 @@
   (require 'fortune)
   (require 'xdg)
   (customize-set-variable 'fortune-dir
-                          (file-name-concat (xdg-config-home) "fortune"))
+                          (file-name-concat (xdg-config-home) "fortunes"))
   (customize-set-variable 'fortune-file
-                          (file-name-concat fortune-dir "fortunes")))
+                          (file-name-concat fortune-dir "quotes")))
 
 (prog1 :fortune-in-scratch-buffer
   ;; See: https://www.emacswiki.org/emacs/Fortune
