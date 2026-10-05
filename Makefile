@@ -43,14 +43,19 @@ PACKAGES += emacs emacs-common-non-dfsg
 PACKAGES += fortune-mod
 PACKAGES += make make-doc
 
+# build-essential dependencies
+# Install these directly instead of installing build-essential to avoid
+# having to install dpkg-dev and rust crap (coreutils-from-uutils).
+BUILD_ESSENTIAL := libc-dev gcc g++ make libcrypt-dev
+
 # LanguageTool dependency
 PACKAGES += default-jre
 
 # asdf-nodejs dependencies
-PACKAGES += build-essential g++ make python3 python3-pip
+PACKAGES += g++ make python3 python3-pip
 
 # asdf-ruby dependencies
-PACKAGES += autoconf build-essential libdb-dev libffi-dev
+PACKAGES += autoconf libdb-dev libffi-dev
 PACKAGES += libgdbm-dev libgdbm6 libgmp-dev libncurses5-dev
 PACKAGES += libreadline6-dev libssl-dev libyaml-dev patch rustc
 PACKAGES += uuid-dev zlib1g-dev
@@ -66,7 +71,7 @@ PACKAGES += mpv fonts-jetbrains-mono
 
 
 install :
-	apt update && apt install -y ${PACKAGES}
+	apt update && apt install -y ${PACKAGES} ${BUILD_ESSENTIAL}
 
 
 git : ${HOME}/.config/git/config
