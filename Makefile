@@ -92,6 +92,7 @@ ${HOME}/.config/mpv/mpv.conf : mpv.conf
 
 
 bash : ${HOME}/.bashrc \
+       ${HOME}/.bash_aliases \
        fortune
 
 ${HOME}/.bashrc : /etc/skel/.bashrc bashrc
@@ -99,6 +100,9 @@ ${HOME}/.bashrc : /etc/skel/.bashrc bashrc
 # head and the "-" as argument to cat are used in order to filter out
 # the Local Variable list pertinent to Emacs in ./bashrc.
 	head --lines=-3 ./bashrc | cat /etc/skel/.bashrc - > $@
+
+${HOME}/.bash_aliases : bash_aliases
+	cp --update bash_aliases $@
 
 
 ${HOME}/.irbrc : irbrc
