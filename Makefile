@@ -163,7 +163,11 @@ ${EMACS_D}/templates : | ${EMACS_D}
 
 ${HOME}/.local/state/emacs/projects :
 	mkdir -p $(@D)
-	echo ";;; -*- lisp-data -*-\n((\"${PWD}\"))" > $@
+# "{PWD}/" and "(subst ...)" are used here to ensure the resulting
+# path ends with exactly one trailing /, which seems to be project.el
+# new standard. Having no trailing / still works, but then project.el
+# will add a second, redundant entry containing a trailing /.
+	echo ";;; -*- lisp-data -*-\n((\"$(subst //,/,${PWD}/)\"))" > $@
 
 
 fortune : | ${HOME}/.config/fortunes \
