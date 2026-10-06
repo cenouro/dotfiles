@@ -1,0 +1,6 @@
+Explanation: mpv can have this as a recommended package. It's better
+Explanation: to block this package from being installed by APT and
+Explanation: instead install a more recent version usgin pipx.
+Package: yt-dlp
+Pin: release *
+Pin-Priority: -10

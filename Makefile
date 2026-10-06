@@ -70,7 +70,10 @@ PACKAGES += mpv fonts-jetbrains-mono
 .PHONY : asdf-vm asdf-nodejs asdf-ruby
 
 
-install :
+/etc/apt/preferences.d/blacklist : apt-blacklist
+	cp --update apt-blacklist $@
+
+install : /etc/apt/preferences.d/blacklist
 	apt update && apt install -y ${PACKAGES} ${BUILD_ESSENTIAL}
 
 
