@@ -125,6 +125,7 @@ ${HOME}/.local/LanguageTool-6.6.zip :
 asdf-vm : bash asdf-nodejs asdf-ruby ${HOME}/.local/bin/asdf
 
 ${HOME}/.local/bin/asdf : ${HOME}/.local/asdf-v0.18.0-linux-amd64.tar.gz
+	mkdir -p $(@D)
 	tar --extract --gunzip --touch --file=$< --directory=$(@D)
 
 ${HOME}/.local/asdf-v0.18.0-linux-amd64.tar.gz :
