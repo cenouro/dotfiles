@@ -178,12 +178,17 @@ ${HOME}/.local/state/emacs/projects :
 
 
 fortune : | ${HOME}/.config/fortunes \
-            ${HOME}/.config/fortunes/quotes.dat
+            ${HOME}/.config/fortunes/quotes.dat \
+            ${HOME}/.config/fortunes/bible.dat
 
 ${HOME}/.config/fortunes : | fortunes
 	ln -sf $(realpath ./fortunes) $@
 
 ${HOME}/.config/fortunes/quotes.dat : ./fortunes/quotes \
+                                      | ${HOME}/.config/fortunes
+	strfile -s $< $@
+
+${HOME}/.config/fortunes/bible.dat : ./fortunes/bible \
                                       | ${HOME}/.config/fortunes
 	strfile -s $< $@
 
