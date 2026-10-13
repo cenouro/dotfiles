@@ -1,3 +1,26 @@
+2026-10-07  Mario Maia  <mario.mtbr+github@outlook.com>
+
+	* apt-blacklist: Created apt-blacklist, file dedicated to
+	blacklist APT packages. It's best to keep it short and blacklist
+	only trully problematic packages. Note that coreutils-from-uutils
+	is blacklisted in another file.
+
+	* bash_aliases: Created the file, with aliases for backing up and
+	restoring gpg keys.
+
+	* fortune: Created a dedicated folder for fortune files, named
+	"fortunes". This will make it easier to have multiple fortune
+	files and to configure auto-compilation of such files.
+
+	* fortunes/bible: File has been created.
+
+	* Makefile (BUILD_ESSENTIAL): The package build-essential is no
+	longer installed; instead, its dependencies are installed
+	explicitly. This is because Ubuntu is forcing the adoption of
+	coreutils-from-uutils, a Rust-based implementation of coreutils,
+	by having coreutils-from-uutils as a dependency of build-essential
+	and not having coreutils-from-gnu as an alternative dependency.
+
 2026-08-31  Mario Maia  <mario.mtbr+github@outlook.com>
 
 	* fortunes: A fortune file has been created and is already in use
