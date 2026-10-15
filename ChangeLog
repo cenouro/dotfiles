@@ -4,6 +4,8 @@
 	hassle to use; it's better to used shell-command and invoke
 	fortune directly.
 
+	* init.el (:changelog): Enable LanguageTool when editing ChangeLog.
+
 	* fortunes/.dir-locals.el: File has been created and is
 	responsible for configuring the after-save-hook of fortune files
 	so that they are automatically compiled.

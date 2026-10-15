@@ -164,7 +164,9 @@
 (prog1 :changelog
   (customize-set-variable 'add-log-full-name "Mario Maia")
   (customize-set-variable 'add-log-mailing-address
-                          "mario.mtbr+github@outlook.com"))
+                          "mario.mtbr+github@outlook.com")
+  (with-eval-after-load 'init-flymake
+    (add-hook 'change-log-mode-hook #'my/flymake-languagetool-load)))
 
 (prog1 :vc-git
   (customize-set-variable 'vc-git-diff-switches "--patience"))
