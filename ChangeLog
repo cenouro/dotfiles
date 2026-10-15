@@ -1,5 +1,9 @@
 2026-10-15  Mario Maia  <mario.mtbr+github@outlook.com>
 
+	* init.el: Remove fortune.el. This builtin library is kind of a
+	hassle to use; it's better to used shell-command and invoke
+	fortune directly.
+
 	* fortunes/.dir-locals.el: File has been created and is
 	responsible for configuring the after-save-hook of fortune files
 	so that they are automatically compiled.
